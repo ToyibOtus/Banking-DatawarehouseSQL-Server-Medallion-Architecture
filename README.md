@@ -1,13 +1,13 @@
 # Banking Datawarehouse — SQL Medallion Architecture
 
 Welcome to my **SQL Server Data Warehouse Project**! This project is a fully hands-on, end-to-end **SQL Server Data Warehouse** built from
-the ground up — from raw source data ingestion to business-ready analytics. It is designed to reflect the standards and practices of a 
+the ground up, from raw source data ingestion to business-ready analytics. It is designed to reflect the standards and practices of a 
 real-world banking data engineering environment, covering every layer of the modern data stack: architecture design, ETL pipeline 
 development, data modelling, and advanced analytical reporting.
 
 The project is built on the **Medallion Architecture (Bronze → Silver → Gold)**, a widely adopted pattern in enterprise data warehousing 
-that progressively refines raw data into clean, conformed, and business-ready information. Every design decision in this project — from 
-schema naming conventions to stored procedure structure to load strategies — is grounded in industry practice.
+that progressively refines raw data into clean, conformed, and business-ready information. Every design decision in this project, from 
+schema naming conventions to stored procedure structure to load strategies is grounded in industry practice.
 
 This is both a learning project and a portfolio piece. It demonstrates not just the ability to write SQL, but the ability to think like 
 a data engineer: designing for traceability, performance, maintainability, and analytical value.
@@ -16,7 +16,7 @@ a data engineer: designing for traceability, performance, maintainability, and a
 
 ## Project Overview
 
-A mid-sized fictional bank — **First National Bank** — operates across multiple internal systems that manage customers, accounts, 
+A mid-sized fictional bank **First National Bank** operates across multiple internal systems that manage customers, accounts, 
 transactions, loans, employees, and branches. Each system generates data independently, in its own format, on its own schedule. 
 The goal of this project is to consolidate all of that data into a single, governed, analytically powerful Data Warehouse.
 
