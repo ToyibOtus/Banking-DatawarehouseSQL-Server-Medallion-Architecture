@@ -1,6 +1,6 @@
 # Banking Datawarehouse — SQL Medallion Architecture
 
-Welcome to my **SQL Server Data Warehouse Project**! This project is a fully hands-on, end-to-end **SQL Server Data Warehouse** built from
+Welcome to my **SQL Server Data Warehouse Project**! This project is a fully hands-on, end-to-end SQL Server Data Warehouse built from
 the ground up, from raw source data ingestion to business-ready analytics. It is designed to reflect the standards and practices of a 
 real-world banking data engineering environment, covering every layer of the modern data stack: architecture design, ETL pipeline 
 development, data modelling, and advanced analytical reporting.
