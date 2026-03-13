@@ -3,7 +3,7 @@
 Script    : 01_create_database.sql
 Location  : scripts/00_init/
 Author    : Otusanya Toyib Oluwatimilehin
-Created   : 03-12-2026
+Created   : 2026-03-12
 ===========================================================================
 Script Purpose:
 	Creates the BankingDW database and all required schemas across
@@ -14,6 +14,9 @@ Warning:
 	Running this script permanently deletes the database [BankingDW],
 	and all data inside it.
 	Ensure to have proper backup before running.
+===========================================================================
+  Change Log:
+      1.0   2026-03-13   Initial creation
 ===========================================================================
 */
 USE master;
