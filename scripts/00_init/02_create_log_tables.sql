@@ -50,6 +50,7 @@ CREATE TABLE etl.batch_log
 	CONSTRAINT chk_layer_etl_batch_log CHECK(layer IN ('Bronze', 'Silver', 'Gold')),
 	CONSTRAINT chk_load_status CHECK(load_status IN('Running', 'Success', 'Failed'))
 );
+GO
 
 -- Create etl.step_log table
 CREATE TABLE etl.step_log
@@ -70,6 +71,7 @@ CREATE TABLE etl.step_log
 	CONSTRAINT fk_batch_id_etl_step_log FOREIGN KEY(batch_id) REFERENCES etl.batch_log (batch_id),
 	CONSTRAINT chk_step_status CHECK(step_status IN('Running', 'Success', 'Failed'))
 );
+GO
 
 -- Create etl.error_log table
 CREATE TABLE etl.error_log
@@ -90,6 +92,7 @@ CREATE TABLE etl.error_log
 	CONSTRAINT fk_step_id_etl_error_log FOREIGN KEY(step_id) REFERENCES etl.step_log (step_id),
 	CONSTRAINT chk_layer_etl_error_log CHECK(layer IN ('Bronze', 'Silver', 'Gold'))
 );
+GO
 
 -- Create etl.watermark table
 CREATE TABLE etl.watermark
@@ -103,3 +106,4 @@ CREATE TABLE etl.watermark
 	updated_at DATETIME2 NOT NULL,
 	CONSTRAINT fk_last_batch_id_etl_watermark FOREIGN KEY(last_batch_id) REFERENCES etl.batch_log (batch_id)
 );
+GO
