@@ -42,7 +42,7 @@ BEGIN
 	@source_system NVARCHAR(50) = 'CBS',
 	@layer NVARCHAR(50) = 'Bronze',
 	@batch_start_time DATETIME2,
-	@end_time DATETIME2,
+	@batch_end_time DATETIME2,
 	@batch_duration_seconds INT,
 	@batch_status NVARCHAR(50) = 'Running',
 	@total_rows INT = 0,
@@ -56,6 +56,7 @@ BEGIN
 	@source_object NVARCHAR(200),
 	@target_object NVARCHAR(50),
 	@start_time DATETIME2,
+	@end_time DATETIME2,
 	@step_duration_seconds INT,
 	@step_status NVARCHAR(50),
 	@rows_extracted INT,
@@ -599,14 +600,14 @@ BEGIN
 	-- =======================================================================================
 		
 		-- Map values to variables
-		SET @end_time = SYSDATETIME();
-		SET @batch_duration_seconds = DATEDIFF(second, @batch_start_time, @end_time);
+		SET @batch_end_time = SYSDATETIME();
+		SET @batch_duration_seconds = DATEDIFF(second, @batch_start_time, @batch_end_time);
 		SET @batch_status = 'Success';
 
 		-- Update log details at batch-level
 		UPDATE etl.batch_log
 			SET
-				end_time = @end_time,
+				end_time = @batch_end_time,
 				load_duration_seconds = @batch_duration_seconds,
 				load_status = @batch_status,
 				total_rows_processed = @total_rows
@@ -619,16 +620,16 @@ BEGIN
 
 	BEGIN CATCH
 		-- Map values to variables on failure
+		SET @step_status = 'Failed';
+		SET @batch_status = 'Failed';
+		IF @start_time IS NULL SET @start_time = SYSDATETIME();
 		SET @end_time = SYSDATETIME();
 		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
 		SET @batch_duration_seconds = DATEDIFF(second, @batch_start_time, @end_time);
-		SET @step_status = 'Failed';
-		SET @batch_status = 'Failed';
 
-		
-		IF @rows_extracted IS NULL SET @rows_extracted = 0;
 		IF @rows_inserted IS NULL SET @rows_inserted = 0;
-		IF @total_rows IS NULL SET @total_rows = 0;
+		IF @rows_extracted IS NULL SET @rows_extracted = 0;
+		IF @total_rows IS NULL SET @total_rows = 0
 
 		SET @rows_rejected = 0;
 
@@ -652,7 +653,6 @@ BEGIN
 						step_status = @step_status,
 						rows_extracted = @rows_extracted,
 						rows_inserted = @rows_inserted,
-						rows_rejected = @rows_rejected,
 						err_message = ERROR_MESSAGE()
 					WHERE step_id = @step_id;
 			END;
