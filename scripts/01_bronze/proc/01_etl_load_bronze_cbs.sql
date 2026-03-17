@@ -45,7 +45,7 @@ BEGIN
 	@end_time DATETIME2,
 	@batch_duration_seconds INT,
 	@load_status NVARCHAR(50) = 'Running',
-	@total_rows_processed INT = 0,
+	@total_rows INT = 0,
 	@executed_by NVARCHAR(100) = SUSER_NAME(),
 	@err_message NVARCHAR(MAX),
 
@@ -56,7 +56,7 @@ BEGIN
 	@source_object NVARCHAR(200),
 	@target_object NVARCHAR(50),
 	@start_time DATETIME2,
-	@duration_seconds INT,
+	@step_duration_seconds INT,
 	@step_status NVARCHAR(50) = 'Running',
 	@rows_extracted INT,
 	@rows_inserted INT,
@@ -76,9 +76,6 @@ BEGIN
 	@target_accounts NVARCHAR(50) = 'bronze.cbs_accounts',
 	@target_branches NVARCHAR(50) = 'bronze.cbs_branches',
 	@target_transactions NVARCHAR(50) = 'bronze.cbs_transactions',
-
-	-- total rows processed
-	@total_rows INT = 0,
 
 	-- Holds SQL queries (BULK INSERT)
 	@sql NVARCHAR(MAX);
@@ -107,7 +104,7 @@ BEGIN
 		@layer,
 		@batch_start_time,
 		@load_status,
-		@total_rows_processed,
+		@total_rows,
 		@executed_by
 	);
 	SET @batch_id = SCOPE_IDENTITY();
@@ -256,7 +253,7 @@ BEGIN
 		SET @rows_extracted = @rows_inserted;
 		SET @total_rows = @total_rows + @rows_inserted;
 		SET @end_time = SYSDATETIME();
-		SET @duration_seconds = DATEDIFF(second, @start_time, @end_time);
+		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
 		SET @step_status = 'Success';
 
 		-- Update log details at watermark-level on success
@@ -271,7 +268,7 @@ BEGIN
 		UPDATE etl.step_log
 			SET 
 				end_time = @end_time,
-				load_duration_seconds = @duration_seconds,
+				load_duration_seconds = @step_duration_seconds,
 				step_status = 'Success',
 				rows_extracted = @rows_extracted,
 				rows_inserted = @rows_inserted
@@ -405,7 +402,7 @@ BEGIN
 		SET @rows_extracted = @rows_inserted;
 		SET @total_rows = @total_rows + @rows_inserted;
 		SET @end_time = SYSDATETIME();
-		SET @duration_seconds = DATEDIFF(second, @start_time, @end_time);
+		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
 		SET @step_status = 'Success';
 
 		-- Update log details at watermark-level on success
@@ -420,7 +417,7 @@ BEGIN
 		UPDATE etl.step_log
 			SET 
 				end_time = @end_time,
-				load_duration_seconds = @duration_seconds,
+				load_duration_seconds = @step_duration_seconds,
 				step_status = 'Success',
 				rows_extracted = @rows_extracted,
 				rows_inserted = @rows_inserted
@@ -570,7 +567,7 @@ BEGIN
 		SET @rows_extracted = @rows_inserted;
 		SET @total_rows = @total_rows + @rows_inserted;
 		SET @end_time = SYSDATETIME();
-		SET @duration_seconds = DATEDIFF(second, @start_time, @end_time);
+		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
 		SET @step_status = 'Success';
 
 		-- Update log details at watermark-level
@@ -585,7 +582,7 @@ BEGIN
 		UPDATE etl.step_log
 			SET 
 				end_time = @end_time,
-				load_duration_seconds = @duration_seconds,
+				load_duration_seconds = @step_duration_seconds,
 				step_status = 'Success',
 				rows_extracted = @rows_extracted,
 				rows_inserted = @rows_inserted
@@ -620,7 +617,7 @@ BEGIN
 	BEGIN CATCH
 		-- Map values to variables on failure
 		SET @end_time = SYSDATETIME();
-		SET @duration_seconds = DATEDIFF(second, @start_time, @end_time);
+		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
 		SET @batch_duration_seconds = DATEDIFF(second, @batch_start_time, @end_time);
 		SET @step_status = 'Failed';
 		SET @load_status = 'Failed';
@@ -648,7 +645,7 @@ BEGIN
 				UPDATE etl.step_log
 					SET
 						end_time = @end_time,
-						load_duration_seconds = @duration_seconds,
+						load_duration_seconds = @step_duration_seconds,
 						step_status = @step_status,
 						rows_extracted = @rows_extracted,
 						rows_inserted = @rows_inserted,
@@ -685,7 +682,7 @@ BEGIN
 					COALESCE(@target_object, 'Unknown'),
 					@start_time,
 					@end_time,
-					@duration_seconds,
+					@step_duration_seconds,
 					@step_status,
 					@rows_extracted,
 					@rows_inserted,
