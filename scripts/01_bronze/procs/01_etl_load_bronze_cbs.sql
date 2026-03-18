@@ -4,7 +4,7 @@ Script    : 01_etl_load_bronze_cbs
 Location  : scripts/01_bronze/procs/
 Author    : Otusanya Toyib Oluwatimilehin
 Created   : 2026-03-17
-Version   : 1.0
+Version   : 1.2
 ===================================================================================
 Script Purpose:
     Loads all records from the source system (CBS) into the bronze layer. It has
@@ -18,9 +18,13 @@ Script Purpose:
 ===================================================================================
   Change Log:
 	 
-	 | Version |     Date    |    Description                                   |
-	 |---------|-------------|--------------------------------------------------|
-	 | 	 1.0   |  2026-03-17 |  Initial creation                                |
+	| Version |     Date    |  Description                                     |
+	|---------|-------------|--------------------------------------------------|
+	|   1.0   |  2026-03-17 |  Initial creation                                |
+	|   1.1   |  2026-03-18 |  Separated batch and step timing variables,      |
+	|         |             |  added NULL guards in CATCH block                |
+	|   1.2   |  2026-03-18 |  Fixed @source_object truncation, increased      |
+	|         |             |  NVARCHAR(50) to NVARCHAR(200)                   |          
 ===================================================================================
 */
 USE BankingDW;
@@ -573,7 +577,7 @@ BEGIN
 		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
 		SET @step_status = 'Success';
 
-		-- Update log details at watermark-level
+		-- Update log details at watermark-level on success
 		UPDATE etl.watermark
 			SET
 				source_object = @source_object,
