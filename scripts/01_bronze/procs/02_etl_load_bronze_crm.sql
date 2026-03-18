@@ -1,7 +1,7 @@
 /*
 ===================================================================================
 Script    : 02_etl_load_bronze_crm
-Location  : scripts/01_bronze/proc/
+Location  : scripts/01_bronze/procs/
 Author    : Otusanya Toyib Oluwatimilehin
 Created   : 2026-03-18
 Version   : 1.0
