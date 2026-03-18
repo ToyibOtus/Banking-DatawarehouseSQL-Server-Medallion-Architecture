@@ -65,7 +65,6 @@ BEGIN
     
 	-- Last loaded (Retrieved from etl.watermark)
 	@wm_accounts DATETIME2,
-	@wm_branches DATETIME2,
 	@wm_transactions DATETIME2,
 
 	-- File paths (Update to match environment)
@@ -117,8 +116,6 @@ BEGIN
 	-- =======================================================================================
 	
 	SELECT @wm_accounts = last_loaded FROM etl.watermark WHERE source_system = @source_system AND target_object = @target_accounts;
-
-	SELECT @wm_branches = last_loaded FROM etl.watermark WHERE source_system = @source_system AND target_object = @target_branches;
 
 	SELECT @wm_transactions = last_loaded FROM etl.watermark WHERE source_system = @source_system AND target_object = @target_transactions;
 
