@@ -49,7 +49,7 @@ BEGIN
 	@step_id INT = NULL,
 	@step_name NVARCHAR(50),
 	@load_type NVARCHAR(50),
-	@source_object NVARCHAR(50),
+	@source_object NVARCHAR(200),
 	@target_object NVARCHAR(50),
 	@start_time DATETIME2,
 	@end_time DATETIME2,
