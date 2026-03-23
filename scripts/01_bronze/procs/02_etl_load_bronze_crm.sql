@@ -346,7 +346,7 @@ BEGIN
 				err_message = ERROR_MESSAGE()
 			WHERE batch_id = @batch_id;
 		
-		-- iF step_id is not NULL, update step log on failure
+		-- If step_id is not NULL, update step log on failure
 		IF @step_id IS NOT NULL
 			BEGIN
 				UPDATE etl.step_log
