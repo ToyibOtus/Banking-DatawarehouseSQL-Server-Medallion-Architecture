@@ -1,18 +1,18 @@
 /*
 ===================================================================================
-Script    : 04_etl_load_bronze_los
+Script    : 03_etl_load_bronze_hrms
 Location  : scripts/01_bronze/procs/
 Author    : Otusanya Toyib Oluwatimilehin
 Created   : 2026-03-18
-Version   : 1.1
+Version   : 1.2
 ===================================================================================
 Script Purpose:
-    Loads all records from the source system (LOS) into the bronze layer. It has
+    Loads all records from the source system (HRMS) into the bronze layer. It has
 	an in-buit logging system designed to track and monitor every ETL step, and
 	thus enabling easy debugging.
 
 	Tables Loaded:
-		bronze.los_loan_applications
+		bronze.hrms_employees
 ===================================================================================
   Change Log:
 	 
@@ -20,13 +20,14 @@ Script Purpose:
 	|---------|-------------|--------------------------------------------------|
 	|   1.0   |  2026-03-18 |  Initial creation                                |
 	|   1.1   |  2026-03-18 |  Fixed @source_object truncation, increased      |
-	|         |             |  NVARCHAR(50) to NVARCHAR(200)                   | 
+	|         |             |  NVARCHAR(50) to NVARCHAR(200)                   |     
+	|   1.2   |  2026-03-23 |  Mapped NULL to step_id across all steps         | 
 ===================================================================================
 */
 USE BankingDW;
 GO
 
-CREATE OR ALTER PROCEDURE etl.load_bronze_los AS
+CREATE OR ALTER PROCEDURE etl.load_bronze_hrms AS
 BEGIN
 	-- Suppress number of rows affected
 	SET NOCOUNT ON;
@@ -37,8 +38,8 @@ BEGIN
 	-- Batch-Level variables
 	DECLARE
 	@batch_id INT = NULL,
-	@batch_name NVARCHAR(50) = 'etl.load_bronze_los',
-	@source_system NVARCHAR(50) = 'LOS',
+	@batch_name NVARCHAR(50) = 'etl.load_bronze_hrms',
+	@source_system NVARCHAR(50) = 'HRMS',
 	@layer NVARCHAR(50) = 'Bronze',
 	@batch_start_time DATETIME2,
 	@batch_end_time DATETIME2,
@@ -62,13 +63,10 @@ BEGIN
 	@rows_rejected INT,
 
 	-- File path (Update to match environment)
-	@path_loan_applications NVARCHAR(200) = 'C:\SQLData\Finance Datasets\LOS\loan_applications.csv',
+	@path_employees NVARCHAR(200) = 'C:\SQLData\Finance Datasets\HRMS\employees.csv',
 
 	-- target table
-	@target_loan_applications NVARCHAR(50) = 'bronze.los_loan_applications',
-
-	-- Last loaded (Retrieved from etl.watermark)
-	@wm_loan_applications DATETIME2,
+	@target_employees NVARCHAR(50) = 'bronze.hrms_employees',
 
 	-- Holds SQL queries (BULK INSERT)
 	@sql NVARCHAR(MAX);
@@ -106,26 +104,21 @@ BEGIN
 	SET @batch_id = SCOPE_IDENTITY();
 
 	-- =======================================================================================
-	-- SECTION 3: READ WATERMARKS — Get last successful load point per table
-	-- =======================================================================================
-
-	SELECT @wm_loan_applications = last_loaded FROM etl.watermark WHERE source_system = @source_system AND target_object = @target_loan_applications;
-
-	-- =======================================================================================
 	-- SECTION 4: LOAD ALL BRONZE TABLES
 	-- =======================================================================================
 	
 	BEGIN TRY
 	-- ===============================================
-	-- STEP 1: LOAD bronze.los_loan_applications
+	-- STEP 1: LOAD bronze.hrms_employees
 	-- ===============================================
 
 		-- Map values to variables before transactions
 		SET @start_time = SYSDATETIME();
-		SET @step_name = 'Load bronze.los_loan_applications';
-		SET @load_type = 'Incremental: Append-Only';
-		SET @source_object = @path_loan_applications;
-		SET @target_object = @target_loan_applications;
+		SET @step_id = NULL;
+		SET @step_name = 'Load bronze.hrms_employees';
+		SET @load_type = 'Full: Truncate & Insert';
+		SET @source_object = @path_employees;
+		SET @target_object = @target_employees;
 		SET @step_status = 'Running';
 		SET @rows_extracted = 0;
 		SET @rows_inserted = 0;
@@ -162,66 +155,49 @@ BEGIN
 		SET @step_id = SCOPE_IDENTITY();
 
 		-- Create a temporary staging table
-		CREATE TABLE #stg_loan_applications
+		CREATE TABLE #stg_employees
 		(
-			loan_id NVARCHAR(50),
-			customer_id NVARCHAR(50),
+			employee_id NVARCHAR(50),
+			first_name NVARCHAR(50),
+			last_name NVARCHAR(50),
+			email NVARCHAR(250),
+			phone_number NVARCHAR(50),
+			department NVARCHAR(50),
+			job_title NVARCHAR(50),
 			branch_id NVARCHAR(50),
-			loan_officer_employee_id NVARCHAR(50),
-			loan_type NVARCHAR(50),
-			loan_status NVARCHAR(50),
-			application_date DATE,
-			decision_date DATE,
-			disbursement_date DATE,
-			requested_amount DECIMAL(18, 2),
-			approved_amount DECIMAL(18, 2),
-			disbursed_amount DECIMAL(18, 2),
-			outstanding_balance DECIMAL(18, 2),
-			interest_rate DECIMAL(12, 4),
-			term_months INT,
-			monthly_payment DECIMAL(18, 2),
-			days_delinquent INT,
-			collateral_type NVARCHAR(50),
-			collateral_value DECIMAL(12, 2),
-			purpose_description NVARCHAR(500),
-			rejection_reason NVARCHAR(500),
-			created_at DATETIME2,
-			updated_at DATETIME2
+			hire_date DATE,
+			termination_date DATE,
+			salary DECIMAL(18, 2),
+			is_active BIT,
+			manager_id NVARCHAR(50)
 		);
 
 		-- Map SQL query to variable
-		SET @sql = 'BULK INSERT #stg_loan_applications FROM ''' + @source_object + ''' WITH (FIRSTROW = 2, FORMAT = ''CSV'', FIELDTERMINATOR = '','', 
+		SET @sql = 'BULK INSERT #stg_employees FROM ''' + @source_object + ''' WITH (FIRSTROW = 2, FORMAT = ''CSV'', FIELDTERMINATOR = '','', 
 		ROWTERMINATOR = ''0x0A'', CODEPAGE = ''65001'', TABLOCK, KEEPNULLS);';
 
 		-- Execute SQL query
 		EXEC (@sql);
+		
+		-- Delete data from bronze.hrms_employees
+		TRUNCATE TABLE bronze.hrms_employees;
 
-		-- Load into bronze.los_loan_applications
-		INSERT INTO bronze.los_loan_applications
+		-- Load bronze.hrms_employees
+		INSERT INTO bronze.hrms_employees
 		(
-			loan_id,
-			customer_id,
+			employee_id,
+			first_name,
+			last_name,
+			email,
+			phone_number,
+			department,
+			job_title,
 			branch_id,
-			loan_officer_employee_id,
-			loan_type,
-			loan_status,
-			application_date,
-			decision_date,
-			disbursement_date,
-			requested_amount,
-			approved_amount,
-			disbursed_amount,
-			outstanding_balance,
-			interest_rate,
-			term_months,
-			monthly_payment,
-			days_delinquent,
-			collateral_type,
-			collateral_value,
-			purpose_description,
-			rejection_reason,
-			created_at,
-			updated_at,
+			hire_date,
+			termination_date,
+			salary,
+			is_active,
+			manager_id,
 			
 			-- Metadata columns
 			_source_system,
@@ -230,37 +206,26 @@ BEGIN
 			_load_timestamp
 		)
 		SELECT
-			loan_id,
-			customer_id,
+			employee_id,
+			first_name,
+			last_name,
+			email,
+			phone_number,
+			department,
+			job_title,
 			branch_id,
-			loan_officer_employee_id,
-			loan_type,
-			loan_status,
-			application_date,
-			decision_date,
-			disbursement_date,
-			requested_amount,
-			approved_amount,
-			disbursed_amount,
-			outstanding_balance,
-			interest_rate,
-			term_months,
-			monthly_payment,
-			days_delinquent,
-			collateral_type,
-			collateral_value,
-			purpose_description,
-			rejection_reason,
-			created_at,
-			updated_at,
+			hire_date,
+			termination_date,
+			salary,
+			is_active,
+			manager_id,
 
 			-- Map values to metadata columns
 			@source_system,
 			@source_object,
 			@batch_id,
 			@start_time
-		FROM #stg_loan_applications
-		WHERE updated_at > @wm_loan_applications;
+		FROM #stg_employees;
 
 		-- Map values to variables on success
 		SET @rows_inserted = @@ROWCOUNT;
@@ -289,7 +254,7 @@ BEGIN
 			WHERE step_id = @step_id;
 
 		-- Drop staging table
-		DROP TABLE IF EXISTS #stg_loan_applications;
+		DROP TABLE IF EXISTS #stg_employees;
 
 	-- =======================================================================================
 	-- SECTION 5: CLOSE BATCH ON SUCCESS
