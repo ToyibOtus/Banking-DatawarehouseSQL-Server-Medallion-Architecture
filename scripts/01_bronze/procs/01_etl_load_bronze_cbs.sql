@@ -4,7 +4,7 @@ Script    : 01_etl_load_bronze_cbs
 Location  : scripts/01_bronze/procs/
 Author    : Otusanya Toyib Oluwatimilehin
 Created   : 2026-03-17
-Version   : 1.2
+Version   : 1.3
 ===================================================================================
 Script Purpose:
     Loads all records from the source system (CBS) into the bronze layer. It has
@@ -24,7 +24,8 @@ Script Purpose:
 	|   1.1   |  2026-03-18 |  Separated batch and step timing variables,      |
 	|         |             |  added NULL guards in CATCH block                |
 	|   1.2   |  2026-03-18 |  Fixed @source_object truncation, increased      |
-	|         |             |  NVARCHAR(50) to NVARCHAR(200)                   |          
+	|         |             |  NVARCHAR(50) to NVARCHAR(200)                   |     
+	|   1.3   |  2026-03-23 |  Mapped NULL to step_id across all steps         |
 ===================================================================================
 */
 USE BankingDW;
@@ -134,11 +135,12 @@ BEGIN
 
 		-- Map values to variables before transactions
 		SET @start_time = SYSDATETIME();
+		SET @step_id = NULL;
+		SET @step_name = 'Load bronze.cbs_accounts';
+		SET @load_type = 'Incremental: Append-Only';
 		SET @source_object = @path_accounts;
 		SET @target_object = @target_accounts;
-		SET @step_name = 'Load bronze.cbs_accounts';
 		SET @step_status = 'Running';
-		SET @load_type = 'Incremental: Append-Only';
 		SET @rows_extracted = 0;
 		SET @rows_inserted = 0;
 		SET @rows_rejected = 0;
@@ -288,11 +290,12 @@ BEGIN
 
 		-- Map values to variables before transactions
 		SET @start_time = SYSDATETIME();
+		SET @step_id = NULL;
+		SET @step_name = 'Load bronze.cbs_branches';
+		SET @load_type = 'Full: Truncate & Insert';
 		SET @source_object = @path_branches;
 		SET @target_object = @target_branches;
-		SET @step_name = 'Load bronze.cbs_branches';
 		SET @step_status = 'Running';
-		SET @load_type = 'Full: Truncate & Insert';
 		SET @rows_extracted = 0;
 		SET @rows_inserted = 0;
 		SET @rows_rejected = 0;
@@ -438,11 +441,12 @@ BEGIN
 		
 		-- Map values to variables before transactions
 		SET @start_time = SYSDATETIME();
+		SET @step_id = NULL;
+		SET @step_name = 'Load bronze.cbs_transactions';
+		SET @load_type = 'Incremental: Append-Only';
 		SET @source_object = @path_transactions;
 		SET @target_object = @target_transactions;
-		SET @step_name = 'Load bronze.cbs_transactions';
 		SET @step_status = 'Running';
-		SET @load_type = 'Incremental: Append-Only';
 		SET @rows_extracted = 0;
 		SET @rows_inserted = 0;
 		SET @rows_rejected = 0;
