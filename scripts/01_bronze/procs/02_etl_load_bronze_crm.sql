@@ -11,8 +11,12 @@ Script Purpose:
 	an in-buit logging system designed to track and monitor every ETL step, and
 	thus enabling easy debugging.
 
-	Tables Loaded:
-		bronze.crm_customers
+Tables Loaded:
+	bronze.crm_customers
+
+Usage: EXEC etl.load_bronze_crm
+	
+Parameter: None
 ===================================================================================
   Change Log:
 	 
