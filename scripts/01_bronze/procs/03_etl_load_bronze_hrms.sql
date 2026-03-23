@@ -11,10 +11,14 @@ Script Purpose:
 	an in-buit logging system designed to track and monitor every ETL step, and
 	thus enabling easy debugging.
 
-	Tables Loaded:
-		bronze.hrms_employees
+Tables Loaded:
+	bronze.hrms_employees
+
+Usage: EXEC etl.load_bronze_hrms
+	
+Parameter: None
 ===================================================================================
-  Change Log:
+Change Log:
 	 
 	| Version |     Date    |  Description                                     |
 	|---------|-------------|--------------------------------------------------|
