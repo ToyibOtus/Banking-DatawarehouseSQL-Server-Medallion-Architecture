@@ -4,7 +4,7 @@ Script    : 03_etl_load_bronze_hrms
 Location  : scripts/01_bronze/procs/
 Author    : Otusanya Toyib Oluwatimilehin
 Created   : 2026-03-18
-Version   : 1.1
+Version   : 1.2
 ===================================================================================
 Script Purpose:
     Loads all records from the source system (HRMS) into the bronze layer. It has
@@ -20,7 +20,8 @@ Script Purpose:
 	|---------|-------------|--------------------------------------------------|
 	|   1.0   |  2026-03-18 |  Initial creation                                |
 	|   1.1   |  2026-03-18 |  Fixed @source_object truncation, increased      |
-	|         |             |  NVARCHAR(50) to NVARCHAR(200)                   | 
+	|         |             |  NVARCHAR(50) to NVARCHAR(200)                   |     
+	|   1.2   |  2026-03-23 |  Mapped NULL to step_id across all steps         | 
 ===================================================================================
 */
 USE BankingDW;
@@ -113,6 +114,7 @@ BEGIN
 
 		-- Map values to variables before transactions
 		SET @start_time = SYSDATETIME();
+		SET @step_id = NULL;
 		SET @step_name = 'Load bronze.hrms_employees';
 		SET @load_type = 'Full: Truncate & Insert';
 		SET @source_object = @path_employees;
