@@ -11,12 +11,16 @@ Script Purpose:
 	an in-buit logging system designed to track and monitor every ETL step, and
 	thus enabling easy debugging.
 
-	Tables Loaded:
-		bronze.cbs_accounts
-		bronze.cbs_branches
-		bronze.cbs_transactions
+Tables Loaded:
+	bronze.cbs_accounts
+	bronze.cbs_branches
+	bronze.cbs_transactions
+
+Usage: EXEC etl.load_bronze_cbs
+	
+Parameter: None
 ===================================================================================
-  Change Log:
+Change Log:
 	 
 	| Version |     Date    |  Description                                     |
 	|---------|-------------|--------------------------------------------------|
