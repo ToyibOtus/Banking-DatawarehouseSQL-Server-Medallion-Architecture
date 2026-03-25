@@ -7,7 +7,7 @@ Created   : 2026-03-25
 Version   : 1.0
 ===================================================================================
 Script Purpose:
-  Loads all HRMS records from the bronze layer into corresponding silver layer.
+ 	Loads all HRMS records from the bronze layer into corresponding silver layer.
 	It performs series of data transformations, and data quality checks on the
 	transformed data before loading. Additionally, it has an in-buit logging 
 	system designed to track and monitor every ETL step, and thus enabling 
