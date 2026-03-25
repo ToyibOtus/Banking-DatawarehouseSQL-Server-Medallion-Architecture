@@ -227,8 +227,10 @@ BEGIN
 				WHEN email NOT LIKE ('%@%.%') THEN NULL
 				ELSE email
 			END AS email,
-			CASE	
-				WHEN phone_number IS NULL OR phone_number = 'N/A' THEN 'Unknown'
+			CASE 
+				WHEN phone_number IS NULL THEN 'Unknown'
+				WHEN UPPER(phone_number) = 'UNKNOWN' THEN 'Unknown'
+				WHEN UPPER(phone_number) = 'N/A' THEN 'Unknown'
 				ELSE phone_number
 			END AS phone_number,
 			CASE
@@ -434,6 +436,7 @@ BEGIN
 			created_at,
 			updated_at,
 
+			-- Metadata columns
 			_source_system,
 			_batch_id,
 			_created_at
@@ -466,6 +469,7 @@ BEGIN
 			src.created_at,
 			src.updated_at,
 
+			-- Map variables to metadata columns
 			@source_system,
 			@batch_id,
 			@start_time
