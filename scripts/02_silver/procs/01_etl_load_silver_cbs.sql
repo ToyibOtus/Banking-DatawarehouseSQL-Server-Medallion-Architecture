@@ -4,7 +4,7 @@ Script    : 01_etl_load_silver_cbs
 Location  : scripts/02_silver/procs/
 Author    : Otusanya Toyib Oluwatimilehin
 Created   : 2026-03-23
-Version   : 1.0
+Version   : 1.1
 ===================================================================================
 Script Purpose:
     Loads all CBS records from the bronze layer into corresponding silver layer.
@@ -31,6 +31,8 @@ Change Log:
 	| Version |     Date    |  Description                                     |
 	|---------|-------------|--------------------------------------------------|
 	|   1.0   |  2026-03-23 |  Initial creation                                |
+	|   1.1   |  2026-03-28 |  Checked for invalid values in primary key in    |
+	|         |             |  DQ monitor                                      |
 ===================================================================================
 */
 USE BankingDW;
@@ -297,8 +299,9 @@ BEGIN
 		WITH dq_checks AS
 		(
 		SELECT
-			COUNT(*) AS total_rows,
+			COUNT(*) AS total_records,
 			COUNT(CASE WHEN account_id IS NULL THEN 1 ELSE NULL END) AS pk_null,
+			COUNT(CASE WHEN account_id NOT LIKE ('ACC%') THEN 1 ELSE NULL END) AS invalid_pk,
 			COUNT(CASE WHEN open_date > close_date OR open_date > GETDATE() THEN 1 ELSE NULL END) AS invalid_open_date,
 			COUNT(CASE WHEN created_at > updated_at OR created_at > GETDATE() THEN 1 ELSE NULL END) AS invalid_created_at,
 			COUNT(CASE WHEN currency_code IS NULL OR TRIM(currency_code) = '' THEN 1 ELSE NULL END) AS invalid_currency_code,
@@ -327,54 +330,58 @@ BEGIN
 		dq_description
 		)
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'PK Null', 
-		CASE WHEN pk_null > 0 THEN 'Critical' ELSE NULL END, total_rows, pk_null, CASE WHEN pk_null > 0 THEN 'Failed' 
+		CASE WHEN pk_null > 0 THEN 'Critical' ELSE NULL END, total_records, pk_null, CASE WHEN pk_null > 0 THEN 'Failed' 
 		ELSE 'Passed' END, CASE WHEN pk_null > 0 THEN 
 		'Critical DQ Rule Violated: NULL(s) detected in Primary Key, account_id. Transactions aborted.' ELSE NULL END  FROM dq_checks
 		UNION
+		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid PK', CASE WHEN invalid_pk > 0 THEN 
+		'Critical' ELSE NULL END, total_records, invalid_pk, CASE WHEN invalid_pk > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_pk > 0 THEN
+		'Critical DQ Rule Violated: Invalid value(s) detected in primary key, account_id. Transactions aborted.' ELSE NULL END FROM dq_checks
+		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Open Date', 
-		CASE WHEN invalid_open_date > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_open_date, CASE WHEN invalid_open_date > 0 THEN 'Failed' 
+		CASE WHEN invalid_open_date > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_open_date, CASE WHEN invalid_open_date > 0 THEN 'Failed' 
 		ELSE 'Passed' END, CASE WHEN invalid_open_date > 0 THEN 
 		'Mild DQ Rule Violated: Field, open_date, has date value(s) greater than closed date or present date.' ELSE NULL END  FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Creation Date', 
-		CASE WHEN invalid_created_at > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_created_at, CASE WHEN invalid_created_at > 0 THEN 'Failed' 
+		CASE WHEN invalid_created_at > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_created_at, CASE WHEN invalid_created_at > 0 THEN 'Failed' 
 		ELSE 'Passed' END, CASE WHEN invalid_created_at > 0 THEN 
 		'Mild DQ Rule Violated: Field, created_at, has date value(s) greater than present date.' ELSE NULL END  FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Currency Code', 
-		CASE WHEN invalid_currency_code > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_currency_code, CASE WHEN invalid_currency_code > 0 THEN 'Failed' 
+		CASE WHEN invalid_currency_code > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_currency_code, CASE WHEN invalid_currency_code > 0 THEN 'Failed' 
 		ELSE 'Passed' END, CASE WHEN invalid_currency_code > 0 THEN 
 		'Mild DQ Rule Violated: NULL(s), empty spaces, or an empty string detected in field, currency_code.' ELSE NULL END  FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'New Currency Code', 
-		CASE WHEN new_currency_code > 0 THEN 'Info' ELSE NULL END, total_rows, new_currency_code, CASE WHEN new_currency_code > 0 THEN 'Warning' ELSE 
+		CASE WHEN new_currency_code > 0 THEN 'Info' ELSE NULL END, total_records, new_currency_code, CASE WHEN new_currency_code > 0 THEN 'Warning' ELSE 
 		'Passed' END, CASE WHEN new_currency_code > 0 THEN 'Minor DQ Rule Violated: New currency code(s) detected in currency_code' ELSE NULL END  
 		FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Available Balance', 
-		CASE WHEN invalid_available_balance > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_available_balance, CASE WHEN invalid_available_balance > 0 
+		CASE WHEN invalid_available_balance > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_available_balance, CASE WHEN invalid_available_balance > 0 
 		THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_available_balance > 0 THEN 
 		'Mild DQ Rule Violated: Invalid value(s) detected in available_balance.' ELSE NULL END FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Current Balance', 
-		CASE WHEN invalid_current_balance > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_current_balance, 
+		CASE WHEN invalid_current_balance > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_current_balance, 
 		CASE WHEN invalid_current_balance > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_current_balance > 0 THEN 
 		'Mild DQ Rule Violated: Invalid value(s) detected in current_balance.' ELSE NULL END 
 		FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Overdraft Limit', 
-		CASE WHEN invalid_overdraft_limit > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_overdraft_limit, 
+		CASE WHEN invalid_overdraft_limit > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_overdraft_limit, 
 		CASE WHEN invalid_overdraft_limit > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_overdraft_limit > 0 THEN 
 		'Mild DQ Rule Violated: Invalid value(s) detected in overdraft_limit.' ELSE NULL END FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Interest Rate', 
-		CASE WHEN invalid_interest_rate > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_interest_rate, CASE WHEN invalid_interest_rate > 0 THEN 
+		CASE WHEN invalid_interest_rate > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_interest_rate, CASE WHEN invalid_interest_rate > 0 THEN 
 		'Failed' ELSE 'Passed' END, CASE WHEN invalid_interest_rate > 0 THEN 'Mild DQ Rule Violated: Invalid value(s) detected in interest_rate' ELSE NULL END 
 		FROM dq_checks;
 
 		-- Throw error when critical DQ rule is violated
-		IF EXISTS (SELECT 1 FROM etl.dq_log WHERE (check_name = 'PK Null' AND records_failed > 0) AND (batch_id = @batch_id AND step_id = @step_id)) 
-		THROW 50001, 'Critical DQ Rule(s) Violated: Check etl.dq_log to see more information.', 1;
+		IF EXISTS (SELECT 1 FROM etl.dq_log WHERE ((check_name = 'PK Null' AND records_failed > 0) OR (check_name = 'Invalid PK' AND records_failed > 0)) 
+		AND (batch_id = @batch_id AND step_id = @step_id)) THROW 50001, 'Critical DQ Rule(s) Violated: Check etl.dq_log to see more information.', 1;
 
 		-- Update outdated records in silver table
 		UPDATE tgt
@@ -588,9 +595,10 @@ BEGIN
 		WITH dq_checks AS
 		(
 		SELECT
-			COUNT(*) AS total_rows,
+			COUNT(*) AS total_records,
 			COUNT(*) - COUNT (DISTINCT branch_id) AS pk_duplicates,
 			COUNT(CASE WHEN branch_id IS NULL THEN 1 ELSE NULL END) AS pk_null,
+			COUNT(CASE WHEN branch_id NOT LIKE ('BRN%') THEN 1 ELSE NULL END) AS invalid_pk,
 			COUNT(CASE WHEN manager_employee_id IS NULL THEN 1 ELSE NULL END) AS employee_id_null,
 			COUNT(CASE WHEN opened_date > GETDATE() THEN 1 ELSE NULL END) AS invalid_opened_date,
 			COUNT(CASE WHEN country IS NULL OR TRIM(country) = '' THEN 1 ELSE NULL END) AS invalid_country,
@@ -615,38 +623,43 @@ BEGIN
 			dq_description
 		)
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'PK Duplicate', CASE WHEN 
-		pk_duplicates > 0 THEN 'Critical' ELSE NULL END, total_rows, pk_duplicates, CASE WHEN pk_duplicates > 0 THEN 'Failed' ELSE 'Passed' END, 
+		pk_duplicates > 0 THEN 'Critical' ELSE NULL END, total_records, pk_duplicates, CASE WHEN pk_duplicates > 0 THEN 'Failed' ELSE 'Passed' END, 
 		CASE WHEN pk_duplicates > 0 THEN 'Critical DQ Rule Violated: Primary key, branch_id, contains duplicates. Transactions aborted.' ELSE NULL END 
 		FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'PK Null', CASE WHEN 
-		pk_null > 0 THEN 'Critical' ELSE NULL END, total_rows, pk_null, CASE WHEN pk_null > 0 THEN 'Failed' ELSE 'Passed' END, 
+		pk_null > 0 THEN 'Critical' ELSE NULL END, total_records, pk_null, CASE WHEN pk_null > 0 THEN 'Failed' ELSE 'Passed' END, 
 		CASE WHEN pk_null > 0 THEN 'Critical DQ Rule Violated: NULL(s) detected in primary key, branch_id. Transactions aborted.' 
 		ELSE NULL END FROM dq_checks
 		UNION
+		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid PK', CASE WHEN invalid_pk > 0 THEN 
+		'Critical' ELSE NULL END, total_records, invalid_pk, CASE WHEN invalid_pk > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_pk > 0 THEN
+		'Critical DQ Rule Violated: Invalid value(s) detected in primary key, branch_id. Transactions aborted.' ELSE NULL END FROM dq_checks
+		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'FK Null', CASE WHEN 
-		employee_id_null > 0 THEN 'Warning' ELSE NULL END, total_rows, employee_id_null, CASE WHEN employee_id_null > 0 THEN 'Failed' ELSE 'Passed' END, 
+		employee_id_null > 0 THEN 'Warning' ELSE NULL END, total_records, employee_id_null, CASE WHEN employee_id_null > 0 THEN 'Failed' ELSE 'Passed' END, 
 		CASE WHEN employee_id_null > 0 THEN 'Mild DQ Rule Violated: NULL(s) detected in Foreign key, manager_employee_id. Transactions aborted.' 
 		ELSE NULL END FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Opened Date', CASE WHEN 
-		invalid_opened_date > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_opened_date, CASE WHEN invalid_opened_date > 0 THEN 'Failed' 
+		invalid_opened_date > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_opened_date, CASE WHEN invalid_opened_date > 0 THEN 'Failed' 
 		ELSE 'Passed' END, CASE WHEN invalid_opened_date > 0 THEN 
 		'Mild DQ Rule Violated: Field, opened_date, has date value(s) greater than present date' ELSE NULL END FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Country ', CASE WHEN 
-		invalid_country > 0 THEN 'Warning' ELSE NULL END, total_rows,invalid_country, CASE WHEN invalid_country > 0 THEN 'Failed' ELSE 'Passed' END, 
+		invalid_country > 0 THEN 'Warning' ELSE NULL END, total_records,invalid_country, CASE WHEN invalid_country > 0 THEN 'Failed' ELSE 'Passed' END, 
 		CASE WHEN invalid_country > 0 THEN 
 		'Mild DQ Rule Violated: NULL(s), empty spaces, or an empty string detected in field, country.' ELSE NULL END FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'New Country', CASE WHEN 
-		country_new > 0 THEN 'Info' ELSE NULL END, total_rows, country_new, CASE WHEN country_new > 0 THEN 'Warning' ELSE 'Passed' END, 
+		country_new > 0 THEN 'Info' ELSE NULL END, total_records, country_new, CASE WHEN country_new > 0 THEN 'Warning' ELSE 'Passed' END, 
 		CASE WHEN country_new > 0 THEN 
 		'Minor DQ Rule Violated: New value(s) detected in field, country.' ELSE NULL END FROM dq_checks;
 
 		-- Throw error when critical DQ rule is violated
-		IF EXISTS (SELECT 1 FROM etl.dq_log WHERE ((check_name = 'PK Duplicate' AND records_failed > 0) OR (check_name = 'PK Null' AND records_failed > 0))
-		AND (batch_id = @batch_id AND step_id = @step_id)) THROW 50002, 'Critical DQ Rule(s) Violated: Check etl.dq_log to see more information.', 2;
+		IF EXISTS (SELECT 1 FROM etl.dq_log WHERE ((check_name = 'PK Duplicate' AND records_failed > 0) OR (check_name = 'PK Null' AND records_failed > 0) 
+		OR (check_name = 'Invalid PK' AND records_failed > 0)) AND (batch_id = @batch_id AND step_id = @step_id)) 
+		THROW 50002, 'Critical DQ Rule(s) Violated: Check etl.dq_log to see more information.', 2;
 
 		-- Update outdated records in silver table
 		UPDATE tgt
@@ -923,8 +936,9 @@ BEGIN
 		WITH dq_checks AS
 		(
 		SELECT
-			COUNT(*) AS total_rows,
+			COUNT(*) AS total_records,
 			COUNT(CASE WHEN transaction_id IS NULL THEN 1 ELSE NULL END) AS pk_null,
+			COUNT(CASE WHEN transaction_id NOT LIKE ('TXN%') THEN 1 ELSE NULL END) AS invalid_pk,
 			COUNT(CASE WHEN transaction_type NOT IN ('Transfer', 'Wire Transfer') AND counterpart_account_id IS NOT NULL THEN 1 ELSE NULL END) AS unexpected_counterpart,
 			COUNT(CASE WHEN currency IS NULL OR TRIM(currency) = '' THEN 1 ELSE NULL END) AS invalid_currency,
 			COUNT(CASE WHEN currency NOT IN ('CAD', 'USD', 'GBP', 'EUR') THEN 1 ELSE NULL END) AS new_currency,
@@ -952,43 +966,47 @@ BEGIN
 			dq_description
 		)
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'PK Null', CASE WHEN 
-		pk_null > 0 THEN 'Critical' ELSE NULL END, total_rows, pk_null, CASE WHEN pk_null > 0 THEN 'Failed' ELSE 'Passed' END, 
+		pk_null > 0 THEN 'Critical' ELSE NULL END, total_records, pk_null, CASE WHEN pk_null > 0 THEN 'Failed' ELSE 'Passed' END, 
 		CASE WHEN pk_null > 0 THEN
 		'Critical DQ Rule Violated: NULL(s) detected in Primary Key, transaction_id. Transactions aborted.' ELSE NULL END FROM dq_checks
 		UNION
+		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid PK', CASE WHEN invalid_pk > 0 THEN 
+		'Critical' ELSE NULL END, total_records, invalid_pk, CASE WHEN invalid_pk > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_pk > 0 THEN
+		'Critical DQ Rule Violated: Invalid value(s) detected in primary key, transaction_id. Transactions aborted.' ELSE NULL END FROM dq_checks
+		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Unexpected Counterpart Account ID', CASE WHEN 
-		unexpected_counterpart > 0 THEN 'Warning' ELSE NULL END, total_rows, unexpected_counterpart, CASE WHEN unexpected_counterpart > 0 
+		unexpected_counterpart > 0 THEN 'Warning' ELSE NULL END, total_records, unexpected_counterpart, CASE WHEN unexpected_counterpart > 0 
 		THEN 'Failed' ELSE 'Passed' END, CASE WHEN unexpected_counterpart > 0 THEN
 		'Mild DQ Rule Violated: Field, counterpart_account_id should be NULL in non-transfer transactions.' ELSE NULL END FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Currency', CASE WHEN 
-		invalid_currency > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_currency, CASE WHEN invalid_currency > 0 THEN 'Failed' ELSE 'Passed' END, 
+		invalid_currency > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_currency, CASE WHEN invalid_currency > 0 THEN 'Failed' ELSE 'Passed' END, 
 		CASE WHEN invalid_currency > 0 THEN
 		'Mild DQ Rule Violated: Null(s), empty spaces, or an empty string detected in field, currency.' ELSE NULL END FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'New Currency', CASE WHEN 
-		new_currency > 0 THEN 'Info' ELSE NULL END, total_rows, new_currency, CASE WHEN new_currency > 0 THEN 'Warning' ELSE 'Passed' END, 
+		new_currency > 0 THEN 'Info' ELSE NULL END, total_records, new_currency, CASE WHEN new_currency > 0 THEN 'Warning' ELSE 'Passed' END, 
 		CASE WHEN new_currency > 0 THEN
 		'Minor DQ Rule Violated: New value(s) detected in field, currency.' ELSE NULL END FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Transaction Date', CASE WHEN 
-		invalid_transaction_date > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_transaction_date, 
+		invalid_transaction_date > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_transaction_date, 
 		CASE WHEN invalid_transaction_date > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_transaction_date > 0 THEN
 		'Mild DQ Rule Violated: Field, transaction_date, has date value(s) greater than present date.' ELSE NULL END FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Transaction DateTime', CASE WHEN 
-		invalid_transaction_date_time > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_transaction_date_time, 
+		invalid_transaction_date_time > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_transaction_date_time, 
 		CASE WHEN invalid_transaction_date_time > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_transaction_date_time > 0 THEN
 		'Mild DQ Rule Violated: Field, transaction_date_time not compatible with transaction_date & transaction_time.' ELSE NULL END FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid Creation Date', CASE WHEN 
-		invalid_created_at > 0 THEN 'Warning' ELSE NULL END, total_rows, invalid_created_at, 
+		invalid_created_at > 0 THEN 'Warning' ELSE NULL END, total_records, invalid_created_at, 
 		CASE WHEN invalid_created_at > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_created_at > 0 THEN
 		'Mild DQ Rule Violated: Field, created_at, has date value(s) greater than present date.' ELSE NULL END FROM dq_checks;
 
 		-- Throw error when critical DQ rule is violated
-		IF EXISTS (SELECT 1 FROM etl.dq_log WHERE (check_name = 'PK Null' AND records_failed > 0) AND (batch_id = @batch_id AND step_id = @step_id))
-		THROW 50003, 'Critical DQ Rule(s) Violated: Check etl.dq_log to see more information.', 3; 
+		IF EXISTS (SELECT 1 FROM etl.dq_log WHERE ((check_name = 'PK Null' AND records_failed > 0) OR (check_name = 'Invalid PK' AND records_failed > 0)) 
+		AND (batch_id = @batch_id AND step_id = @step_id)) THROW 50003, 'Critical DQ Rule(s) Violated: Check etl.dq_log to see more information.', 3; 
 
 		-- Load new records into silver table
 		INSERT INTO silver.cbs_transactions
