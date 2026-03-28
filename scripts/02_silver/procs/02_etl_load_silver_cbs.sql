@@ -209,34 +209,6 @@ BEGIN
 			ROW_NUMBER() OVER(PARTITION BY account_id ORDER BY updated_at DESC) AS record_recency
 		FROM bronze.cbs_accounts
 		)
-		-- Filter outdated records
-		, customer_validation AS
-		(
-		SELECT
-			account_id,
-			customer_id,
-			account_type,
-			account_status,
-			open_date,
-			close_date,
-			currency_code,
-			current_balance,
-			available_balance,
-			overdraft_limit,
-			interest_rate,
-			branch_id,
-			assigned_employee_id,
-			is_primary,
-			created_at,
-			updated_at,
-			_batch_id,
-			CASE
-				WHEN customer_id LIKE ('CUST_INVALID%') THEN 'No'
-				ELSE 'Yes'
-			END AS is_valid
-		FROM base_query
-		WHERE record_recency = 1
-		)
 		-- Retrieve only records with valid customers & perform relevant transformations
 		, data_transformations AS
 		(
@@ -267,8 +239,8 @@ BEGIN
 				ELSE CAST(updated_at AS DATE)
 			END AS updated_at,
 			_batch_id
-		FROM customer_validation
-		WHERE is_valid = 'Yes'
+		FROM base_query
+		WHERE customer_id IN (SELECT customer_id FROM silver.crm_customers)
 		)
 		-- Load transformed bronze table into a temporary staging table
 		SELECT
@@ -899,7 +871,8 @@ BEGIN
 			created_at,
 			_batch_id
 		FROM base_query
-		WHERE record_recency = 1
+		WHERE record_recency = 1 
+		AND account_id IN (SELECT account_id FROM silver.cbs_accounts)
 		)
 		-- Load transformed records from bronze into a temporary staging table
 		SELECT
