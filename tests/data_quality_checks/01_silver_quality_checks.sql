@@ -47,6 +47,232 @@ Change Log:
 ===================================================================================
 */
 --===========================================================================
+-- Data Quality Checks on silver.crm_customers
+--===========================================================================
+-- Check for NULLs & duplicates in primary key
+-- Expectation: No Result
+SELECT
+	customer_id,
+	COUNT(*) AS duplicate_chk
+FROM silver.crm_customers
+GROUP BY customer_id
+HAVING customer_id IS NULL OR COUNT(*) > 1;
+
+
+-- Check for invalid values in primary key
+-- Expectation: No Result
+SELECT
+	customer_id
+FROM silver.crm_customers
+WHERE TRIM(customer_id) = '' OR customer_id NOT LIKE ('CUST%');
+
+
+-- Check for unwanted spaces in primary key
+-- Expectation: No Result
+SELECT
+	customer_id
+FROM silver.crm_customers
+WHERE customer_id <> TRIM(customer_id);
+
+
+-- Check for invalid foreign keys
+-- Expectation: No Result
+SELECT onboarding_branch_id FROM silver.crm_customers WHERE onboarding_branch_id NOT IN
+(SELECT branch_id FROM silver.cbs_branches);
+
+
+-- Check for invalid values in foreign key
+-- Expectation: No Result
+SELECT
+	onboarding_branch_id
+FROM silver.crm_customers
+WHERE TRIM(onboarding_branch_id) = '' OR onboarding_branch_id NOT LIKE ('BRN%');
+
+
+-- Check for unwanted spaces in foreign key
+-- Expectation: No Result
+SELECT
+	onboarding_branch_id
+FROM silver.crm_customers
+WHERE onboarding_branch_id <> TRIM(onboarding_branch_id);
+
+
+
+-- Data Standardization & Consistency on low cardinality fields
+-- Expectation: User friendly values & No NULLs 
+SELECT DISTINCT segment FROM silver.crm_customers;
+
+SELECT DISTINCT risk_band FROM silver.crm_customers;
+
+SELECT DISTINCT gender FROM silver.crm_customers;
+
+SELECT DISTINCT city FROM silver.crm_customers;
+
+SELECT DISTINCT [state] FROM silver.crm_customers;
+
+SELECT DISTINCT country FROM silver.crm_customers;
+
+SELECT DISTINCT customer_since FROM silver.crm_customers;
+
+SELECT DISTINCT is_active FROM silver.crm_customers;
+
+SELECT DISTINCT marketing_opt_in FROM silver.crm_customers;
+
+SELECT DISTINCT preferred_language FROM silver.crm_customers;
+
+SELECT DISTINCT credit_score FROM silver.crm_customers ORDER BY credit_score DESC;
+
+
+-- Check for unwanted spaces in high cardinality string fields
+-- Expectations: No Result
+SELECT
+	first_name
+FROM silver.crm_customers
+WHERE first_name <> TRIM(first_name);
+
+SELECT
+	last_name
+FROM silver.crm_customers
+WHERE last_name <> TRIM(last_name);
+
+SELECT
+	company_name
+FROM silver.crm_customers
+WHERE company_name <> TRIM(company_name);
+
+SELECT
+	email
+FROM silver.crm_customers
+WHERE email <> TRIM(email);
+
+SELECT
+	phone_number
+FROM silver.crm_customers
+WHERE phone_number <> TRIM(phone_number);
+
+SELECT
+	address_line_1
+FROM silver.crm_customers
+WHERE address_line_1 <> TRIM(address_line_1);
+
+SELECT
+	zip_code
+FROM silver.crm_customers
+WHERE zip_code <> TRIM(zip_code);
+
+SELECT
+	national_id
+FROM silver.crm_customers
+WHERE national_id <> TRIM(national_id);
+
+
+
+-- Check for NULLs & empty strings in high cardinality string fields
+-- Expectation: No Result
+SELECT
+	first_name
+FROM silver.crm_customers
+WHERE first_name IS NULL OR TRIM(first_name) = ''; 
+
+SELECT
+	last_name
+FROM silver.crm_customers
+WHERE last_name IS NULL OR TRIM(last_name) = ''; 
+
+SELECT 
+	company_name
+FROM silver.crm_customers
+WHERE TRIM(company_name) = ''
+ORDER BY company_name; 
+
+SELECT
+	national_id
+FROM silver.crm_customers
+WHERE TRIM(national_id) = ''
+ORDER BY national_id;
+
+SELECT
+	email
+FROM silver.crm_customers
+WHERE email IS NULL OR TRIM(email) = ''
+ORDER BY email;
+
+SELECT
+	phone_number
+FROM silver.crm_customers
+WHERE phone_number IS NULL OR phone_number = 'N/A' OR TRIM(phone_number) = ''
+ORDER BY phone_number;
+
+SELECT
+	address_line_1
+FROM silver.crm_customers
+WHERE address_line_1 IS NULL OR TRIM(address_line_1) = ''
+ORDER BY address_line_1;
+
+SELECT
+	zip_code
+FROM silver.crm_customers
+WHERE TRIM(zip_code) = '';  
+
+
+-- Check for invalid dates
+-- Expectation: No Result
+SELECT
+	date_of_birth
+FROM silver.crm_customers
+WHERE date_of_birth > GETDATE();
+
+SELECT
+	created_at
+FROM silver.crm_customers
+WHERE created_at > updated_at OR created_at > GETDATE();
+
+SELECT
+	updated_at
+FROM silver.crm_customers
+WHERE updated_at > GETDATE();
+
+SELECT
+	onboard_date
+FROM silver.crm_customers
+WHERE onboard_date > GETDATE();
+
+SELECT
+	customer_since
+FROM silver.crm_customers
+WHERE customer_since > YEAR(GETDATE());
+
+SELECT
+	onboard_date,
+	customer_since
+FROM silver.crm_customers
+WHERE YEAR(onboard_date) <> customer_since;
+
+SELECT
+	onboard_date,
+	customer_since
+FROM silver.crm_customers
+WHERE customer_since IS NULL AND onboard_date IS NOT NULL;
+
+
+-- Check for invalid credit score
+-- Expectation: No Result
+SELECT
+	credit_score
+FROM silver.crm_customers
+WHERE NOT credit_score BETWEEN 300 AND 850;
+
+
+-- Check for invalid emails
+-- Expectation: No Result
+SELECT
+	email
+FROM silver.crm_customers
+WHERE LEN(email) < 6 OR email NOT LIKE ('%@%.%');
+
+
+
+--===========================================================================
 -- Data Quality Checks on silver.cbs_accounts
 --===========================================================================
 USE BankingDW;
@@ -556,230 +782,6 @@ SELECT
 FROM silver.cbs_transactions
 WHERE created_at > SYSDATETIME();
 
-
---===========================================================================
--- Data Quality Checks on silver.crm_customers
---===========================================================================
--- Check for NULLs & duplicates in primary key
--- Expectation: No Result
-SELECT
-	customer_id,
-	COUNT(*) AS duplicate_chk
-FROM silver.crm_customers
-GROUP BY customer_id
-HAVING customer_id IS NULL OR COUNT(*) > 1;
-
-
--- Check for invalid values in primary key
--- Expectation: No Result
-SELECT
-	customer_id
-FROM silver.crm_customers
-WHERE TRIM(customer_id) = '' OR customer_id NOT LIKE ('CUST%');
-
-
--- Check for unwanted spaces in primary key
--- Expectation: No Result
-SELECT
-	customer_id
-FROM silver.crm_customers
-WHERE customer_id <> TRIM(customer_id);
-
-
--- Check for invalid foreign keys
--- Expectation: No Result
-SELECT onboarding_branch_id FROM silver.crm_customers WHERE onboarding_branch_id NOT IN
-(SELECT branch_id FROM silver.cbs_branches);
-
-
--- Check for invalid values in foreign key
--- Expectation: No Result
-SELECT
-	onboarding_branch_id
-FROM silver.crm_customers
-WHERE TRIM(onboarding_branch_id) = '' OR onboarding_branch_id NOT LIKE ('BRN%');
-
-
--- Check for unwanted spaces in foreign key
--- Expectation: No Result
-SELECT
-	onboarding_branch_id
-FROM silver.crm_customers
-WHERE onboarding_branch_id <> TRIM(onboarding_branch_id);
-
-
-
--- Data Standardization & Consistency on low cardinality fields
--- Expectation: User friendly values & No NULLs 
-SELECT DISTINCT segment FROM silver.crm_customers;
-
-SELECT DISTINCT risk_band FROM silver.crm_customers;
-
-SELECT DISTINCT gender FROM silver.crm_customers;
-
-SELECT DISTINCT city FROM silver.crm_customers;
-
-SELECT DISTINCT [state] FROM silver.crm_customers;
-
-SELECT DISTINCT country FROM silver.crm_customers;
-
-SELECT DISTINCT customer_since FROM silver.crm_customers;
-
-SELECT DISTINCT is_active FROM silver.crm_customers;
-
-SELECT DISTINCT marketing_opt_in FROM silver.crm_customers;
-
-SELECT DISTINCT preferred_language FROM silver.crm_customers;
-
-SELECT DISTINCT credit_score FROM silver.crm_customers ORDER BY credit_score DESC;
-
-
--- Check for unwanted spaces in high cardinality string fields
--- Expectations: No Result
-SELECT
-	first_name
-FROM silver.crm_customers
-WHERE first_name <> TRIM(first_name);
-
-SELECT
-	last_name
-FROM silver.crm_customers
-WHERE last_name <> TRIM(last_name);
-
-SELECT
-	company_name
-FROM silver.crm_customers
-WHERE company_name <> TRIM(company_name);
-
-SELECT
-	email
-FROM silver.crm_customers
-WHERE email <> TRIM(email);
-
-SELECT
-	phone_number
-FROM silver.crm_customers
-WHERE phone_number <> TRIM(phone_number);
-
-SELECT
-	address_line_1
-FROM silver.crm_customers
-WHERE address_line_1 <> TRIM(address_line_1);
-
-SELECT
-	zip_code
-FROM silver.crm_customers
-WHERE zip_code <> TRIM(zip_code);
-
-SELECT
-	national_id
-FROM silver.crm_customers
-WHERE national_id <> TRIM(national_id);
-
-
-
--- Check for NULLs & empty strings in high cardinality string fields
--- Expectation: No Result
-SELECT
-	first_name
-FROM silver.crm_customers
-WHERE first_name IS NULL OR TRIM(first_name) = ''; 
-
-SELECT
-	last_name
-FROM silver.crm_customers
-WHERE last_name IS NULL OR TRIM(last_name) = ''; 
-
-SELECT 
-	company_name
-FROM silver.crm_customers
-WHERE TRIM(company_name) = ''
-ORDER BY company_name; 
-
-SELECT
-	national_id
-FROM silver.crm_customers
-WHERE TRIM(national_id) = ''
-ORDER BY national_id;
-
-SELECT
-	email
-FROM silver.crm_customers
-WHERE email IS NULL OR TRIM(email) = ''
-ORDER BY email;
-
-SELECT
-	phone_number
-FROM silver.crm_customers
-WHERE phone_number IS NULL OR phone_number = 'N/A' OR TRIM(phone_number) = ''
-ORDER BY phone_number;
-
-SELECT
-	address_line_1
-FROM silver.crm_customers
-WHERE address_line_1 IS NULL OR TRIM(address_line_1) = ''
-ORDER BY address_line_1;
-
-SELECT
-	zip_code
-FROM silver.crm_customers
-WHERE TRIM(zip_code) = '';  
-
-
--- Check for invalid dates
--- Expectation: No Result
-SELECT
-	date_of_birth
-FROM silver.crm_customers
-WHERE date_of_birth > GETDATE();
-
-SELECT
-	created_at
-FROM silver.crm_customers
-WHERE created_at > updated_at OR created_at > GETDATE();
-
-SELECT
-	updated_at
-FROM silver.crm_customers
-WHERE updated_at > GETDATE();
-
-SELECT
-	onboard_date
-FROM silver.crm_customers
-WHERE onboard_date > GETDATE();
-
-SELECT
-	customer_since
-FROM silver.crm_customers
-WHERE customer_since > YEAR(GETDATE());
-
-SELECT
-	onboard_date,
-	customer_since
-FROM silver.crm_customers
-WHERE YEAR(onboard_date) <> customer_since;
-
-SELECT
-	onboard_date,
-	customer_since
-FROM silver.crm_customers
-WHERE customer_since IS NULL AND onboard_date IS NOT NULL;
-
-
--- Check for invalid credit score
--- Expectation: No Result
-SELECT
-	credit_score
-FROM silver.crm_customers
-WHERE NOT credit_score BETWEEN 300 AND 850;
-
-
--- Check for invalid emails
--- Expectation: No Result
-SELECT
-	email
-FROM silver.crm_customers
-WHERE LEN(email) < 6 OR email NOT LIKE ('%@%.%');
 
 
 --===========================================================================
