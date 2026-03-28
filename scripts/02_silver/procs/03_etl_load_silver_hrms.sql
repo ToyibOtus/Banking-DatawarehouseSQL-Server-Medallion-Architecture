@@ -4,10 +4,10 @@ Script    : 03_etl_load_silver_hrms
 Location  : scripts/02_silver/procs/
 Author    : Otusanya Toyib Oluwatimilehin
 Created   : 2026-03-25
-Version   : 1.0
+Version   : 1.1
 ===================================================================================
 Script Purpose:
- 	Loads all HRMS records from the bronze layer into corresponding silver layer.
+    Loads all HRMS records from the bronze layer into corresponding silver layer.
 	It performs series of data transformations, and data quality checks on the
 	transformed data before loading. Additionally, it has an in-buit logging 
 	system designed to track and monitor every ETL step, and thus enabling 
@@ -29,6 +29,8 @@ Change Log:
 	| Version |     Date    |  Description                                     |
 	|---------|-------------|--------------------------------------------------|
 	|   1.0   |  2026-03-25 |  Initial creation                                |
+	|   1.1   |  2026-03-28 |  Checked for invalid values in primary key in    |
+	|         |             |  DQ monitor                                      |
 ===================================================================================
 */
 USE BankingDW;
@@ -258,6 +260,7 @@ BEGIN
 		SELECT
 			COUNT(*) AS total_records,
 			COUNT(CASE WHEN employee_id IS NULL THEN 1 ELSE NULL END) AS pk_null,
+			COUNT(CASE WHEN employee_id NOT LIKE ('EMP%') THEN 1 ELSE NULL END) AS invalid_pk,
 			COUNT(CASE WHEN branch_id IS NULL THEN 1 ELSE NULL END) AS branch_id_null,
 			COUNT(CASE WHEN hire_date > termination_date OR hire_date > GETDATE() THEN 1 ELSE NULL END) AS invalid_hire_date
 		FROM #stg_employees
@@ -282,6 +285,10 @@ BEGIN
 		'Critical' ELSE NULL END, total_records, pk_null, CASE WHEN pk_null > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN pk_null > 0 THEN
 		'Critical DQ Rule Violated: NULL(s) detected in primary key, employee_id. Transactions aborted.' ELSE NULL END FROM dq_checks
 		UNION
+		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid PK', CASE WHEN invalid_pk > 0 THEN
+		'Critical' ELSE NULL END, total_records, invalid_pk, CASE WHEN invalid_pk > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_pk > 0 THEN
+		'Critical DQ Rule Violated: Invalid value(s) detected in primary key, employee_id. Transactions aborted.' ELSE NULL END FROM dq_checks
+		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'FK Null', CASE WHEN branch_id_null > 0 THEN
 		'Warning' ELSE NULL END, total_records, branch_id_null, CASE WHEN branch_id_null > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN 
 		branch_id_null > 0 THEN 'Mild DQ Rule Violated: NULL(s) detected in foreign key, branch_id.' ELSE NULL END 
@@ -293,8 +300,8 @@ BEGIN
 		'Mild DQ Rule Violated: Field, hire_date, has date value(s) greater than termination date or present date.' ELSE NULL END 
 		FROM dq_checks;
 
-		IF EXISTS (SELECT 1 FROM etl.dq_log WHERE (check_name = 'PK Null' AND records_failed > 0) AND (batch_id = @batch_id AND step_id = @step_id))
-		THROW 50005, 'Critical DQ Rule(s) Violated: Check etl.dq_log to see more information.', 5;
+		IF EXISTS (SELECT 1 FROM etl.dq_log WHERE ((check_name = 'PK Null' AND records_failed > 0) OR (check_name = 'Invalid PK' AND records_failed > 0)) 
+		AND (batch_id = @batch_id AND step_id = @step_id)) THROW 50005, 'Critical DQ Rule(s) Violated: Check etl.dq_log to see more information.', 5;
 
 
 		-- Update outdated records in silver table
@@ -336,6 +343,7 @@ BEGIN
 		-- Retrieve number of records updated
 		SET @rows_updated = @@ROWCOUNT;
 
+		-- Load data into silver table
 		INSERT INTO silver.hrms_employees
 		(
 			employee_id,
