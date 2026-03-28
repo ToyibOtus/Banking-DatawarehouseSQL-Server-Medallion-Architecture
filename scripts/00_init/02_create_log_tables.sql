@@ -4,7 +4,7 @@ Script    : 02_create_log_tables.sql
 Location  : scripts/00_init/
 Author    : Otusanya Toyib Oluwatimilehin
 Created   : 2026-03-13
-Version   : 1.1
+Version   : 1.5
 ====================================================================================
 Script Purpose:
     Creates the ETL logging framework tables used to track every
@@ -15,6 +15,7 @@ Script Purpose:
       etl.batch_log    One row per pipeline run
       etl.step_log     One row per step within a run
       etl.error_log    One row per rejected record
+	  etl.dq_log       One row per data quality check
       etl.watermark    Last successful load point per source table
 
   Warning:
@@ -28,12 +29,18 @@ Script Purpose:
 	 | 	 1.0   |  2026-03-13 |  Initial creation                                |
 	 |	 1.1   |  2026-03-17 |  Added load duration to batch and step logs,     |
 	 |	       |             |  loaded etl.watermark                            |
+	 |   1.2   |  2026-03-18 |  Seeded watermark log table with bronze records  | 
+	 |   1.3   |  2026-03-18 |  Seeded watermark log table with silver records  | 
+	 |   1.4   |  2026-03-21 |  Removed error_code, raw_record & record_key     |
+	 |         |             |  from error_log                                  |
+	 |   1.5   |  2026-03-21 |  Added a new log table, dq_log                   |
 ====================================================================================
 */
 USE BankingDW;
 GO
 
 DROP TABLE IF EXISTS etl.error_log;
+DROP TABLE IF EXISTS etl.dq_log;
 DROP TABLE IF EXISTS etl.step_log;
 DROP TABLE IF EXISTS etl.watermark;
 DROP TABLE IF EXISTS etl.batch_log;
@@ -62,8 +69,8 @@ GO
 CREATE TABLE etl.step_log
 (
 	step_id INT IDENTITY(1, 1) PRIMARY KEY,
-	step_name NVARCHAR(50) NOT NULL,
 	batch_id INT NOT NULL,
+	step_name NVARCHAR(50) NOT NULL,
 	load_type NVARCHAR(50) NOT NULL,
 	source_object NVARCHAR(200) NOT NULL,
 	target_object NVARCHAR(50) NOT NULL,
@@ -91,16 +98,35 @@ CREATE TABLE etl.error_log
 	layer NVARCHAR(50) NOT NULL,
 	source_object NVARCHAR(200) NOT NULL,
 	target_object NVARCHAR(50) NOT NULL,
-	record_key NVARCHAR(200),
-	error_code NVARCHAR(50),
 	error_description NVARCHAR(MAX) NOT NULL,
 	rejected_at DATETIME2 NOT NULL,
-	raw_record NVARCHAR(MAX),
 	CONSTRAINT fk_batch_id_etl_error_log FOREIGN KEY(batch_id) REFERENCES etl.batch_log (batch_id),
 	CONSTRAINT fk_step_id_etl_error_log FOREIGN KEY(step_id) REFERENCES etl.step_log (step_id),
-	CONSTRAINT chk_layer_etl_error_log CHECK(layer IN ('Bronze', 'Silver', 'Gold'))
+	CONSTRAINT chk_layer_etl_error_log CHECK(layer IN('Bronze', 'Silver', 'Gold'))
 );
 GO
+
+CREATE TABLE etl.dq_log
+(
+	dq_id INT IDENTITY(1, 1) PRIMARY KEY,
+	batch_id INT NOT NULL,
+	step_id INT NOT NULL,
+	checked_at DATETIME2 NOT NULL,
+	source_system NVARCHAR(50) NOT NULL,
+	layer NVARCHAR(50) NOT NULL,
+	source_object NVARCHAR(50) NOT NULL,
+	target_object NVARCHAR(50) NOT NULL,
+	check_name NVARCHAR(50) NOT NULL,
+	severity NVARCHAR(50),
+	records_checked INT NOT NULL,
+	records_failed INT NOT NULL,
+	dq_status NVARCHAR(50) NOT NULL,
+	dq_description NVARCHAR(MAX),
+	CONSTRAINT fk_batch_id_etl_dq_log FOREIGN KEY(batch_id) REFERENCES etl.batch_log (batch_id),
+	CONSTRAINT fk_step_id_etl_dq_log FOREIGN KEY(step_id) REFERENCES etl.step_log (step_id),
+	CONSTRAINT chk_severity_etl_dq_log CHECK(severity IN('Critical', 'Warning', 'Info')),
+	CONSTRAINT chk_dq_status_etl_dq_log CHECK(dq_status IN('Failed', 'Warning', 'Passed'))
+);
 
 -- Create etl.watermark table
 CREATE TABLE etl.watermark
@@ -128,4 +154,10 @@ VALUES
 	('CBS', 'bronze.cbs_transactions', '1900-01-01'),
 	('CRM', 'bronze.crm_customers', '1900-01-01'),
 	('HRMS', 'bronze.hrms_employees', '1900-01-01'),
-	('LOS', 'bronze.los_loan_applications', '1900-01-01');
+	('LOS', 'bronze.los_loan_applications', '1900-01-01'),
+	('CBS', 'silver.cbs_accounts', '1900-01-01'),
+	('CBS', 'silver.cbs_branches', '1900-01-01'),
+	('CBS', 'silver.cbs_transactions', '1900-01-01'),
+	('CRM', 'silver.crm_customers', '1900-01-01'),
+	('HRMS', 'silver.hrms_employees', '1900-01-01'),
+	('LOS', 'silver.los_loan_applications', '1900-01-01');
