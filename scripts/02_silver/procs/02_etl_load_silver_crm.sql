@@ -4,7 +4,7 @@ Script    : 02_etl_load_silver_crm
 Location  : scripts/02_silver/procs/
 Author    : Otusanya Toyib Oluwatimilehin
 Created   : 2026-03-24
-Version   : 1.0
+Version   : 1.1
 ===================================================================================
 Script Purpose:
     Loads all CRM records from the bronze layer into corresponding silver layer.
@@ -29,6 +29,8 @@ Change Log:
 	| Version |     Date    |  Description                                     |
 	|---------|-------------|--------------------------------------------------|
 	|   1.0   |  2026-03-24 |  Initial creation                                |
+	|   1.1   |  2026-03-28 |  Checked for invalid values in primary key in    |
+	|         |             |  DQ monitor                                      |
 ===================================================================================
 */
 USE BankingDW;
@@ -305,6 +307,7 @@ BEGIN
 		SELECT
 			COUNT(*) AS total_records,
 			COUNT(CASE WHEN customer_id IS NULL THEN 1 ELSE NULL END) AS pk_null,
+			COUNT(CASE WHEN customer_id NOT LIKE ('CUST%') THEN 1 ELSE NULL END) AS invalid_pk,
 			COUNT(CASE WHEN date_of_birth > GETDATE() THEN 1 ELSE NULL END) AS invalid_dob,
 			COUNT(CASE WHEN country NOT IN ('USA') THEN 1 ELSE NULL END) AS new_country,
 			COUNT(CASE WHEN credit_score IS NOT NULL AND NOT credit_score BETWEEN 300 AND 850 THEN 1 ELSE NULL END) AS credit_score_out_of_range,
@@ -333,6 +336,10 @@ BEGIN
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'PK Null', CASE WHEN pk_null > 0
 		THEN 'Critical' ELSE NULL END, total_records, pk_null, CASE WHEN pk_null > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN pk_null > 0
 		THEN 'Critical DQ Rule Violated: NULL(s) detected in primary key, customer_id. Transactions aborted.' ELSE NULL END FROM dq_checks
+		UNION
+		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid PK', CASE WHEN invalid_pk > 0 THEN 
+		'Critical' ELSE NULL END, total_records, invalid_pk, CASE WHEN invalid_pk > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_pk > 0 THEN
+		'Critical DQ Rule Violated: Invalid value(s) detected in primary key, customer_id. Transactions aborted.' ELSE NULL END FROM dq_checks
 		UNION
 		SELECT @batch_id, @step_id, @start_time, @source_system, @layer, @source_object, @target_object, 'Invalid DOB', CASE WHEN invalid_dob > 0
 		THEN 'Warning' ELSE NULL END, total_records, invalid_dob, CASE WHEN invalid_dob > 0 THEN 'Failed' ELSE 'Passed' END, CASE WHEN invalid_dob > 0 
@@ -363,8 +370,8 @@ BEGIN
 		'Mild DQ Rule Violated: Field, created_at, has date value(s) greater than present date.' ELSE NULL END FROM dq_checks;
 
 
-		IF EXISTS (SELECT 1 FROM etl.dq_log WHERE (check_name = 'PK Null' AND records_failed > 0) AND (batch_id = @batch_id AND step_id = @step_id))
-		THROW 50004, 'Critical DQ Rule(s) Violated: Check etl.dq_log to see more information.', 4;
+		IF EXISTS (SELECT 1 FROM etl.dq_log WHERE ((check_name = 'PK Null' AND records_failed > 0) OR (check_name = 'Invalid PK' AND records_failed > 0)) 
+		AND (batch_id = @batch_id AND step_id = @step_id)) THROW 50004, 'Critical DQ Rule(s) Violated: Check etl.dq_log to see more information.', 4;
 
 		-- Update outdated records in silver table
 		UPDATE tgt
