@@ -4,7 +4,7 @@ Script    : 02_create_log_tables.sql
 Location  : scripts/00_init/
 Author    : Otusanya Toyib Oluwatimilehin
 Created   : 2026-03-13
-Version   : 1.5
+Version   : 1.6
 ====================================================================================
 Script Purpose:
     Creates the ETL logging framework tables used to track every
@@ -34,6 +34,7 @@ Script Purpose:
 	 |   1.4   |  2026-03-21 |  Removed error_code, raw_record & record_key     |
 	 |         |             |  from error_log                                  |
 	 |   1.5   |  2026-03-21 |  Added a new log table, dq_log                   |
+	 |   1.6   |  2026-03-29 |  Added new records to dq_log table               |
 ====================================================================================
 */
 USE BankingDW;
@@ -149,15 +150,21 @@ INSERT INTO etl.watermark
 	last_loaded
 )
 VALUES 
+	('CRM', 'bronze.crm_customers', '1900-01-01'),
+	('HRMS', 'bronze.hrms_employees', '1900-01-01'),
 	('CBS', 'bronze.cbs_accounts', '1900-01-01'),
 	('CBS', 'bronze.cbs_branches', '1900-01-01'),
 	('CBS', 'bronze.cbs_transactions', '1900-01-01'),
-	('CRM', 'bronze.crm_customers', '1900-01-01'),
-	('HRMS', 'bronze.hrms_employees', '1900-01-01'),
 	('LOS', 'bronze.los_loan_applications', '1900-01-01'),
+	('CRM', 'silver.crm_customers', '1900-01-01'),
+	('HRMS', 'silver.hrms_employees', '1900-01-01'),
 	('CBS', 'silver.cbs_accounts', '1900-01-01'),
 	('CBS', 'silver.cbs_branches', '1900-01-01'),
 	('CBS', 'silver.cbs_transactions', '1900-01-01'),
-	('CRM', 'silver.crm_customers', '1900-01-01'),
-	('HRMS', 'silver.hrms_employees', '1900-01-01'),
-	('LOS', 'silver.los_loan_applications', '1900-01-01');
+	('LOS', 'silver.los_loan_applications', '1900-01-01'),
+	('CRM', 'gold.dim_customers', '1900-01-01'),
+	('HRMS', 'gold.dim_employees', '1900-01-01'),
+	('CBS', 'gold.dim_accounts', '1900-01-01'),
+	('CBS', 'gold.dim_branches', '1900-01-01'),
+	('CBS', 'gold.fact_transactions', '1900-01-01'),
+	('LOS', 'gold.fact_loan_applications', '1900-01-01');
