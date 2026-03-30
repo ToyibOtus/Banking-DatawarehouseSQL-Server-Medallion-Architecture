@@ -3,7 +3,7 @@
 Script    : 01_etl_load_gold_crm
 Location  : scripts/03_gold/procs/
 Author    : Otusanya Toyib Oluwatimilehin
-Created   : 2026-03-29
+Created   : 2026-03-30
 Version   : 1.0
 ===================================================================================
 Script Purpose:
@@ -23,7 +23,7 @@ Change Log:
 	 
 	| Version |     Date    |  Description                                     |
 	|---------|-------------|--------------------------------------------------|
-	|   1.0   |  2026-03-29 |  Initial creation                                |
+	|   1.0   |  2026-03-30 |  Initial creation                                |
 ===================================================================================
 */
 USE BankingDW;
@@ -63,7 +63,8 @@ BEGIN
 	@rows_extracted INT,
 	@rows_inserted INT,
 	@rows_updated INT,
-	@rows_rejected INT,
+	@rows_expired INT,
+	@rows_rejected INT, 
 
 	-- Last Batch ID (Retrieved from etl.watermark)
 	@wm_customers INT,
@@ -125,13 +126,14 @@ BEGIN
 		SET @start_time = SYSDATETIME();
 		SET @step_id = NULL;
 		SET @step_name = 'Load gold.dim_customers';
-		SET @load_type = 'SCD2: Expire & Insert';
+		SET @load_type = 'Incremental: SCD1 & SCD2';
 		SET @source_object = @source_customers;
 		SET @target_object = @target_customers;
 		SET @step_status = 'Running';
 		SET @rows_extracted = 0;
 		SET @rows_inserted = 0;
 		SET @rows_updated = 0;
+		SET @rows_expired = 0;
 		SET @rows_rejected = 0;
 
 		-- Load log details at step-level
@@ -147,6 +149,7 @@ BEGIN
 			rows_extracted,
 			rows_inserted,
 			rows_updated,
+			rows_expired,
 			rows_rejected
 		)
 		VALUES
@@ -161,6 +164,7 @@ BEGIN
 			@rows_extracted,
 			@rows_inserted,
 			@rows_updated,
+			@rows_expired,
 			@rows_rejected
 		);
 		-- Retrieve recently generated step_id
@@ -201,21 +205,64 @@ BEGIN
 		-- Retrieve number of loaded records
 		SET @rows_extracted = @@ROWCOUNT;
 
+		-- Overwrite outdated records, no new version created
+		UPDATE tgt
+			SET
+				tgt.first_name = src.first_name,
+				tgt.last_name = src.last_name,
+				tgt.email = src.email,
+				tgt.phone_number = src.phone_number,
+				tgt.preferred_language = src.preferred_language,
+				tgt.updated_at = src.updated_at,
+
+				tgt._source_system = @source_system,
+				tgt._batch_id = @batch_id,
+				tgt._updated_at = @start_time
+				FROM gold.dim_customers tgt
+				INNER JOIN #stg_customers src
+				ON tgt.customer_id = src.customer_id
+				WHERE
+					(COALESCE(tgt.first_name, 'Unknown') <> COALESCE(src.first_name, 'Unknown') OR
+					COALESCE(tgt.last_name, 'Unknown') <> COALESCE(src.last_name, 'Unknown') OR
+					COALESCE(tgt.email, 'Unknown') <> COALESCE(src.email, 'Unknown') OR
+					COALESCE(tgt.phone_number, 'Unknown') <> COALESCE(src.phone_number, 'Unknown') OR
+					COALESCE(tgt.preferred_language, 'Unknown') <> COALESCE(src.preferred_language, 'Unknown'))
+					AND tgt._is_active = 1;
+
+		-- Retrieve number of updated records
+		SET @rows_updated = @@ROWCOUNT;
+		
+		
 		-- Update metadata columns in outdated records
 		UPDATE tgt
 			SET
 				tgt._source_system = @source_system,
 				tgt._batch_id = @batch_id,
 				tgt._updated_at = @start_time,
-				_valid_to = CAST(@start_time AS DATE),
-				_is_active = 0
+				tgt._valid_to = CAST(@start_time AS DATE),
+				tgt._is_active = 0
 				FROM gold.dim_customers tgt
 				INNER JOIN #stg_customers src
 				ON tgt.customer_id = src.customer_id
-			WHERE tgt._is_active = 1 AND COALESCE(src.updated_at, '1900-01-01') > COALESCE(tgt.updated_at, '1900-01-01');
-		
-		-- Retrieve number of in active records
-		SET @rows_updated = @@ROWCOUNT;
+			WHERE 
+				(COALESCE(tgt.company_name, 'Unknown') <> COALESCE(src.company_name, 'Unknown') OR
+				COALESCE(tgt.segment, 'Unknown') <> COALESCE(src.segment, 'Unknown') OR
+				COALESCE(tgt.risk_band, 'Unknown') <> COALESCE(src.risk_band, 'Unknown')  OR
+				COALESCE(tgt.date_of_birth, '1900-01-01') <> COALESCE(src.date_of_birth, '1900-01-01') OR
+				COALESCE(tgt.gender, 'Unknown') <> COALESCE(src.gender, 'Unknown') OR
+				COALESCE(tgt.address_line_1, 'Unknown') <> COALESCE(src.address_line_1, 'Unknown') OR
+				COALESCE(tgt.city, 'Unknown') <> COALESCE(src.city, 'Unknown') OR
+				COALESCE(tgt.[state], 'Unknown') <> COALESCE(src.[state], 'Unknown') OR
+				COALESCE(tgt.zip_code, 'Unknown') <> COALESCE(src.zip_code, 'Unknown') OR
+				COALESCE(tgt.country, 'Unknown') <> COALESCE(src.country, 'Unknown') OR
+				COALESCE(tgt.is_active, 0) <> COALESCE(src.is_active, 0) OR
+				COALESCE(tgt.marketing_opt_in, 0) <> COALESCE(src.marketing_opt_in, 0) OR
+				COALESCE(tgt.annual_income, 0.00) <> COALESCE(src.annual_income, 0.00) OR
+				COALESCE(tgt.credit_score, 0) <> COALESCE(src.credit_score, 0))
+				AND tgt._is_active = 1;
+
+		-- Retrieve number of inactive records
+		SET @rows_expired = @@ROWCOUNT;		
 
 		-- Load updated records into gold table
 		INSERT INTO gold.dim_customers
@@ -373,7 +420,7 @@ BEGIN
 
 		-- Map values to variables on success
 		SET @rows_inserted = @rows_inserted + @@ROWCOUNT;
-		SET @rows_rejected = @rows_extracted - @rows_inserted;
+		SET @rows_rejected = @rows_extracted - (@rows_inserted + @rows_updated);
 		SET @total_rows = @total_rows + @rows_extracted;
 		SET @end_time = SYSDATETIME();
 		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
@@ -396,6 +443,7 @@ BEGIN
 				rows_extracted = @rows_extracted,
 				rows_inserted = @rows_inserted,
 				rows_updated = @rows_updated,
+				rows_expired = @rows_expired,
 				rows_rejected = @rows_rejected
 			WHERE step_id = @step_id;
 
@@ -421,6 +469,10 @@ BEGIN
 			WHERE batch_id = @batch_id;
 	END TRY
 
+
+	-- =======================================================================================
+	-- SECTION 6: ERROR HANDLING
+	-- =======================================================================================
 	BEGIN CATCH
 		-- Map values to variables on failure
 		IF @start_time IS NULL SET @start_time = SYSDATETIME();
@@ -432,9 +484,10 @@ BEGIN
 
 		IF @rows_extracted IS NULL SET @rows_extracted = 0;
 		IF @rows_updated IS NULL SET @rows_updated = 0;
+		IF @rows_expired IS NULL SET @rows_expired = 0;
 		IF @rows_inserted IS NULL SET @rows_inserted = 0;
 
-		SET @rows_rejected = @rows_extracted - @rows_inserted;
+		SET @rows_rejected = @rows_extracted - (@rows_inserted + @rows_updated);
 
 		SET @total_rows = @total_rows + @rows_extracted;
 
@@ -459,6 +512,7 @@ BEGIN
 						rows_extracted = @rows_extracted,
 						rows_inserted = @rows_inserted,
 						rows_updated = @rows_updated,
+						rows_expired = @rows_expired,
 						rows_rejected = @rows_rejected,
 						err_message = ERROR_MESSAGE()
 					WHERE step_id = @step_id;
@@ -480,6 +534,7 @@ BEGIN
 					rows_extracted,
 					rows_inserted,
 					rows_updated,
+					rows_expired,
 					rows_rejected,
 					err_message
 				)
@@ -497,6 +552,7 @@ BEGIN
 					@rows_extracted,
 					@rows_inserted,
 					@rows_updated,
+					@rows_expired,
 					@rows_rejected,
 					ERROR_MESSAGE()
 				);
