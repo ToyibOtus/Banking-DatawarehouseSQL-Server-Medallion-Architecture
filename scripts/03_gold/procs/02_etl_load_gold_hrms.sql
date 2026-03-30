@@ -3,7 +3,7 @@
 Script    : 02_etl_load_gold_hrms
 Location  : scripts/03_gold/procs/
 Author    : Otusanya Toyib Oluwatimilehin
-Created   : 2026-03-29
+Created   : 2026-03-30
 Version   : 1.0
 ===================================================================================
 Script Purpose:
@@ -23,7 +23,7 @@ Change Log:
 	 
 	| Version |     Date    |  Description                                     |
 	|---------|-------------|--------------------------------------------------|
-	|   1.0   |  2026-03-29 |  Initial creation                                |
+	|   1.0   |  2026-03-30 |  Initial creation                                |
 ===================================================================================
 */
 USE BankingDW;
