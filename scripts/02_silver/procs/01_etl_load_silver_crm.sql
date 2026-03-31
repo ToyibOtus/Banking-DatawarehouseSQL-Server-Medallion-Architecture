@@ -214,7 +214,10 @@ BEGIN
 			NULLIF(TRIM(customer_id), '') AS customer_id,
 			first_name,
 			last_name,
-			NULLIF(TRIM(company_name), '') AS company_name,
+			CASE
+				WHEN company_name IS NULL THEN 'Unknown'
+				ELSE company_name
+			END AS company_name,
 			segment,
 			risk_band,
 			date_of_birth,
