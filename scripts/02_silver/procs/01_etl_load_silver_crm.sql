@@ -215,14 +215,14 @@ BEGIN
 			first_name,
 			last_name,
 			CASE
-				WHEN company_name IS NULL THEN 'Unknown'
+				WHEN company_name IS NULL THEN 'N/A'
 				ELSE company_name
 			END AS company_name,
 			segment,
 			risk_band,
 			date_of_birth,
 			CASE 
-				WHEN gender IS NULL THEN 'Unknown'
+				WHEN gender IS NULL THEN 'N/A'
 				WHEN TRIM(UPPER(gender)) = 'M' THEN 'Male'
 				WHEN TRIM(UPPER(gender)) = 'F' THEN 'Female'
 				ELSE TRIM(gender)
@@ -233,13 +233,12 @@ BEGIN
 				ELSE email
 			END AS email,
 			CASE 
-				WHEN phone_number IS NULL THEN 'Unknown'
-				WHEN UPPER(phone_number) = 'UNKNOWN' THEN 'Unknown'
-				WHEN UPPER(phone_number) = 'N/A' THEN 'Unknown'
-				ELSE phone_number
+				WHEN phone_number IS NULL THEN 'N/A'
+				WHEN UPPER(phone_number) = 'UNKNOWN' THEN 'N/A'
+				ELSE UPPER(phone_number)
 			END AS phone_number,
 			CASE
-				WHEN address_line_1 IS NULL THEN 'Unknown'
+				WHEN address_line_1 IS NULL THEN 'N/A'
 				ELSE address_line_1
 			END AS address_line_1,
 			city,
@@ -255,7 +254,7 @@ BEGIN
 			is_active,
 			marketing_opt_in, 
 			CASE
-				WHEN preferred_language IS NULL THEN 'Unknown'
+				WHEN preferred_language IS NULL THEN 'N/A'
 				ELSE TRIM(preferred_language)
 			END AS preferred_language,
 			annual_income,
