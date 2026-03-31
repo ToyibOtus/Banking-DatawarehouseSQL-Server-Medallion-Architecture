@@ -209,10 +209,9 @@ BEGIN
 				ELSE email
 			END AS email,
 			CASE 
-				WHEN phone_number IS NULL THEN 'Unknown'
-				WHEN UPPER(phone_number) = 'N/A' THEN 'Unknown'
-				WHEN UPPER(phone_number) = 'UNKNOWN' THEN 'Unknown'
-				ELSE phone_number
+				WHEN phone_number IS NULL THEN 'N/A'
+				WHEN UPPER(phone_number) = 'UNKNOWN' THEN 'N/A'
+				ELSE UPPER(phone_number)
 			END AS phone_number,
 			department,
 			job_title,
