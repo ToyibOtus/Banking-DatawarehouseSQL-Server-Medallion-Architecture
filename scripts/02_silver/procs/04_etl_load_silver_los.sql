@@ -243,11 +243,11 @@ BEGIN
 			collateral_type,
 			collateral_value, 
 			CASE
-				WHEN purpose_description IS NULL THEN 'Unknown'
+				WHEN purpose_description IS NULL THEN 'N/A'
 				ELSE purpose_description
 			END AS purpose_description,
 			CASE
-				WHEN loan_status = 'Rejected' AND rejection_reason IS NULL THEN 'Unknown'
+				WHEN loan_status = 'Rejected' AND rejection_reason IS NULL THEN 'N/A'
 				ELSE rejection_reason
 			END AS rejection_reason,
 			CAST(created_at AS DATE) AS created_at,
