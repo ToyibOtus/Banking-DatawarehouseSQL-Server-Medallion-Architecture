@@ -217,7 +217,7 @@ BEGIN
 			NULLIF(TRIM(customer_id), '') AS customer_id,
 			account_type,
 			CASE
-				WHEN account_status IS NULL THEN 'Unknown'
+				WHEN account_status IS NULL THEN 'N/A'
 				ELSE account_status
 			END AS account_status,
 			open_date,
@@ -851,19 +851,19 @@ BEGIN
 			balance_after,
 			NULLIF(TRIM(counterpart_account_id), '') AS counterpart_account_id,
 			CASE
-				WHEN merchant_name IS NULL THEN 'Unknown'
+				WHEN merchant_name IS NULL THEN 'N/A'
 				ELSE merchant_name
 			END AS merchant_name,
 			CASE
-				WHEN merchant_category IS NULL THEN 'Unknown'
+				WHEN merchant_category IS NULL THEN 'N/A'
 				ELSE merchant_category
 			END AS merchant_category,
 			CASE
-				WHEN reference_number IS NULL THEN 'Unknown'
+				WHEN reference_number IS NULL THEN 'N/A'
 				ELSE reference_number
 			END AS reference_number,
 			CASE
-				WHEN [description] IS NULL THEN 'Unknown'
+				WHEN [description] IS NULL THEN 'N/A'
 				ELSE [description]
 			END AS [description],
 			NULLIF(TRIM(branch_id), '') AS branch_id,
