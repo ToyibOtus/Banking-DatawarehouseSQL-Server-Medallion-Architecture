@@ -8,8 +8,9 @@ Version   : 1.0
 ===================================================================================
 Script Purpose:
     Loads all HRMS records from the silver layer into corresponding gold layer.
-	It has an in-buit logging system designed to track and monitor every ETL step, 
-	and thus enabling easy debugging.
+	It performs data integrations where necessary. Additionally, it has an in-buit 
+	logging system designed to track and monitor every ETL step, and thus enabling 
+	easy debugging.
 
 Tables Loaded:
 	gold.dim_employees
@@ -63,7 +64,6 @@ BEGIN
 	@rows_extracted INT,
 	@rows_inserted INT,
 	@rows_updated INT,
-	@rows_expired INT,
 	@rows_rejected INT,
 
 	-- Last Batch ID (Retrieved from etl.watermark)
@@ -126,14 +126,13 @@ BEGIN
 		SET @start_time = SYSDATETIME();
 		SET @step_id = NULL;
 		SET @step_name = 'Load gold.dim_employees';
-		SET @load_type = 'Incremental: SCD1 & SCD2';
+		SET @load_type = 'Incremental: Update & Insert';
 		SET @source_object = @source_employees;
 		SET @target_object = @target_employees;
 		SET @step_status = 'Running';
 		SET @rows_extracted = 0;
 		SET @rows_inserted = 0;
 		SET @rows_updated = 0;
-		SET @rows_expired = 0;
 		SET @rows_rejected = 0;
 
 		-- Load log details at step-level
@@ -149,7 +148,6 @@ BEGIN
 			rows_extracted,
 			rows_inserted,
 			rows_updated,
-			rows_expired,
 			rows_rejected
 		)
 		VALUES
@@ -164,7 +162,6 @@ BEGIN
 			@rows_extracted,
 			@rows_inserted,
 			@rows_updated,
-			@rows_expired,
 			@rows_rejected
 		);
 		-- Retrieve recently generated step_id
@@ -174,8 +171,7 @@ BEGIN
 		-- Load silver table into a temporary staging table
 		SELECT
 			m.employee_id,
-			m.first_name,
-			m.last_name,
+			CONCAT(m.first_name, ' ', m.last_name) AS employee_name,
 			m.email,
 			m.phone_number,
 			m.department,
@@ -198,13 +194,21 @@ BEGIN
 		-- Retrieve number of loaded records
 		SET @rows_extracted = @@ROWCOUNT;
 
-		-- Overwrite outdated records, no new version created
+		-- Overwrite outdated records
 		UPDATE tgt
 			SET
-				tgt.first_name = src.first_name,
-				tgt.last_name = src.last_name,
+				tgt.employee_name = src.employee_name,
 				tgt.email = src.email,
 				tgt.phone_number = src.phone_number,
+				tgt.department = src.department,
+				tgt.job_title = src.job_title,
+				tgt.branch_id = src.branch_id,
+				tgt.hire_date = src.hire_date,
+				tgt.termination_date = src.termination_date,
+				tgt.salary = src.salary,
+				tgt.is_active = src.is_active,
+				tgt.manager_id = src.manager_id,
+				tgt.manager_name = src.manager_name,
 
 				tgt._source_system = @source_system,
 				tgt._batch_id = @batch_id,
@@ -213,100 +217,28 @@ BEGIN
 				INNER JOIN #stg_employees src
 				ON tgt.employee_id = src.employee_id
 			WHERE 
-					(COALESCE(tgt.first_name, 'Unknown') <> COALESCE(src.first_name, 'Unknown') OR
-					COALESCE(tgt.last_name, 'Unknown') <> COALESCE(src.last_name, 'Unknown') OR
-					COALESCE(tgt.email, 'Unknown') <> COALESCE(src.email, 'Unknown') OR
-					COALESCE(tgt.phone_number, 'Unknown') <> COALESCE(src.phone_number, 'Unknown')OR
-					COALESCE(tgt.hire_date, '1900-01-01') <> COALESCE(src.hire_date, '1900-01-01'))
-					AND tgt._is_active = 1;
-		
-		-- Retrieve number of updated records
-		SET @rows_updated = @@ROWCOUNT;
-				
-		-- Update metadata columns in outdated records
-		UPDATE tgt
-			SET
-				tgt._source_system = @source_system,
-				tgt._batch_id = @batch_id,
-				tgt._updated_at = @start_time,
-				tgt._valid_to = CAST(@start_time AS DATE),
-				tgt._is_active = 0
-				FROM gold.dim_employees tgt
-				INNER JOIN #stg_employees src
-				ON tgt.employee_id = src.employee_id
-			WHERE 
-					(COALESCE(tgt.department, 'Unknown') <> COALESCE(src.department, 'Unknown') OR
-					COALESCE(tgt.job_title, 'Unknown') <> COALESCE(src.job_title, 'Unknown') OR
-					COALESCE(tgt.branch_id, 'Unknown') <> COALESCE(src.branch_id, 'Unknown')  OR
+					COALESCE(tgt.employee_name, '') <> COALESCE(src.employee_name, '') OR
+					COALESCE(tgt.email, '') <> COALESCE(src.email, '') OR
+					COALESCE(tgt.phone_number, '') <> COALESCE(src.phone_number, '')OR
+					COALESCE(tgt.department, '') <> COALESCE(src.department, '') OR
+					COALESCE(tgt.job_title, '') <> COALESCE(src.job_title, '') OR
+					COALESCE(tgt.branch_id, '') <> COALESCE(src.branch_id, '')  OR
+					COALESCE(tgt.hire_date, '1900-01-01') <> COALESCE(src.hire_date, '1900-01-01')OR
 					COALESCE(tgt.termination_date, '1900-01-01') <> COALESCE(src.termination_date, '1900-01-01') OR
 					COALESCE(tgt.salary, 0.00) <> COALESCE(src.salary, 0.00) OR
 					COALESCE(tgt.is_active, 0) <> COALESCE(src.is_active, 0) OR 
-					COALESCE(tgt.manager_id, 'Unknown') <> COALESCE(src.manager_id, 'Unknown')) 
-					AND tgt._is_active = 1;
+					COALESCE(tgt.manager_id, '') <> COALESCE(src.manager_id, '') OR
+					COALESCE(tgt.manager_name, '') <> COALESCE(src.manager_name, '');
+		
+		-- Retrieve number of updated records
+		SET @rows_updated = @@ROWCOUNT;
 
-		-- Retrieve number of inactive records
-		SET @rows_expired = @@ROWCOUNT;
-
-		-- Load updated records into gold table
-		INSERT INTO gold.dim_employees
-		(
-			employee_id,
-			first_name,
-			last_name,
-			email,
-			phone_number,
-			department,
-			job_title,
-			branch_id,
-			hire_date,
-			termination_date,
-			salary,
-			is_active,
-			manager_id,
-			manager_name,
-
-			-- Metadata columns
-			_source_system,
-			_batch_id,
-			_created_at,
-			_valid_from,
-			_is_active
-		)
-		SELECT
-			src.employee_id,
-			src.first_name,
-			src.last_name,
-			src.email,
-			src.phone_number,
-			src.department,
-			src.job_title,
-			src.branch_id,
-			src.hire_date,
-			src.termination_date,
-			src.salary,
-			src.is_active,
-			src.manager_id,
-			src.manager_name,
-
-			-- Map variables to metadata columns
-			@source_system,
-			@batch_id,
-			@start_time,
-			CAST(@start_time AS DATE),
-			1
-		FROM #stg_employees src
-		WHERE EXISTS (SELECT 1 FROM gold.dim_employees tgt 
-		WHERE tgt.employee_id = src.employee_id AND tgt._is_active = 0 AND tgt._batch_id = @batch_id);
-
-		-- Retrive number of loaded records
-		SET @rows_inserted = @@ROWCOUNT;
 
 		-- Load new records into gold table
 		INSERT INTO gold.dim_employees
 		(
 			employee_id,
-			first_name,
-			last_name,
+			employee_name,
 			email,
 			phone_number,
 			department,
@@ -322,14 +254,11 @@ BEGIN
 			-- Metadata columns
 			_source_system,
 			_batch_id,
-			_created_at,
-			_valid_from,
-			_is_active
+			_created_at
 		)
 		SELECT
 			src.employee_id,
-			src.first_name,
-			src.last_name,
+			src.employee_name,
 			src.email,
 			src.phone_number,
 			src.department,
@@ -345,16 +274,27 @@ BEGIN
 			-- Map variables to metadata columns
 			@source_system,
 			@batch_id,
-			@start_time,
-			CAST(@start_time AS DATE),
-			1
+			@start_time
 		FROM #stg_employees src
 		LEFT JOIN gold.dim_employees tgt
 		ON src.employee_id = tgt.employee_id
 		WHERE tgt.employee_id IS NULL;
 
+		-- Retrieve rows inserted
+		SET @rows_inserted = @@ROWCOUNT;
+
+
+		-- Retrieve manager key where available
+		UPDATE tgt
+			SET
+				tgt.manager_key = src.employee_key
+				FROM gold.dim_employees tgt
+				INNER JOIN
+					(SELECT employee_id, employee_key FROM gold.dim_employees) src
+				ON tgt.manager_id = src.employee_id
+			WHERE _batch_id = @batch_id AND manager_key IS NULL AND manager_id IS NOT NULL;
+
 		-- Map values to variables on success
-		SET @rows_inserted = @rows_inserted + @@ROWCOUNT;
 		SET @rows_rejected = @rows_extracted - (@rows_inserted + @rows_updated);
 		SET @total_rows = @total_rows + @rows_extracted;
 		SET @end_time = SYSDATETIME();
@@ -378,7 +318,6 @@ BEGIN
 				rows_extracted = @rows_extracted,
 				rows_inserted = @rows_inserted,
 				rows_updated = @rows_updated,
-				rows_expired = @rows_expired,
 				rows_rejected = @rows_rejected
 			WHERE step_id = @step_id;
 
@@ -420,7 +359,6 @@ BEGIN
 
 		IF @rows_extracted IS NULL SET @rows_extracted = 0;
 		IF @rows_updated IS NULL SET @rows_updated = 0;
-		IF @rows_expired IS NULL SET @rows_expired = 0;
 		IF @rows_inserted IS NULL SET @rows_inserted = 0;
 
 		SET @rows_rejected = @rows_extracted - (@rows_inserted + @rows_updated);
@@ -448,7 +386,6 @@ BEGIN
 						rows_extracted = @rows_extracted,
 						rows_inserted = @rows_inserted,
 						rows_updated = @rows_updated,
-						rows_expired = @rows_expired,
 						rows_rejected = @rows_rejected,
 						err_message = ERROR_MESSAGE()
 					WHERE step_id = @step_id;
@@ -470,17 +407,16 @@ BEGIN
 					rows_extracted,
 					rows_inserted,
 					rows_updated,
-					rows_expired,
 					rows_rejected,
 					err_message
 				)
 				VALUES
 				(
 					@batch_id,
-					COALESCE(@step_name, 'Unknown'),
-					COALESCE(@load_type, 'Unknown'),
-					COALESCE(@source_object, 'Unknown'),
-					COALESCE(@target_object, 'Unknown'),
+					COALESCE(@step_name, 'N/A'),
+					COALESCE(@load_type, 'N/A'),
+					COALESCE(@source_object, 'N/A'),
+					COALESCE(@target_object, 'N/A'),
 					@start_time,
 					@end_time,
 					@step_duration_seconds,
@@ -488,7 +424,6 @@ BEGIN
 					@rows_extracted,
 					@rows_inserted,
 					@rows_updated,
-					@rows_expired,
 					@rows_rejected,
 					ERROR_MESSAGE()
 				);
@@ -512,10 +447,10 @@ BEGIN
 		(
 			@batch_id,
 			@step_id,
-			COALESCE(@source_system, 'Unknown'),
-			COALESCE(@layer, 'Unknown'),
-			COALESCE(@source_object, 'Unknown'),
-			COALESCE(@target_object, 'Unknown'),
+			COALESCE(@source_system, 'N/A'),
+			COALESCE(@layer, 'N/A'),
+			COALESCE(@source_object, 'N/A'),
+			COALESCE(@target_object, 'N/A'),
 			ERROR_MESSAGE(),
 			@end_time
 		);
