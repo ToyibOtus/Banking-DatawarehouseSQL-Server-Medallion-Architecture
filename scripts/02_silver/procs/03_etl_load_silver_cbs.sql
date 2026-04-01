@@ -217,6 +217,7 @@ BEGIN
 			NULLIF(TRIM(customer_id), '') AS customer_id,
 			account_type,
 			CASE
+				WHEN account_status IS NULL AND close_date IS NOT NULL THEN 'Closed'
 				WHEN account_status IS NULL THEN 'N/A'
 				ELSE account_status
 			END AS account_status,
@@ -1161,10 +1162,10 @@ BEGIN
 				VALUES
 				(
 					@batch_id,
-					COALESCE(@step_name, 'Unknown'),
-					COALESCE(@load_type, 'Unknown'),
-					COALESCE(@source_object, 'Unknown'),
-					COALESCE(@target_object, 'Unknown'),
+					COALESCE(@step_name, 'N/A'),
+					COALESCE(@load_type, 'N/A'),
+					COALESCE(@source_object, 'N/A'),
+					COALESCE(@target_object, 'N/A'),
 					@start_time,
 					@end_time,
 					@step_duration_seconds,
@@ -1197,8 +1198,8 @@ BEGIN
 			@step_id,
 			@source_system,
 			@layer,
-			COALESCE(@source_object, 'Unknown'),
-			COALESCE(@target_object, 'Unknown'),
+			COALESCE(@source_object, 'N/A'),
+			COALESCE(@target_object, 'N/A'),
 			ERROR_MESSAGE(),
 			@end_time
 		);
