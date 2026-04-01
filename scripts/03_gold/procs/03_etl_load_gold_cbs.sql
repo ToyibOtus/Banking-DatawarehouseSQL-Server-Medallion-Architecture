@@ -3,7 +3,7 @@
 Script    : 03_etl_load_gold_cbs
 Location  : scripts/03_gold/procs/
 Author    : Otusanya Toyib Oluwatimilehin
-Created   : 2026-03-30
+Created   : 2026-04-01
 Version   : 1.0
 ===================================================================================
 Script Purpose:
@@ -31,6 +31,7 @@ Change Log:
 */
 USE BankingDW;
 GO
+
 CREATE OR ALTER PROCEDURE etl.load_gold_cbs AS
 BEGIN
 	-- Suppress number of rows affected	
@@ -427,7 +428,8 @@ BEGIN
 				INNER JOIN #stg_accounts src
 				ON tgt.account_id = src.account_id
 			WHERE
-				(COALESCE(tgt.account_status, '') <> COALESCE(src.account_status, '') OR
+				(COALESCE(tgt.customer_key, 0) <> COALESCE(src.customer_key, 0) OR
+				COALESCE(tgt.account_status, '') <> COALESCE(src.account_status, '') OR
 				COALESCE(tgt.close_date, '1900-01-01') <> COALESCE(src.close_date, '1900-01-01') OR
 				COALESCE(tgt.overdraft_limit, 0) <> COALESCE(src.overdraft_limit, 0) OR
 				COALESCE(tgt.interest_rate, 0) <> COALESCE(src.interest_rate, 0) OR
