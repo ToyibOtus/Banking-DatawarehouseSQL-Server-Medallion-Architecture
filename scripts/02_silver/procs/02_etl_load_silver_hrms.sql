@@ -508,10 +508,10 @@ BEGIN
 				VALUES
 				(
 					@batch_id,
-					COALESCE(@step_name, 'Unknown'),
-					COALESCE(@load_type, 'Unknown'),
-					COALESCE(@source_object, 'Unknown'),
-					COALESCE(@target_object, 'Unknown'),
+					COALESCE(@step_name, 'N/A'),
+					COALESCE(@load_type, 'N/A'),
+					COALESCE(@source_object, 'N/A'),
+					COALESCE(@target_object, 'N/A'),
 					@start_time,
 					@end_time,
 					@step_duration_seconds,
@@ -544,8 +544,8 @@ BEGIN
 			@step_id,
 			@source_system,
 			@layer,
-			COALESCE(@source_object, 'Unknown'),
-			COALESCE(@target_object, 'Unknown'),
+			COALESCE(@source_object, 'N/A'),
+			COALESCE(@target_object, 'N/A'),
 			ERROR_MESSAGE(),
 			@end_time
 		);
