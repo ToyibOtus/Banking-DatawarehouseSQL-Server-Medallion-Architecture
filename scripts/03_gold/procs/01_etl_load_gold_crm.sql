@@ -8,8 +8,9 @@ Version   : 1.0
 ===================================================================================
 Script Purpose:
     Loads all CRM records from the silver layer into corresponding gold layer.
-	It has an in-buit logging system designed to track and monitor every ETL step, 
-	and thus enabling easy debugging.
+	It performs data integrations where necessary. Additionally, it has an in-buit 
+	logging system designed to track and monitor every ETL step, and thus enabling 
+	easy debugging.
 
 Tables Loaded:
 	gold.dim_customers
@@ -173,8 +174,7 @@ BEGIN
 		-- Load silver table into a temporary staging table
 		SELECT
 			customer_id,
-			first_name,
-			last_name,
+			CONCAT(first_name, ' ', last_name) AS customer_name,
 			company_name,
 			segment,
 			risk_band,
@@ -208,8 +208,7 @@ BEGIN
 		-- Overwrite outdated records, no new version created
 		UPDATE tgt
 			SET
-				tgt.first_name = src.first_name,
-				tgt.last_name = src.last_name,
+				tgt.customer_name = src.customer_name,
 				tgt.email = src.email,
 				tgt.phone_number = src.phone_number,
 				tgt.preferred_language = src.preferred_language,
@@ -222,11 +221,10 @@ BEGIN
 				INNER JOIN #stg_customers src
 				ON tgt.customer_id = src.customer_id
 				WHERE
-					(COALESCE(tgt.first_name, 'Unknown') <> COALESCE(src.first_name, 'Unknown') OR
-					COALESCE(tgt.last_name, 'Unknown') <> COALESCE(src.last_name, 'Unknown') OR
-					COALESCE(tgt.email, 'Unknown') <> COALESCE(src.email, 'Unknown') OR
-					COALESCE(tgt.phone_number, 'Unknown') <> COALESCE(src.phone_number, 'Unknown') OR
-					COALESCE(tgt.preferred_language, 'Unknown') <> COALESCE(src.preferred_language, 'Unknown'))
+					(COALESCE(tgt.customer_name, '') <> COALESCE(src.customer_name, '') OR
+					COALESCE(tgt.email, '') <> COALESCE(src.email, '') OR
+					COALESCE(tgt.phone_number, '') <> COALESCE(src.phone_number, '') OR
+					COALESCE(tgt.preferred_language, '') <> COALESCE(src.preferred_language, ''))
 					AND tgt._is_active = 1;
 
 		-- Retrieve number of updated records
@@ -245,19 +243,19 @@ BEGIN
 				INNER JOIN #stg_customers src
 				ON tgt.customer_id = src.customer_id
 			WHERE 
-				(COALESCE(tgt.company_name, 'Unknown') <> COALESCE(src.company_name, 'Unknown') OR
-				COALESCE(tgt.segment, 'Unknown') <> COALESCE(src.segment, 'Unknown') OR
-				COALESCE(tgt.risk_band, 'Unknown') <> COALESCE(src.risk_band, 'Unknown')  OR
+				(COALESCE(tgt.company_name, '') <> COALESCE(src.company_name, '') OR
+				COALESCE(tgt.segment, '') <> COALESCE(src.segment, '') OR
+				COALESCE(tgt.risk_band, '') <> COALESCE(src.risk_band, '')  OR
 				COALESCE(tgt.date_of_birth, '1900-01-01') <> COALESCE(src.date_of_birth, '1900-01-01') OR
-				COALESCE(tgt.gender, 'Unknown') <> COALESCE(src.gender, 'Unknown') OR
-				COALESCE(tgt.address_line_1, 'Unknown') <> COALESCE(src.address_line_1, 'Unknown') OR
-				COALESCE(tgt.city, 'Unknown') <> COALESCE(src.city, 'Unknown') OR
-				COALESCE(tgt.[state], 'Unknown') <> COALESCE(src.[state], 'Unknown') OR
-				COALESCE(tgt.zip_code, 'Unknown') <> COALESCE(src.zip_code, 'Unknown') OR
-				COALESCE(tgt.country, 'Unknown') <> COALESCE(src.country, 'Unknown') OR
+				COALESCE(tgt.gender, '') <> COALESCE(src.gender, '') OR
+				COALESCE(tgt.address_line_1, '') <> COALESCE(src.address_line_1, '') OR
+				COALESCE(tgt.city, '') <> COALESCE(src.city, '') OR
+				COALESCE(tgt.[state], '') <> COALESCE(src.[state], '') OR
+				COALESCE(tgt.zip_code, '') <> COALESCE(src.zip_code, '') OR
+				COALESCE(tgt.country, '') <> COALESCE(src.country, '') OR
 				COALESCE(tgt.is_active, 0) <> COALESCE(src.is_active, 0) OR
 				COALESCE(tgt.marketing_opt_in, 0) <> COALESCE(src.marketing_opt_in, 0) OR
-				COALESCE(tgt.annual_income, 0.00) <> COALESCE(src.annual_income, 0.00) OR
+				COALESCE(tgt.annual_income, 0) <> COALESCE(src.annual_income, 0) OR
 				COALESCE(tgt.credit_score, 0) <> COALESCE(src.credit_score, 0))
 				AND tgt._is_active = 1;
 
@@ -268,8 +266,7 @@ BEGIN
 		INSERT INTO gold.dim_customers
 		(
 			customer_id,
-			first_name,
-			last_name,
+			customer_name,
 			company_name,
 			segment,
 			risk_band,
@@ -303,8 +300,7 @@ BEGIN
 		)
 		SELECT
 			src.customer_id,
-			src.first_name,
-			src.last_name,
+			src.customer_name,
 			src.company_name,
 			src.segment,
 			src.risk_band,
@@ -346,8 +342,7 @@ BEGIN
 		INSERT INTO gold.dim_customers
 		(
 			customer_id,
-			first_name,
-			last_name,
+			customer_name,
 			company_name,
 			segment,
 			risk_band,
@@ -381,8 +376,7 @@ BEGIN
 		)
 		SELECT
 			src.customer_id,
-			src.first_name,
-			src.last_name,
+			src.customer_name,
 			src.company_name,
 			src.segment,
 			src.risk_band,
