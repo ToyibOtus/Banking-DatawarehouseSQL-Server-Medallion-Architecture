@@ -240,7 +240,7 @@ BEGIN
 			END AS updated_at,
 			_batch_id
 		FROM base_query
-		WHERE customer_id IN (SELECT customer_id FROM silver.crm_customers)
+		WHERE record_recency = 1 AND customer_id IN (SELECT customer_id FROM silver.crm_customers)
 		)
 		-- Load transformed bronze table into a temporary staging table
 		SELECT
