@@ -35,6 +35,7 @@ Script Purpose:
 	 |         |             |  from error_log                                  |
 	 |   1.5   |  2026-03-21 |  Added a new log table, dq_log                   |
 	 |   1.6   |  2026-03-29 |  Added new records to dq_log table               |
+	 |   1.6   |  2026-03-30 |  Added a new field, rows expired to step table   |
 ====================================================================================
 */
 USE BankingDW;
@@ -82,6 +83,7 @@ CREATE TABLE etl.step_log
 	rows_extracted INT,
 	rows_inserted INT,
 	rows_updated INT,
+	rows_expired INT,
 	rows_rejected INT,
 	err_message NVARCHAR(MAX),
 	CONSTRAINT fk_batch_id_etl_step_log FOREIGN KEY(batch_id) REFERENCES etl.batch_log (batch_id),
@@ -164,7 +166,7 @@ VALUES
 	('LOS', 'silver.los_loan_applications', '1900-01-01'),
 	('CRM', 'gold.dim_customers', '1900-01-01'),
 	('HRMS', 'gold.dim_employees', '1900-01-01'),
-	('CBS', 'gold.dim_accounts', '1900-01-01'),
 	('CBS', 'gold.dim_branches', '1900-01-01'),
+	('CBS', 'gold.dim_accounts', '1900-01-01'),
 	('CBS', 'gold.fact_transactions', '1900-01-01'),
 	('LOS', 'gold.fact_loan_applications', '1900-01-01');
