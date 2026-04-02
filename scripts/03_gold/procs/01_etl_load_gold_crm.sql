@@ -29,6 +29,7 @@ Change Log:
 */
 USE BankingDW;
 GO
+
 CREATE OR ALTER PROCEDURE etl.load_gold_crm AS
 BEGIN
 	-- Suppress number of rows affected	
@@ -189,7 +190,7 @@ BEGIN
 			zip_code,
 			country,
 			onboard_date,
-			onboarding_branch_id,
+			onboarding_branch_id AS branch_id,
 			customer_since,
 			is_active,
 			marketing_opt_in,
@@ -259,6 +260,7 @@ BEGIN
 				COALESCE(tgt.credit_score, 0) <> COALESCE(src.credit_score, 0))
 				AND tgt._is_active = 1;
 
+
 		-- Retrieve number of inactive records
 		SET @rows_expired = @@ROWCOUNT;		
 
@@ -281,7 +283,7 @@ BEGIN
 			zip_code,
 			country,
 			onboard_date,
-			onboarding_branch_id,
+			branch_id,
 			customer_since,
 			is_active,
 			marketing_opt_in,
@@ -315,7 +317,7 @@ BEGIN
 			src.zip_code,
 			src.country,
 			src.onboard_date,
-			src.onboarding_branch_id,
+			src.branch_id,
 			src.customer_since,
 			src.is_active,
 			src.marketing_opt_in,
@@ -357,7 +359,7 @@ BEGIN
 			zip_code,
 			country,
 			onboard_date,
-			onboarding_branch_id,
+			branch_id,
 			customer_since,
 			is_active,
 			marketing_opt_in,
@@ -391,7 +393,7 @@ BEGIN
 			src.zip_code,
 			src.country,
 			src.onboard_date,
-			src.onboarding_branch_id,
+			src.branch_id,
 			src.customer_since,
 			src.is_active,
 			src.marketing_opt_in,
