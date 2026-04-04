@@ -29,7 +29,7 @@ Schemas group objects by architectural layer or function.
 
 ### Bronze and Silver Tables
 
-Prefixed with the source system name to indicate data origin: < source_system >_< entity >
+Prefixed with the source system name to indicate data origin: <source_system>_<object_name>
 
 | Example                        | Description                        |
 |--------------------------------|------------------------------------|
@@ -41,9 +41,9 @@ Prefixed with the source system name to indicate data origin: < source_system >_
 ### Gold Tables
 
 Prefixed with object type to indicate dimensional role: 
-* dim_< entity >: dimension table
-* fact_< entity >: fact table
-* vw_< entity >: analytical view
+* dim_<object_name>: dimension table
+* fact_<object_name>: fact table
+* vw_<object_name>: analytical view
 
 | Example                          | Description                        |
 |----------------------------------|------------------------------------|
@@ -69,13 +69,13 @@ Named by function
 
 ## Columns
 
-* Bronze: Plain snake_case — as-is from source system
-* Silver: Plain snake_case — as-is from source system
-* Gold: Plain snake_case — user-friendly values 
+* Bronze: as-is from source system
+* Silver: as-is from source system
+* Gold: user-friendly values 
 
 
 ### Surrogate Keys
-< entity >_key
+<object_name>_key
 
 | Example          | Description                        |
 |------------------|------------------------------------|
@@ -85,8 +85,7 @@ Named by function
 
 ### Audit Columns
 
-Prefixed with underscore `_` to visually separate them from business columns.
-Audit columns vary by layer:
+Prefixed with underscore `_` to visually separate them from business columns:
 
 **Examples:**
 _source_system   
@@ -100,7 +99,7 @@ _load_timestamp
 ## Stored Procedures
 
 ### ETL Load Procedures
-etl.load_<layer>_<source_system>
+etl.load_<layer_name>_<source_system>
 
 | Procedure                  | Description                              |
 |----------------------------|------------------------------------------|
@@ -110,10 +109,11 @@ etl.load_<layer>_<source_system>
 | etl.load_gold_los`         | Loads all LOS Gold tables                |
 
 ### Special Procedures
-etl.reconcile_gold_keys     → Cross-system surrogate key resolution
+etl.reconcile_gold_keys: Cross-system surrogate key resolution
 
 ### Orchestrator Procedures
-etl.run_<scope>_pipeline
+etl.run_<layer_name>_pipeline
+
 
 | Procedure                      | Description                          |
 |--------------------------------|--------------------------------------|
@@ -126,10 +126,9 @@ etl.run_<scope>_pipeline
 
 ## Constraints
 
-* Primary key: pk_< table > 
-* Foreign key: fk_< column >_< table >
-* Unique constraint: uq< column >_< table >
-* Check constraint: chk_< column >_< table >
+* Foreign key: fk_<column_name>_<object_name>
+* Unique constraint: uq_<column_name>_<object_name>
+* Check constraint: chk_<column_name>_<object_name>
 
 | Example                                        | Description                       |
 |------------------------------------------------|-----------------------------------|
@@ -141,7 +140,7 @@ etl.run_<scope>_pipeline
 ## Scripts
 
 ### Naming Pattern
-<sequence_number>_<object_name>.sql
+<sequence_number>_<script_name>.sql
 
 Scripts are numbered sequentially within each folder to indicate execution order.
 
