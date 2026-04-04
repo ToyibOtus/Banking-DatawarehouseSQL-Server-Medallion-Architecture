@@ -890,8 +890,8 @@ BEGIN
 		(
 			@batch_id,
 			@step_id,
-			COALESCE(@source_system, 'N/A'),
-			COALESCE(@layer, 'N/A'),
+			@source_system,
+			@layer,
 			COALESCE(@source_object, 'N/A'),
 			COALESCE(@target_object, 'N/A'),
 			ERROR_MESSAGE(),
