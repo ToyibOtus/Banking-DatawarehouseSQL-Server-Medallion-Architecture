@@ -47,8 +47,7 @@ The following requirements define the scope and standards of this project.
 
 - Model source data across four independent systems (CBS, CRM, HRMS, LOS) into a unified conformed dimensional model using Star Schema
 
-- Implement a fully logged ETL pipeline using domain-grouped stored procedures — one per source system per layer — with a dedicated key
-  reconciliation procedure and four-procedure orchestration layer for automated pipeline execution
+- Implement a fully logged ETL pipeline using domain-grouped stored procedures — one per source system per layer
 
 - Build a production-grade ETL logging and auditing framework that tracks every batch, every step, and every error across all layers
 
