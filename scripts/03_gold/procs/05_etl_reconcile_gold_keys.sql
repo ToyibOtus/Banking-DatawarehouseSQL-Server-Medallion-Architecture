@@ -46,7 +46,7 @@ BEGIN
 	DECLARE
 	@batch_id INT = NULL,
 	@batch_name NVARCHAR(50) = 'etl.reconcile_gold_keys',
-	@source_system NVARCHAR(50) = 'Gold',
+	@source_system NVARCHAR(50) = 'INTERNAL',
 	@layer NVARCHAR(50) = 'Gold',
 	@batch_start_time DATETIME2,
 	@batch_end_time DATETIME2,
