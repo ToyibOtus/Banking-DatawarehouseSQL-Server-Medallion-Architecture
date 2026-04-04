@@ -106,7 +106,6 @@ Generate SQL and BI reports that draw insight into:
 ---
 ## Project Roadmap
 
-- **Dataset generation**: Multi-source synthetic banking data (137,493 rows)
 - **Project planning**: Architecture design, load strategy, naming conventions
 - **Repository setup**: Structure, README, data dictionary, naming conventions
 - **Phase 1**: DDL scripts — Bronze, Silver, and Gold layer table definitions
