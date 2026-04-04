@@ -62,7 +62,6 @@ CREATE TABLE etl.batch_log
 	total_rows_processed INT,
 	executed_by NVARCHAR(100),
 	err_message NVARCHAR(MAX),
-	CONSTRAINT chk_layer_etl_batch_log CHECK(layer IN ('Bronze', 'Silver', 'Gold')),
 	CONSTRAINT chk_load_status CHECK(load_status IN('Running', 'Success', 'Failed'))
 );
 GO
