@@ -236,6 +236,7 @@ BEGIN
 
 		-- Map values to variables on success
 		SET @rows_inserted = @@ROWCOUNT;
+		SET @rows_rejected = @rows_extracted - @rows_inserted;
 		SET @total_rows = @total_rows + @rows_extracted;
 		SET @end_time = SYSDATETIME();
 		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
@@ -256,7 +257,8 @@ BEGIN
 				load_duration_seconds = @step_duration_seconds,
 				step_status = @step_status,
 				rows_extracted = @rows_extracted,
-				rows_inserted = @rows_inserted
+				rows_inserted = @rows_inserted,
+				rows_rejected = @rows_rejected
 			WHERE step_id = @step_id;
 
 		-- Drop staging table
@@ -315,6 +317,7 @@ BEGIN
 						step_status = @step_status,
 						rows_extracted = @rows_extracted,
 						rows_inserted = @rows_inserted,
+						rows_rejected = @rows_rejected,
 						err_message = ERROR_MESSAGE()
 					WHERE step_id = @step_id;
 			END;
