@@ -264,6 +264,7 @@ BEGIN
 
 		-- Map values to variables on success
 		SET @rows_inserted = @@ROWCOUNT;
+		SET @rows_rejected = @rows_extracted - @rows_inserted;
 		SET @total_rows = @total_rows + @rows_extracted;
 		SET @end_time = SYSDATETIME();
 		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
@@ -279,13 +280,14 @@ BEGIN
 
 		-- Update log details at step-level on success
 		UPDATE etl.step_log
-			SET 
+			SET
 				end_time = @end_time,
 				load_duration_seconds = @step_duration_seconds,
-				step_status = 'Success',
+				step_status = @step_status,
 				rows_extracted = @rows_extracted,
-				rows_inserted = @rows_inserted
-			WHERE batch_id = @batch_id AND step_id = @step_id;
+				rows_inserted = @rows_inserted,
+				rows_rejected = @rows_rejected
+			WHERE step_id = @step_id;
 		
 		-- Drop staging table
 		DROP TABLE IF EXISTS #stg_accounts;
@@ -415,8 +417,9 @@ BEGIN
 			@start_time
 		FROM #stg_branches;
 
-		-- Map values to variables on successs
+		-- Map values to variables on success
 		SET @rows_inserted = @@ROWCOUNT;
+		SET @rows_rejected = @rows_extracted - @rows_inserted;
 		SET @total_rows = @total_rows + @rows_extracted;
 		SET @end_time = SYSDATETIME();
 		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
@@ -429,16 +432,17 @@ BEGIN
 				last_batch_id = @batch_id,
 				last_loaded = @end_time
 			WHERE source_system = @source_system AND target_object = @target_object;
-		
+
 		-- Update log details at step-level on success
 		UPDATE etl.step_log
-			SET 
+			SET
 				end_time = @end_time,
 				load_duration_seconds = @step_duration_seconds,
-				step_status = 'Success',
+				step_status = @step_status,
 				rows_extracted = @rows_extracted,
-				rows_inserted = @rows_inserted
-			WHERE batch_id = @batch_id AND step_id = @step_id;
+				rows_inserted = @rows_inserted,
+				rows_rejected = @rows_rejected
+			WHERE step_id = @step_id;
 		
 		-- Drop staging table
 		DROP TABLE IF EXISTS #stg_branches;
@@ -586,6 +590,7 @@ BEGIN
 
 		-- Map values to variables on success
 		SET @rows_inserted = @@ROWCOUNT;
+		SET @rows_rejected = @rows_extracted - @rows_inserted;
 		SET @total_rows = @total_rows + @rows_extracted;
 		SET @end_time = SYSDATETIME();
 		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
@@ -598,16 +603,17 @@ BEGIN
 				last_batch_id = @batch_id,
 				last_loaded = @end_time
 			WHERE source_system = @source_system AND target_object = @target_object;
-		
-		-- Update log details at step-level
+
+		-- Update log details at step-level on success
 		UPDATE etl.step_log
-			SET 
+			SET
 				end_time = @end_time,
 				load_duration_seconds = @step_duration_seconds,
-				step_status = 'Success',
+				step_status = @step_status,
 				rows_extracted = @rows_extracted,
-				rows_inserted = @rows_inserted
-			WHERE batch_id = @batch_id AND step_id = @step_id;
+				rows_inserted = @rows_inserted,
+				rows_rejected = @rows_rejected
+			WHERE step_id = @step_id;
 		
 		-- Drop staging table
 		DROP TABLE IF EXISTS #stg_transactions;
@@ -669,6 +675,7 @@ BEGIN
 						step_status = @step_status,
 						rows_extracted = @rows_extracted,
 						rows_inserted = @rows_inserted,
+						rows_rejected = @rows_rejected,
 						err_message = ERROR_MESSAGE()
 					WHERE step_id = @step_id;
 			END;
