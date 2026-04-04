@@ -43,14 +43,26 @@ language — no external orchestration tools, no notebooks, no Python. Pure SQL,
 The following requirements define the scope and standards of this project.
 
 **Data Engineering**
-- Design and implement a multi-layer Data Warehouse using the Medallion Architecture (Bronze, Silver, Gold)
-- Model source data across four independent systems into a unified, conformed dimensional model
-- Implement a fully logged ETL pipeline using domain-grouped stored procedures — one per source system per layer
-- Build a production-grade ETL logging and auditing framework that tracks every batch, every step, and every error
-- Apply industry-standard load strategies per layer: Incremental Append (Bronze), MERGE/Upsert (Silver), Truncate & Reload (Gold)
-- Implement SCD Type 2 on `dim_customer` to preserve historical changes in customer segment and risk band
-- Enforce audit column standards across all layers for full data lineage traceability
-- Handle source system deletions through soft-delete flags — Bronze is append-only and never truncated
+- Design and implement a multi-layer Data Warehouse using the Medallion Architecture (Bronze, Silver, Gold) on SQL Server
+
+- Model source data across four independent systems (CBS, CRM, HRMS, LOS) into a unified conformed dimensional model using Star Schema
+
+- Implement a fully logged ETL pipeline using domain-grouped stored procedures — one per source system per layer — with a dedicated key
+  reconciliation procedure and four-procedure orchestration layer for automated pipeline execution
+
+- Build a production-grade ETL logging and auditing framework that tracks every batch, every step, and every error across all layers
+
+- Apply industry-standard load strategies per layer: Bronze → Incremental Append-Only and Full Truncate & Insert, Silver → Incremental
+  Update & Insert, Gold   → Incremental SCD1, SCD2, Expire & Insert, and Append-Only
+
+- Implement mixed SCD strategies across Gold dimensions — SCD Type 1 for stable attributes, SCD Type 2 for analytically significant slowly
+  changing attributes across dim_customers and dim_accounts
+
+- Resolve cross-system surrogate key dependencies via a dedicated reconciliation procedure — handling circular references between dimension
+  tables loaded from different source systems
+
+- Enforce audit column standards appropriate to each layer and load type for full data lineage traceability
+
 
 **Data Analytics**
 - Perform Exploratory Data Analysis (EDA) across all business domains: customers, accounts, transactions, and loans
