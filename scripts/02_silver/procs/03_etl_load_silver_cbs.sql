@@ -405,6 +405,7 @@ BEGIN
 			assigned_employee_id,
 			is_primary,
 			created_at,
+			updated_at,
 			
 			-- Metadata columns
 			_source_system,
@@ -427,6 +428,7 @@ BEGIN
 			src.assigned_employee_id,
 			src.is_primary,
 			src.created_at,
+			src.updated_at,
 
 			-- Map values to metadata columns
 			@source_system,
