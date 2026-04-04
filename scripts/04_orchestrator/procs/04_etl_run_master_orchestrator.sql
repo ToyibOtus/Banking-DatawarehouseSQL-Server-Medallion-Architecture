@@ -1,0 +1,158 @@
+/*
+===================================================================================
+Script    : 04_etl_run_master_orchestrator
+Location  : scripts/04_orchestrator/procs/
+Author    : Otusanya Toyib Oluwatimilehin
+Created   : 2026-04-04
+Version   : 1.0
+===================================================================================
+Script Purpose:
+    It performs the full ETL operation, loading all layers from bronze to gold. 
+
+Tables Loaded:
+	bronze.crm_customers
+	bronze.hrms_employees
+	bronze.cbs_accounts
+	bronze.cbs_branches
+	bronze.cbs_transactions
+	bronze.los_loan_applications
+
+	silver.crm_customers
+	silver.hrms_employees
+	silver.cbs_accounts
+	silver.cbs_branches
+	silver.cbs_transactions
+	silver.los_loan_applications
+
+	gold.dim_customers
+	gold.dim_employees
+	gold.dim_branches
+	gold.dim_accounts
+	gold.fact_transactions
+	gold.fact_loan_applications
+
+Usage: EXEC etl.run_master_orchestrator
+	
+Parameter: None
+
+===================================================================================
+Change Log:
+	 
+	| Version |     Date    |  Description                                     |
+	|---------|-------------|--------------------------------------------------|
+	|   1.0   |  2026-04-04 |  Initial creation                                |
+===================================================================================
+*/
+USE BankingDW;
+GO
+
+CREATE OR ALTER PROCEDURE etl.run_master_orchestrator AS
+BEGIN
+	-- Suppress number of rows affected
+	SET NOCOUNT ON;
+
+	-- =======================================================================================
+	-- SECTION 1: DECLARE ALL VARIABLES
+	-- =======================================================================================
+
+	-- Batch-Level variables
+	DECLARE
+	@batch_id INT,
+	@batch_name NVARCHAR(50) = 'etl.run_master_orchestrator',
+	@source_system NVARCHAR(50) ='ALL',
+	@layer NVARCHAR(50) = 'Bronze -> Silver -> Gold',
+	@start_time DATETIME2,
+	@end_time DATETIME2,
+	@duration_seconds INT,
+	@batch_status NVARCHAR(50) = 'Running',
+	@total_rows INT = 0,
+	@executed_by NVARCHAR(100) = SUSER_NAME();
+
+
+	-- =======================================================================================
+	-- SECTION 2: OPEN BATCH — Log the start of this pipeline run
+	-- =======================================================================================
+
+	-- Retrieve batch start time
+	SET @start_time = SYSDATETIME();
+
+	-- Load log details at batch-level
+	INSERT INTO etl.batch_log
+	(
+		batch_name,
+		source_system,
+		layer,
+		start_time,
+		load_status,
+		total_rows_processed,
+		executed_by
+	)
+	VALUES
+	(
+		@batch_name,
+		@source_system,
+		@layer,
+		@start_time,
+		@batch_status,
+		@total_rows,
+		@executed_by
+	);
+	-- Retrieve recently generated batch_id
+	SET @batch_id = SCOPE_IDENTITY();
+
+	-- =======================================================================================
+	-- SECTION 3: LOAD ALL Layers
+	-- =======================================================================================
+	BEGIN TRY
+		EXEC etl.run_bronze_pipeline;
+		EXEC etl.run_silver_pipeline;
+		EXEC etl.run_gold_pipeline;
+
+		-- Retrieve total rows processed
+		SELECT @total_rows = SUM(COALESCE(total_rows_processed, 0)) FROM etl.batch_log WHERE 
+		(batch_name IN ('etl.run_bronze_pipeline', 'etl.run_silver_pipeline', 'etl.run_gold_pipeline') 
+		AND start_time >= @start_time AND load_status ='Success');
+
+		-- Map values to variables on success
+		SET @end_time = SYSDATETIME();
+		SET @duration_seconds = DATEDIFF(second, @start_time, @end_time);
+		SET @batch_status = 'Success';
+
+		-- Update log details at batch level on success
+		UPDATE etl.batch_log
+			SET
+				end_time = @end_time,
+				load_duration_seconds = @duration_seconds,
+				load_status = @batch_status,
+				total_rows_processed = @total_rows
+			WHERE batch_id = @batch_id;
+	END TRY
+
+
+	-- =======================================================================================
+	-- SECTION 4: ERROR HANDLING
+	-- =======================================================================================
+	BEGIN CATCH
+		-- Map values to variables on failure
+		SET @end_time = SYSDATETIME();
+		SET @duration_seconds = DATEDIFF(second, @start_time, @end_time);
+		SET @batch_status = 'Failed';
+
+		-- Retrieve total rows processed
+		SELECT @total_rows = SUM(COALESCE(total_rows_processed, 0)) FROM etl.batch_log WHERE 
+		(batch_name IN ('etl.run_bronze_pipeline', 'etl.run_silver_pipeline', 'etl.run_gold_pipeline') 
+		AND start_time >= @start_time);
+
+		-- Update log details at batch level on failure
+		UPDATE etl.batch_log
+			SET
+				end_time = @end_time,
+				load_duration_seconds = @duration_seconds,
+				load_status = @batch_status,
+				total_rows_processed = @total_rows,
+				err_message = ERROR_MESSAGE()
+			WHERE batch_id = @batch_id;
+
+		THROW;
+	END CATCH;
+END;
