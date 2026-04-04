@@ -117,16 +117,16 @@ etl.run_<scope>_pipeline
 
 | Procedure                      | Description                          |
 |--------------------------------|--------------------------------------|
-| `etl.run_bronze_pipeline`      | Executes all Bronze load procedures  |
-| `etl.run_silver_pipeline`      | Executes all Silver load procedures  |
-| `etl.run_gold_pipeline`        | Executes all Gold load procedures    |
-| `etl.run_master_orchestrator`  | Executes full Bronze → Silver → Gold |
+| etl.run_bronze_pipeline        | Executes all Bronze load procedures  |
+| etl.run_silver_pipeline        | Executes all Silver load procedures  |
+| etl.run_gold_pipeline          | Executes all Gold load procedures    |
+| etl.run_master_orchestrator    | Executes full Bronze → Silver → Gold |
 
 ---
 
 ## Constraints
 
-* Primary key: pk_<table> 
+* Primary key: pk_< table > 
 * Foreign key: fk_< column >_< table >
 * Unique constraint: uq< column >_< table >
 * Check constraint: chk_< column >_< table >
