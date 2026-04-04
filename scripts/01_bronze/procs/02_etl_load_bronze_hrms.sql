@@ -182,6 +182,9 @@ BEGIN
 
 		-- Execute SQL query
 		EXEC (@sql);
+
+		-- Retrieve rows extracted from source
+		SELECT @rows_extracted = COUNT(*) FROM #stg_employees;
 		
 		-- Delete data from bronze.hrms_employees
 		TRUNCATE TABLE bronze.hrms_employees;
@@ -233,8 +236,7 @@ BEGIN
 
 		-- Map values to variables on success
 		SET @rows_inserted = @@ROWCOUNT;
-		SET @rows_extracted = @rows_inserted;
-		SET @total_rows = @total_rows + @rows_inserted;
+		SET @total_rows = @total_rows + @rows_extracted;
 		SET @end_time = SYSDATETIME();
 		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
 		SET @step_status = 'Success';
@@ -283,16 +285,15 @@ BEGIN
 		-- Map values to variables on failure
 		SET @step_status = 'Failed';
 		SET @batch_status = 'Failed';
-		IF @start_time IS NULL SET @start_time = SYSDATETIME();
 		SET @end_time = SYSDATETIME();
 		SET @step_duration_seconds = DATEDIFF(second, @start_time, @end_time);
 		SET @batch_duration_seconds = DATEDIFF(second, @batch_start_time, @end_time);
 
-		IF @rows_inserted IS NULL SET @rows_inserted = 0;
 		IF @rows_extracted IS NULL SET @rows_extracted = 0;
+		IF @rows_inserted IS NULL SET @rows_inserted = 0;
 		IF @total_rows IS NULL SET @total_rows = 0;
 
-		SET @rows_rejected = 0;
+		SET @rows_rejected = @rows_extracted - @rows_inserted;
 		
 		-- Update log details at batch-level on failure
 		UPDATE etl.batch_log
@@ -339,11 +340,11 @@ BEGIN
 				)
 				VALUES
 				(
-					COALESCE(@step_name, 'Unknown'),
+					COALESCE(@step_name, 'N/A'),
 					@batch_id,
-					COALESCE(@load_type, 'Unknown'),
-					COALESCE(@source_object, 'Unknown'),
-					COALESCE(@target_object, 'Unknown'),
+					COALESCE(@load_type, 'N/A'),
+					COALESCE(@source_object, 'N/A'),
+					COALESCE(@target_object, 'N/A'),
 					@start_time,
 					@end_time,
 					@step_duration_seconds,
@@ -373,10 +374,10 @@ BEGIN
 		(
 			@batch_id,
 			@step_id,
-			COALESCE(@source_system, 'Unknown'),
-			COALESCE(@layer, 'Unknown'),
-			COALESCE(@source_object, 'Unknown'),
-			COALESCE(@target_object, 'Unknown'),
+			@source_system,
+			@layer,
+			COALESCE(@source_object, 'N/A'),
+			COALESCE(@target_object, 'N/A'),
 			ERROR_MESSAGE(),
 			@end_time
 		);
