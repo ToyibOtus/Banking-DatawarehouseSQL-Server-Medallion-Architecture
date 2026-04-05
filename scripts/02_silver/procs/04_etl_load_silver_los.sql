@@ -240,7 +240,10 @@ BEGIN
 				ELSE monthly_payment
 			END AS monthly_payment,
 			days_delinquent,
-			collateral_type,
+			CASE
+				WHEN collateral_type IS NULL THEN 'N/A'
+				ELSE collateral_type
+			END AS collateral_type,
 			collateral_value, 
 			CASE
 				WHEN purpose_description IS NULL THEN 'N/A'
