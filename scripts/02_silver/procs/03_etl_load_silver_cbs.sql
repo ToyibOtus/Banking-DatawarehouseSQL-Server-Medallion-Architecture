@@ -217,12 +217,15 @@ BEGIN
 			NULLIF(TRIM(customer_id), '') AS customer_id,
 			account_type,
 			CASE
-				WHEN account_status IS NULL AND close_date IS NOT NULL THEN 'Closed'
+				WHEN account_status IS NULL AND (close_date IS NOT NULL AND close_date <= GETDATE()) THEN 'Closed'
 				WHEN account_status IS NULL THEN 'N/A'
 				ELSE account_status
 			END AS account_status,
 			open_date,
-			close_date,
+			CASE
+				WHEN close_date > GETDATE() AND account_status = 'Closed' THEN NULL
+				ELSE close_date
+			END AS close_date,
 			currency_code,
 			current_balance,
 			CASE 
