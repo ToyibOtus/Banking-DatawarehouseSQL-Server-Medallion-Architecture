@@ -24,28 +24,28 @@ a new row is inserted when these change, preserving full customer history.
 |--------|-----------|-------------|
 | customer_key | INT | Surrogate primary key. Uniquely identifies each version of a customer record. |
 | customer_id | NVARCHAR(50) | Natural key from the CRM source system (e.g. CUST000001). |
-| customer_name | NVARCHAR(100) | Full name of the customer (e.g. Adeyemi John). |
-| company_name | NVARCHAR(50) | Company name for business customers. NULL for individual customers. |
+| customer_name | NVARCHAR(50) | Full name of the customer (e.g. Richard White). |
+| company_name | NVARCHAR(50) | Company name for business customers. N/A for individual customers. |
 | segment | NVARCHAR(50) | Customer classification by relationship tier (e.g. Retail, SME, Corporate). SCD2 tracked. |
 | risk_band | NVARCHAR(50) | Credit risk classification assigned by the bank (e.g. Low, Medium, High). SCD2 tracked. |
-| date_of_birth | DATE | Customer's date of birth (e.g. 1990-04-15). SCD2 tracked. |
+| date_of_birth | DATE | Customer's date of birth (e.g. 1950-06-20). SCD2 tracked. |
 | gender | NVARCHAR(50) | Customer's gender (e.g. Male, Female). SCD2 tracked. |
 | national_id | NVARCHAR(50) | Government-issued national identification number. |
 | email | NVARCHAR(250) | Customer's primary email address. SCD1 — overwritten on change. |
 | phone_number | NVARCHAR(50) | Customer's primary contact number. SCD1 — overwritten on change. |
 | address_line_1 | NVARCHAR(200) | First line of customer's residential or business address. SCD2 tracked. |
-| city | NVARCHAR(50) | City of customer's address (e.g. Lagos). SCD2 tracked. |
-| state | NVARCHAR(50) | State or province of customer's address (e.g. Lagos State). SCD2 tracked. |
-| zip_code | NVARCHAR(50) | Postal code of customer's address (e.g. 100001). SCD2 tracked. |
-| country | NVARCHAR(50) | Country of customer's address (e.g. Nigeria). SCD2 tracked. |
+| city | NVARCHAR(50) | City of customer's address (e.g. New Orleans). SCD2 tracked. |
+| state | NVARCHAR(50) | State or province of customer's address (e.g. LA). SCD2 tracked. |
+| zip_code | NVARCHAR(50) | Postal code of customer's address (e.g. 77692). SCD2 tracked. |
+| country | NVARCHAR(50) | Country of customer's address (e.g. USA). SCD2 tracked. |
 | onboard_date | DATE | Date the customer was first onboarded with the bank. |
 | branch_key | INT | Surrogate FK to dim_branches. References the branch where the customer was onboarded. |
 | branch_id | NVARCHAR(50) | Natural key of the onboarding branch (e.g. BRN0001). |
-| customer_since | INT | Year the customer relationship with the bank began (e.g. 2018). |
+| customer_since | INT | Year the customer relationship with the bank began (e.g. 2020). |
 | is_active | BIT | Indicates whether the customer is currently active with the bank (1 = Active, 0 = Inactive). SCD2 tracked. |
 | marketing_opt_in | BIT | Indicates whether the customer has opted into marketing communications (1 = Opted In, 0 = Opted Out). SCD2 tracked. |
 | preferred_language | NVARCHAR(50) | Customer's preferred communication language (e.g. English, French). SCD1 — overwritten on change. |
-| annual_income | DECIMAL(18,2) | Customer's declared annual income in local currency (e.g. 5000000.00). SCD2 tracked. |
+| annual_income | DECIMAL(18,2) | Customer's declared annual income in local currency (e.g. 38524.57). SCD2 tracked. |
 | credit_score | INT | Numerical credit score assigned to the customer (e.g. 720). SCD2 tracked. |
 | created_at | DATE | Date the customer record was originally created in the CRM source system. |
 | updated_at | DATE | Date the customer record was last modified in the CRM source system. |
@@ -68,7 +68,7 @@ employee represents their current state.
 |--------|-----------|-------------|
 | employee_key | INT | Surrogate primary key. Uniquely identifies each employee record. |
 | employee_id | NVARCHAR(50) | Natural key from the HRMS source system (e.g. EMP000001). |
-| employee_name | NVARCHAR(100) | Full name of the employee (e.g. Fatima Bello). |
+| employee_name | NVARCHAR(50) | Full name of the employee (e.g. Sandra Li). |
 | email | NVARCHAR(250) | Employee's work email address. SCD1 — overwritten on change. |
 | phone_number | NVARCHAR(50) | Employee's work contact number. SCD1 — overwritten on change. |
 | department | NVARCHAR(50) | Department the employee belongs to (e.g. Retail Banking, Risk). |
@@ -81,7 +81,7 @@ employee represents their current state.
 | is_active | BIT | Indicates whether the employee is currently employed (1 = Active, 0 = Terminated). |
 | manager_key | INT | Surrogate FK self-referencing employee_key. References the employee's direct line manager. |
 | manager_id | NVARCHAR(50) | Natural key of the employee's direct line manager (e.g. EMP000010). |
-| manager_name | NVARCHAR(100) | Full name of the employee's direct line manager (e.g. Chukwuemeka Obi). |
+| manager_name | NVARCHAR(50) | Full name of the employee's direct line manager (e.g. Andrew Cruz). |
 | _source_system | NVARCHAR(50) | ETL audit — identifies the source system that produced this record (HRMS). |
 | _batch_id | INT | ETL audit — references the batch run that created or last updated this row. |
 | _created_at | DATETIME2 | ETL audit — timestamp when this row was first inserted into Gold. |
@@ -98,13 +98,13 @@ One row per branch represents its current state.
 |--------|-----------|-------------|
 | branch_key | INT | Surrogate primary key. Uniquely identifies each branch record. |
 | branch_id | NVARCHAR(50) | Natural key from the CBS source system (e.g. BRN0001). |
-| branch_name | NVARCHAR(200) | Full name of the branch (e.g. Victoria Island Branch). |
-| branch_type | NVARCHAR(50) | Classification of the branch by operational type (e.g. Full Service, Digital, Kiosk). |
+| branch_name | NVARCHAR(200) | Full name of the branch (e.g. New Orleans North Branch). |
+| branch_type | NVARCHAR(50) | Classification of the branch by operational type (e.g. Full Service, Online, Premium). |
 | address_line_1 | NVARCHAR(200) | First line of the branch's physical address. |
-| city | NVARCHAR(50) | City where the branch is located (e.g. Lagos). |
-| state | NVARCHAR(50) | State where the branch is located (e.g. Lagos State). |
-| zip_code | NVARCHAR(50) | Postal code of the branch location (e.g. 101001). |
-| country | NVARCHAR(50) | Country where the branch is located (e.g. Nigeria). |
+| city | NVARCHAR(50) | City where the branch is located (e.g. New Orleans). |
+| state | NVARCHAR(50) | State where the branch is located (e.g. LA). |
+| zip_code | NVARCHAR(50) | Postal code of the branch location (e.g. 81819). |
+| country | NVARCHAR(50) | Country where the branch is located (e.g. USA). |
 | phone_number | NVARCHAR(50) | Branch's primary contact number. |
 | email | NVARCHAR(250) | Branch's primary email address. |
 | opened_date | DATE | Date the branch was officially opened. |
@@ -136,8 +136,8 @@ account state changes.
 | open_date | DATE | Date the account was originally opened. Immutable — never changes. |
 | close_date | DATE | Date the account was closed. NULL if the account is still open. SCD2 tracked. |
 | currency_code | NVARCHAR(50) | ISO currency code of the account (e.g. NGN, USD, GBP). |
-| overdraft_limit | DECIMAL(18,2) | Maximum overdraft credit facility extended to the account (e.g. 500000.00). SCD2 tracked. |
-| interest_rate | DECIMAL(12,4) | Annual interest rate applied to the account (e.g. 0.0350 = 3.50%). SCD2 tracked. |
+| overdraft_limit | DECIMAL(18,2) | Maximum overdraft credit facility extended to the account (e.g. 5000.00). SCD2 tracked. |
+| interest_rate | DECIMAL(12,4) | Annual interest rate in percentage applied to the account (e.g. 4.7227%). SCD2 tracked. |
 | branch_key | INT | Surrogate FK to dim_branches. References the branch where the account is domiciled. |
 | branch_id | NVARCHAR(50) | Natural key of the account's domicile branch (e.g. BRN0001). |
 | employee_key | INT | Surrogate FK to dim_employees. References the relationship manager assigned to the account. |
@@ -168,7 +168,7 @@ insertion. One row per transaction event.
 | transaction_type | NVARCHAR(50) | Classification of the transaction by type (e.g. Deposit, Withdrawal, Transfer, Payment). |
 | amount | DECIMAL(18,2) | Monetary value of the transaction in account currency (e.g. 150000.00). |
 | debit_credit | NVARCHAR(50) | Indicates the direction of the transaction (D = Debit, C = Credit). |
-| currency | NVARCHAR(50) | ISO currency code of the transaction (e.g. NGN, USD). |
+| currency | NVARCHAR(50) | ISO currency code of the transaction (e.g. USD). |
 | transaction_date | DATE | Calendar date on which the transaction occurred. |
 | transaction_time | TIME(0) | Time at which the transaction occurred (e.g. 14:32:00). |
 | transaction_date_time | DATETIME2(0) | Combined date and time of the transaction (e.g. 2024-03-15 14:32:00). |
@@ -176,10 +176,10 @@ insertion. One row per transaction event.
 | status | NVARCHAR(50) | Settlement status of the transaction (e.g. Completed, Pending, Failed, Reversed). |
 | balance_after | DECIMAL(18,2) | Account ledger balance immediately after the transaction settled (e.g. 4850000.00). |
 | counterpart_account_id | NVARCHAR(50) | Natural key of the receiving or sending account for transfer transactions. NULL for non-transfer types. May reference external accounts not in this system. |
-| merchant_name | NVARCHAR(50) | Name of the merchant for point-of-sale or payment transactions (e.g. Shoprite Nigeria). NULL for non-merchant transactions. |
-| merchant_category | NVARCHAR(50) | Category of the merchant (e.g. Groceries, Utilities, Entertainment). NULL for non-merchant transactions. |
+| merchant_name | NVARCHAR(50) | Name of the merchant for point-of-sale or payment transactions (e.g. CVS). NULL for non-merchant transactions. |
+| merchant_category | NVARCHAR(50) | Category of the merchant (e.g. Retail, Pharmacy, Transport). NULL for non-merchant transactions. |
 | reference_number | NVARCHAR(50) | Unique reference number assigned to the transaction by the CBS (e.g. REF20240315001). |
-| description | NVARCHAR(500) | Free-text description or narration of the transaction (e.g. Salary Payment March 2024). |
+| description | NVARCHAR(500) | Free-text description or narration of the transaction (e.g. Loan repayment). |
 | branch_key | INT | Surrogate FK to dim_branches. References the branch where the transaction was initiated. NULL for digital channel transactions. |
 | is_flagged | BIT | Indicates whether the transaction has been flagged for fraud or compliance review (1 = Flagged, 0 = Not Flagged). |
 | created_at | DATETIME2(0) | Timestamp when the transaction record was created in the CBS source system. |
@@ -211,14 +211,14 @@ the loan progresses through each lifecycle stage from application to closure.
 | disbursed_amount | DECIMAL(18,2) | Actual amount disbursed to the customer. May differ from approved amount. NULL if not yet disbursed. |
 | amount_paid | DECIMAL(18,2) | Cumulative repayment amount made by the customer to date (e.g. 750000.00). |
 | outstanding_balance | DECIMAL(18,2) | Remaining loan balance yet to be repaid (e.g. 4250000.00). |
-| interest_rate | DECIMAL(12,4) | Annual interest rate applied to the loan (e.g. 0.1800 = 18.00%). |
+| interest_rate | DECIMAL(18,4) | Annual interest rate applied to the loan (e.g. 23.2973%). |
 | term_months | INT | Agreed repayment duration in months (e.g. 24). |
 | monthly_payment | DECIMAL(18,2) | Scheduled monthly repayment amount (e.g. 208333.33). |
 | days_delinquent | INT | Number of days the loan repayment is overdue. 0 if current. |
 | collateral_type | NVARCHAR(50) | Type of asset pledged as collateral (e.g. Property, Vehicle, Stocks). NULL for unsecured loans. |
 | collateral_value | DECIMAL(18,2) | Estimated market value of the pledged collateral (e.g. 12000000.00). NULL for unsecured loans. |
 | purpose_description | NVARCHAR(500) | Customer-stated purpose for the loan (e.g. Business expansion, Home renovation). |
-| rejection_reason | NVARCHAR(500) | Reason provided for loan rejection. NULL if not rejected (e.g. Insufficient income, Poor credit score). |
+| rejection_reason | NVARCHAR(500) | Reason provided for loan rejection. NULL if not rejected, N/A for unprovided reason if rejected (e.g. Insufficient income, Poor credit score). |
 | created_at | DATE | Date the loan application record was originally created in the LOS source system. |
 | updated_at | DATE | Date the loan application record was last modified in the LOS source system. |
 | _source_system | NVARCHAR(50) | ETL audit — identifies the source system that produced this record (LOS). |
