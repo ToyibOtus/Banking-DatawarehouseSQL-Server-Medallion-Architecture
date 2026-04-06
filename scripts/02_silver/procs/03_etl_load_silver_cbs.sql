@@ -232,7 +232,10 @@ BEGIN
 				WHEN available_balance IS NULL THEN current_balance + overdraft_limit
 				ELSE available_balance
 			END AS available_balance,
-			overdraft_limit,
+			CASE
+				WHEN account_type IN ('Savings', 'Certificate of Deposit', 'Business Savings') AND overdraft_limit <> 0 THEN 0
+				ELSE overdraft_limit
+			END AS overdraft_limit,
 			interest_rate,
 			NULLIF(TRIM(branch_id), '') AS branch_id,
 			NULLIF(TRIM(assigned_employee_id), '') AS assigned_employee_id,
