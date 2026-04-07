@@ -1,0 +1,51 @@
+BranchID,BranchName,BranchType,AddressLine1,City,State,ZipCode,Country,PhoneNumber,Email,OpenedDate,IsActive,Region,ManagerEmployeeID
+BRN0001,New York Downtown Branch,Full Service,4507 Lincoln Dr,New York,NY,28289,USA,954-204-9935,branch.brn0001@firstnationalbank.com,2014-05-05,1,Southwest,EMP00165
+BRN0002,Los Angeles Main Branch,Full Service,3583 Lincoln Pl,Los Angeles,CA,88907,USA,227-674-4257,branch.brn0002@firstnationalbank.com,2000-09-17,1,Northwest,EMP00453
+BRN0003,Chicago Central Branch,Limited Service,7360 Highland Ln,Chicago,IL,10851,USA,977-925-3615,branch.brn0003@firstnationalbank.com,2012-03-22,1,Midwest,EMP00309
+BRN0004,Houston North Branch,Limited Service,5515 Cedar Ave,Houston,TX,59797,USA,299-467-6635,branch.brn0004@firstnationalbank.com,2006-03-26,1,Northeast,EMP00452
+BRN0005,Phoenix Plaza Branch,Premium,2046 Adams Way,Phoenix,AZ,20328,USA,765-400-6925,branch.brn0005@firstnationalbank.com,2016-05-13,1,Northwest,EMP00307
+BRN0006,Philadelphia Main Branch,Limited Service,4742 Maple Dr,Philadelphia,PA,23238,USA,589-384-8428,branch.brn0006@firstnationalbank.com,2001-07-23,1,Midwest,EMP00435
+BRN0007,San Antonio West Branch,Drive-Through,3433 Market Ln,San Antonio,TX,99593,USA,863-173-3803,branch.brn0007@firstnationalbank.com,2003-08-25,1,Southeast,EMP00496
+BRN0008,San Diego Plaza Branch,Online,4423 Adams Pl,San Diego,CA,38785,USA,901-432-1916,branch.brn0008@firstnationalbank.com,2003-08-31,1,Northeast,EMP00498
+BRN0009,Dallas West Branch,Online,4387 Maple Dr,Dallas,TX,84341,USA,935-422-4483,branch.brn0009@firstnationalbank.com,2018-01-20,1,Southwest,EMP00191
+BRN0010,San Jose Plaza Branch,Limited Service,4340 Pine Dr,San Jose,CA,83579,USA,751-369-8019,branch.brn0010@firstnationalbank.com,2014-06-02,1,Southwest,EMP00400
+BRN0011,Austin South Branch,Limited Service,8349 Forest Ave,Austin,TX,16175,USA,312-256-3621,branch.brn0011@firstnationalbank.com,2008-02-13,1,Southwest,EMP00317
+BRN0012,Jacksonville Downtown Branch,Online,6253 Lakeview Ct,Jacksonville,FL,79352,USA,457-666-1188,branch.brn0012@firstnationalbank.com,2013-05-17,1,Northeast,EMP00345
+BRN0013,Fort Worth Financial Branch,Drive-Through,5574 Cedar Ln,Fort Worth,TX,66985,USA,361-564-1053,branch.brn0013@firstnationalbank.com,2015-04-16,0,Northwest,EMP00342
+BRN0014,Columbus Financial Branch,Limited Service,8318 Adams Ave,Columbus,OH,91959,USA,505-961-9317,branch.brn0014@firstnationalbank.com,2005-11-27,1,Southeast,EMP00378
+BRN0015,Charlotte North Branch,Premium,8690 Adams St,Charlotte,NC,88504,USA,531-600-1319,branch.brn0015@firstnationalbank.com,2008-05-21,1,Midwest,EMP00411
+BRN0016,Indianapolis East Branch,Limited Service,950 Lincoln Terrace,Indianapolis,IN,20322,USA,287-849-8962,branch.brn0016@firstnationalbank.com,2018-08-27,1,West,EMP00189
+BRN0017,San Francisco North Branch,Limited Service,7788 Sunset Blvd,San Francisco,CA,44741,USA,740-993-7932,branch.brn0017@firstnationalbank.com,2017-03-05,0,West,EMP00063
+BRN0018,Seattle South Branch,Drive-Through,6538 Market Rd,Seattle,WA,67422,USA,729-562-2982,branch.brn0018@firstnationalbank.com,2016-12-09,1,Northeast,EMP00043
+BRN0019,Denver Main Branch,Premium,9076 Lincoln Terrace,Denver,CO,38864,USA,207-172-1964,branch.brn0019@firstnationalbank.com,2007-08-01,1,Northeast,EMP00298
+BRN0020,Nashville Downtown Branch,Premium,3900 Jefferson Ct,Nashville,TN,38080,USA,752-235-8744,branch.brn0020@firstnationalbank.com,2007-05-30,1,Southwest,EMP00159
+BRN0021,Oklahoma City Central Branch,Limited Service,1546 Cedar Way,Oklahoma City,OK,56438,USA,633-520-8651,branch.brn0021@firstnationalbank.com,2018-02-10,1,Northeast,EMP00354
+BRN0022,El Paso Downtown Branch,Full Service,6597 Central Rd,El Paso,TX,24322,USA,454-296-4116,branch.brn0022@firstnationalbank.com,2015-02-07,1,Southeast,EMP00125
+BRN0023,Washington North Branch,Drive-Through,7580 Lincoln Ave,Washington,DC,68082,USA,763-200-1828,branch.brn0023@firstnationalbank.com,2009-06-18,1,West,EMP00274
+BRN0024,Las Vegas Main Branch,Full Service,3873 Elm Way,Las Vegas,NV,73653,USA,692-318-7570,branch.brn0024@firstnationalbank.com,2018-10-01,1,Southeast,EMP00455
+BRN0025,Louisville Main Branch,Online,4346 Adams Ct,Louisville,KY,47388,USA,633-813-8973,branch.brn0025@firstnationalbank.com,2008-07-01,1,Midwest,EMP00214
+BRN0026,Memphis Main Branch,Premium,8884 Oak Rd,Memphis,TN,17492,USA,251-698-8811,branch.brn0026@firstnationalbank.com,2004-11-18,1,West,EMP00117
+BRN0027,Portland Main Branch,Premium,1313 Franklin Blvd,Portland,OR,18981,USA,809-169-4853,branch.brn0027@firstnationalbank.com,2003-07-13,1,West,EMP00021
+BRN0028,Baltimore Metro Branch,Premium,652 Lakeview Ave,Baltimore,MD,64948,USA,873-697-9565,branch.brn0028@firstnationalbank.com,2005-07-09,1,Midwest,EMP00365
+BRN0029,Milwaukee West Branch,Limited Service,4352 River Blvd,Milwaukee,WI,98039,USA,860-407-8491,branch.brn0029@firstnationalbank.com,2004-07-31,1,Northeast,EMP00478
+BRN0030,Albuquerque Plaza Branch,Premium,9225 Cedar Ave,Albuquerque,NM,80468,USA,418-618-5345,branch.brn0030@firstnationalbank.com,2000-03-17,1,Midwest,EMP00183
+BRN0031,Tucson South Branch,Drive-Through,4670 Elm Ct,Tucson,AZ,81200,USA,920-409-9666,branch.brn0031@firstnationalbank.com,2001-07-17,1,West,EMP00404
+BRN0032,Fresno Downtown Branch,Limited Service,4334 Cedar Ave,Fresno,CA,82512,USA,359-378-5616,branch.brn0032@firstnationalbank.com,2006-09-18,1,Northwest,EMP00218
+BRN0033,Sacramento South Branch,Drive-Through,8281 Forest Ln,Sacramento,CA,16658,USA,294-749-7939,branch.brn0033@firstnationalbank.com,2007-09-09,1,Northeast,EMP00110
+BRN0034,Mesa West Branch,Limited Service,4292 Elm Ct,Mesa,AZ,82309,USA,922-537-1158,branch.brn0034@firstnationalbank.com,2000-01-30,1,Northwest,EMP00145
+BRN0035,Kansas City Financial Branch,Full Service,6050 Highland Pl,Kansas City,MO,29410,USA,640-230-1685,branch.brn0035@firstnationalbank.com,2003-05-06,1,Northeast,EMP00011
+BRN0036,Atlanta South Branch,Limited Service,1685 Lake Pl,Atlanta,GA,63264,USA,835-867-3532,branch.brn0036@firstnationalbank.com,2008-01-10,1,Southeast,EMP00420
+BRN0037,Omaha North Branch,Online,407 Elm Rd,Omaha,NE,63964,USA,885-984-5065,branch.brn0037@firstnationalbank.com,2003-08-24,1,Northwest,EMP00366
+BRN0038,Colorado Springs Central Branch,Full Service,7712 Lincoln Dr,Colorado Springs,CO,70332,USA,558-412-4728,branch.brn0038@firstnationalbank.com,2002-06-04,1,Northwest,EMP00415
+BRN0039,Raleigh Central Branch,Drive-Through,4565 Franklin Ave,Raleigh,NC,46585,USA,559-756-9346,branch.brn0039@firstnationalbank.com,2004-05-01,1,West,EMP00160
+BRN0040,Long Beach Main Branch,Full Service,4280 Elm Terrace,Long Beach,CA,44795,USA,239-211-8119,branch.brn0040@firstnationalbank.com,2007-06-05,1,Midwest,EMP00294
+BRN0041,Virginia Beach Metro Branch,Premium,1895 River Terrace,Virginia Beach,VA,34914,USA,460-145-8144,branch.brn0041@firstnationalbank.com,2009-10-14,1,West,EMP00448
+BRN0042,Minneapolis South Branch,Drive-Through,7067 Maple Rd,Minneapolis,MN,91678,USA,521-779-3041,branch.brn0042@firstnationalbank.com,2015-05-28,1,Midwest,EMP00464
+BRN0043,Tampa East Branch,Online,5345 River Ln,Tampa,FL,82667,USA,330-296-7888,branch.brn0043@firstnationalbank.com,2011-05-17,1,Southwest,EMP00090
+BRN0044,New Orleans North Branch,Premium,9325 Madison Way,New Orleans,LA,81819,USA,200-411-5700,branch.brn0044@firstnationalbank.com,2015-03-11,1,West,EMP00004
+BRN0045,Arlington West Branch,Online,7239 Valley Dr,Arlington,TX,77000,USA,684-912-3780,branch.brn0045@firstnationalbank.com,2013-08-09,1,Midwest,EMP00203
+BRN0046,Wichita Metro Branch,Drive-Through,1531 Liberty Dr,Wichita,KS,98184,USA,517-330-4262,branch.brn0046@firstnationalbank.com,2011-07-24,1,Northeast,EMP00126
+BRN0047,Bakersfield Plaza Branch,Premium,1194 Valley Way,Bakersfield,CA,92544,USA,789-299-7291,branch.brn0047@firstnationalbank.com,2005-06-28,1,Southeast,EMP00377
+BRN0048,Aurora Main Branch,Full Service,6966 Lincoln Blvd,Aurora,CO,77889,USA,675-151-5082,branch.brn0048@firstnationalbank.com,2003-04-23,1,Northeast,EMP00301
+BRN0049,Anaheim North Branch,Online,8703 Sunset Terrace,Anaheim,CA,51588,USA,973-553-9270,branch.brn0049@firstnationalbank.com,2010-03-28,1,West,EMP00108
+BRN0050,Santa Ana North Branch,Online,7374 Jefferson Dr,Santa Ana,CA,93579,USA,483-884-9540,branch.brn0050@firstnationalbank.com,2009-12-31,1,Southeast,EMP00027
