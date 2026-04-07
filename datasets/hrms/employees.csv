@@ -1,0 +1,503 @@
+EmployeeID,FirstName,LastName,Email,PhoneNumber,Department,JobTitle,BranchID,HireDate,TerminationDate,Salary,IsActive,ManagerID
+EMP00001,Sandra,Li,sandra.li41@firstnationalbank.com,282-241-3471,Risk & Compliance,Wealth Advisor,BRN0018,2014-11-13,2018-01-27,48973.71,0,EMP00318
+EMP00002,Deborah,Davis,deborah.davis27@firstnationalbank.com,598-888-1320,Credit,Risk Analyst,BRN0027,2014-02-22,,71487.7,1,EMP00446
+EMP00003,Tunde,Conti,tunde.conti78@firstnationalbank.com,699-324-5471,Retail Banking,Risk Analyst,BRN0023,2011-09-13,,86511.52,1,EMP00404
+EMP00004,Rosa,Al-Farsi,rosa.al-farsi17@firstnationalbank.com,746-127-7455,Retail Banking,Loan Officer,BRN0044,2022-11-26,,49340.48,1,EMP00249
+EMP00005,Jeffrey,Wang,jeffrey.wang28@firstnationalbank.com,545-879-7211,HR,Teller,BRN0009,2015-05-11,,46300.8,1,EMP00409
+EMP00006,Timothy,Green,timothy.green84@firstnationalbank.com,867-141-1508,IT & Technology,Accountant,BRN0031,2005-06-08,,40501.7,1,EMP00436
+EMP00007,Barbara,Lopez,barbara.lopez28@firstnationalbank.com,462-885-7043,Credit,Wealth Advisor,BRN0010,2010-05-09,,139312.98,1,EMP00386
+EMP00008,Linda,Perez,linda.perez4@firstnationalbank.com,789-793-7149,IT & Technology,Loan Officer,BRN0050,2023-05-18,,76012.92,1,EMP00317
+EMP00009,Xiao,White,xiao.white73@firstnationalbank.com,555-645-8018,Commercial Banking,Operations Manager,BRN0041,2010-06-13,2013-10-31,86980.13,0,EMP00325
+EMP00010,Rebecca,Huang,rebecca.huang82@firstnationalbank.com,670-824-3506,Customer Service,Compliance Officer,BRN0001,2014-06-04,,48005.58,1,EMP00321
+EMP00011,Carmen,Sanchez,carmen.sanchez35@firstnationalbank.com,451-950-2419,Wealth Management,Relationship Manager,BRN0035,2022-05-17,,102784.17,1,
+EMP00012,Michael,Romano,michael.romano42@firstnationalbank.com,417-463-5232,Credit,Wealth Advisor,BRN0037,2018-09-09,,87338.17,1,EMP00225
+EMP00013,Mary,Okafor,mary.okafor93@firstnationalbank.com,768-876-4937,Wealth Management,IT Specialist,BRN0036,2005-03-25,,46670.91,1,EMP00337
+EMP00014,Lisa,Lawal,lisa.lawal85@firstnationalbank.com,684-666-9698,Customer Service,Credit Analyst,BRN0006,2011-08-08,,113427.37,1,
+EMP00015,Elizabeth,Torres,elizabeth.torres41@firstnationalbank.com,748-880-4033,Wealth Management,Teller,BRN0030,2011-01-29,,44074.81,1,EMP00201
+EMP00016,Pedro,Torres,pedro.torres38@firstnationalbank.com,383-409-1231,Risk & Compliance,Teller,BRN0049,2016-10-07,,39241.25,1,EMP00163
+EMP00017,Ahmed,Esposito,ahmed.esposito14@firstnationalbank.com,787-391-8690,Finance & Accounting,Financial Analyst,BRN0004,2017-05-31,,47748.95,1,EMP00019
+EMP00018,Amaka,Hernandez,amaka.hernandez74@firstnationalbank.com,254-255-3444,Operations,Loan Officer,BRN0017,2015-09-19,2016-06-13,64846.17,0,EMP00075
+EMP00019,Xiao,Morales,xiao.morales29@firstnationalbank.com,589-561-8253,Credit,Risk Analyst,BRN0008,2017-07-08,,93215.65,1,EMP00199
+EMP00020,Jennifer,Hill,jennifer.hill81@firstnationalbank.com,876-183-3573,Customer Service,Loan Officer,BRN0040,2006-05-09,,129510.9,1,EMP00332
+EMP00021,Emily,Jones,emily.jones30@firstnationalbank.com,489-819-8438,IT & Technology,Teller,BRN0027,2015-02-08,,72215.12,1,EMP00356
+EMP00022,Stephanie,Jackson,stephanie.jackson70@firstnationalbank.com,352-372-3330,Risk & Compliance,Data Analyst,BRN0041,2018-03-25,,35430.35,1,EMP00057
+EMP00023,Sharon,White,sharon.white60@firstnationalbank.com,916-512-5460,Wealth Management,IT Specialist,BRN0048,2023-06-28,,90052.99,1,EMP00203
+EMP00024,Nancy,Brown,nancy.brown12@firstnationalbank.com,890-956-1339,Operations,Customer Service Rep,BRN0003,2014-09-10,,140760.73,1,EMP00034
+EMP00025,Sharon,Abubakar,sharon.abubakar24@firstnationalbank.com,646-750-9056,Wealth Management,Credit Analyst,BRN0049,2008-12-06,,57605.1,1,EMP00141
+EMP00026,Melissa,Romano,melissa.romano37@firstnationalbank.com,610-933-1601,Finance & Accounting,Teller,BRN0021,2020-01-12,2021-11-01,76305.71,0,EMP00176
+EMP00027,Ibrahim,Conti,ibrahim.conti60@firstnationalbank.com,392-630-6927,Wealth Management,Compliance Officer,BRN0050,2014-01-25,,45734.09,1,EMP00393
+EMP00028,Ashley,Siddiqui,ashley.siddiqui90@firstnationalbank.com,229-745-4920,Operations,Operations Manager,BRN0004,2009-07-26,,,1,EMP00174
+EMP00029,Kathleen,White,kathleen.white83@firstnationalbank.com,710-833-5781,Operations,Risk Analyst,BRN0027,2007-02-03,,38532.05,1,EMP00098
+EMP00030,Ryan,Torres,ryan.torres77@firstnationalbank.com,339-984-2143,HR,Credit Analyst,BRN0031,2010-06-20,,47630.01,1,EMP00184
+EMP00031,Sofia,Bello,sofia.bello76@firstnationalbank.com,875-601-3434,Wealth Management,Credit Analyst,BRN0033,2010-12-29,,89529.67,1,EMP00374
+EMP00032,Mark,Okafor,mark.okafor74@firstnationalbank.com,994-520-1715,Wealth Management,Wealth Advisor,BRN0049,2017-03-10,,69118.38,1,
+EMP00033,Karen,Romano,karen.romano5@firstnationalbank.com,804-439-2644,Wealth Management,Loan Officer,BRN0025,2013-08-29,,110102.27,1,EMP00244
+EMP00034,Hassan,Young,hassan.young10@firstnationalbank.com,471-446-7512,Finance & Accounting,Accountant,BRN0030,2005-05-06,,53769.44,1,EMP00399
+EMP00035,Marco,Esposito,marco.esposito70@firstnationalbank.com,270-340-5708,Commercial Banking,Risk Analyst,BRN0035,2013-07-11,,106774.29,1,EMP00014
+EMP00036,Sharon,King,sharon.king89@firstnationalbank.com,229-147-6314,Operations,Credit Analyst,BRN0049,2019-03-20,,48232.41,1,
+EMP00037,Zainab,Scott,zainab.scott22@firstnationalbank.com,824-991-7267,IT & Technology,IT Specialist,BRN0010,2010-06-24,,71624.58,1,EMP00223
+EMP00038,Cynthia,Adeyemi,CYNTHIA.ADEYEMI86@FIRSTNATIONALBANK.COM,494-793-9955,Wealth Management,Credit Analyst,BRN0010,2010-03-18,,75903.45,1,EMP00058
+EMP00039,Nancy,Nasser,nancy.nasser39@firstnationalbank.com,593-973-8916,HR,Customer Service Rep,BRN0020,2019-05-02,,109305.76,1,EMP00059
+EMP00040,Carol,Abubakar,carol.abubakar2@firstnationalbank.com,902-896-1803,Wealth Management,Accountant,BRN0019,2020-09-07,,125038.66,1,EMP00117
+EMP00041,Jorge,Yang,jorge.yang29@firstnationalbank.com,835-356-3240,Retail Banking,Teller,BRN0019,2022-05-26,,138055.89,1,EMP00289
+EMP00042,Patricia,Okonkwo,patricia.okonkwo42@firstnationalbank.com,379-305-3165,Finance & Accounting,Operations Manager,BRN0003,2017-12-31,,33785.19,1,EMP00382
+EMP00043,Ana,Okonkwo,ana.okonkwo96@firstnationalbank.com,317-579-2233,IT & Technology,Accountant,BRN0018,2023-08-18,,66505.53,1,EMP00350
+EMP00044,Edward,Anderson,edward.anderson51firstnationalbank.com,665-477-5295,Finance & Accounting,Loan Officer,BRN0044,2013-11-30,,111371.26,1,EMP00253
+EMP00045,Kevin,Ortiz,kevin.ortiz29@firstnationalbank.com,850-943-8606,Operations,Compliance Officer,BRN0031,2005-07-25,,91611.52,1,EMP00362
+EMP00046,Ngozi,Jackson,ngozi.jackson13@firstnationalbank.com,750-238-7367,Customer Service,Risk Analyst,BRN0009,2006-01-07,,63251.2,1,EMP00451
+EMP00047,Jennifer,Esposito,jennifer.esposito79@firstnationalbank.com,486-133-7070,Wealth Management,Relationship Manager,BRN0047,2008-06-19,,114549.2,1,EMP00484
+EMP00048,Ronald,Davis,ronald.davis51@firstnationalbank.com,325-968-8450,IT & Technology,Compliance Officer,BRN0007,2020-05-19,,113692.68,1,EMP00165
+EMP00049,Susan,Lopez,susan.lopez27@firstnationalbank.com,983-667-4394,IT & Technology,Credit Analyst,BRN0002,2006-02-19,,47079.06,1,EMP00170
+EMP00050,Susan,Conti,susan.conti33@firstnationalbank.com,312-776-1422,Finance & Accounting,Data Analyst,BRN0039,2005-01-24,,34436.35,1,
+EMP00051,Susan,Chaudhry,susan.chaudhry68@firstnationalbank.com,265-587-8344,Customer Service,Customer Service Rep,BRN0038,2012-04-06,2015-03-29,47003.94,0,EMP00126
+EMP00052,Elena,Marino,elena.marino39@firstnationalbank.com,231-162-8847,HR,Compliance Officer,BRN0033,2009-12-20,,46858.03,1,EMP00055
+EMP00053,Yun,Thompson,yun.thompson9@firstnationalbank.com,839-748-9984,HR,Customer Service Rep,BRN0046,2014-12-13,2015-11-09,82107.49,0,EMP00329
+EMP00054,Maria,Jackson,maria.jackson84@firstnationalbank.com,987-664-4522,IT & Technology,Risk Analyst,BRN0030,2016-05-04,,50252.43,1,EMP00192
+EMP00055,Kenneth,Hussain,kenneth.hussain41@firstnationalbank.com,583-256-8770,Commercial Banking,Loan Officer,BRN0030,2013-12-11,,54268.76,1,EMP00324
+EMP00056,Mei,Davis,mei.davis76@firstnationalbank.com,775-437-3002,HR,Accountant,BRN0048,2021-07-28,,48302.25,1,EMP00275
+EMP00057,Linda,Gonzalez,linda.gonzalez65@firstnationalbank.com,872-593-4674,Finance & Accounting,Accountant,BRN0004,2011-06-15,,63693.96,1,EMP00198
+EMP00058,Ana,Hussain,ana.hussain72@firstnationalbank.com,836-728-1430,Operations,Branch Manager,BRN0008,2022-02-08,,38473.52,1,EMP00371
+EMP00059,Timothy,Smith,timothy.smith24@firstnationalbank.com,779-773-7566,Retail Banking,Loan Officer,BRN0045,2022-02-06,,87407.75,1,EMP00290
+EMP00060,Christopher,Zhao,christopher.zhao40@firstnationalbank.com,995-681-2391,Risk & Compliance,Financial Analyst,BRN0014,2013-06-09,,71030.15,1,EMP00250
+EMP00061,Stephanie,Esposito,stephanie.esposito78@firstnationalbank.com,479-320-9394,HR,Loan Officer,BRN0004,2020-02-13,2025-02-01,88582.15,0,EMP00177
+EMP00062,Michelle,Garcia,michelle.garcia29@firstnationalbank.com,813-156-1125,IT & Technology,Data Analyst,BRN0044,2018-04-21,,124280.01,1,EMP00231
+EMP00063,Ngozi,Akhtar,ngozi.akhtar23@firstnationalbank.com,745-820-4770,Finance & Accounting,Loan Officer,BRN0017,2011-06-30,,48785.9,1,EMP00296
+EMP00064,Charles,Zhang,charles.zhang74@firstnationalbank.com,614-826-7843,HR,Branch Manager,BRN0048,2005-12-13,,68302.28,1,EMP00435
+EMP00065,Pedro,Huang,pedro.huang12@firstnationalbank.com,308-349-8138,Customer Service,Loan Officer,BRN0011,2022-12-22,,56313.92,1,EMP00012
+EMP00066,Laura,King,laura.king10@firstnationalbank.com,316-643-9355,Finance & Accounting,Credit Analyst,BRN0020,2021-09-23,,61742.14,1,EMP00297
+EMP00067,Sarah,Adeyemi,sarah.adeyemi26@firstnationalbank.com,356-878-2234,Wealth Management,IT Specialist,BRN0042,2023-04-13,,45465.67,1,
+EMP00068,Ali,Morales,ali.morales42@firstnationalbank.com,842-423-3473,Wealth Management,IT Specialist,BRN0049,2017-12-31,,131076.04,1,EMP00121
+EMP00069,Michelle,Al-Farsi,michelle.al-farsi58@firstnationalbank.com,577-951-5703,Commercial Banking,Customer Service Rep,BRN0018,2018-04-07,2023-12-16,33978.65,0,EMP00469
+EMP00070,David,Anwar,david.anwar74@firstnationalbank.com,529-719-8792,Retail Banking,IT Specialist,BRN0025,2015-05-19,,187054.63,1,EMP00271
+EMP00071,David,Nwosu,david.nwosu91@firstnationalbank.com,649-636-9564,Finance & Accounting,Credit Analyst,BRN0022,2021-01-08,2028-04-08,49567.12,0,EMP00362
+EMP00072,Xiao,Miller,xiao.miller81@firstnationalbank.com,267-437-2548,HR,Teller,BRN0025,2014-03-03,,125179.38,1,EMP00350
+EMP00073,Mary,Perez,mary.perez85@firstnationalbank.com,558-417-7421,Commercial Banking,Teller,BRN0043,2018-07-09,,71447.72,1,
+EMP00074,Omar,Greco,omar.greco12@firstnationalbank.com,633-620,Risk & Compliance,Relationship Manager,BRN0042,2022-10-04,,45654.99,1,
+EMP00075,Karen,Hernandez,karen.hernandez38@firstnationalbank.com,303-619-9843,Customer Service,Branch Manager,BRN0050,2015-11-28,,50490.08,1,
+EMP00076,Karen,Allen,karen.allen24@firstnationalbank.com,989-739-3712,Retail Banking,Risk Analyst,BRN0050,2018-11-11,,75964.2,1,EMP00035
+EMP00077,Ashley,Anwar,ashley.anwar30@firstnationalbank.com,516-928-8684,IT & Technology,Credit Analyst,BRN0047,2010-04-30,,95392.67,1,EMP00208
+EMP00078,Laura,Wu,laura.wu65@firstnationalbank.com,365-936-4271,Risk & Compliance,Accountant,BRN0037,2014-11-19,,75683.58,1,EMP00137
+EMP00079,Linda,Marino,linda.marino16@firstnationalbank.com,981-264-5469,Customer Service,Financial Analyst,BRN0042,2015-10-12,,69497.15,1,EMP00391
+EMP00080,Michael,Chaudhry,michael.chaudhry7@firstnationalbank.com,582-341-7326,Finance & Accounting,Relationship Manager,BRN0006,2009-12-24,,65073.2,1,EMP00481
+EMP00081,Maria,Thompson,maria.thompson18@firstnationalbank.com,683-812-3273,Wealth Management,IT Specialist,BRN0007,2023-10-28,,73278.95,1,EMP00181
+EMP00082,Wei,Cruz,wei.cruz68@firstnationalbank.com,994-395-4893,Retail Banking,Relationship Manager,BRN0006,2005-06-05,,51926.04,1,
+EMP00083,Tunde,Williams,tunde.williams81@firstnationalbank.com,447-835-3352,Retail Banking,Customer Service Rep,BRN0040,2015-04-03,2020-11-10,145309.08,0,
+EMP00084,Mary,Greco,mary.greco47@firstnationalbank.com,738-657-9312,Customer Service,Operations Manager,BRN0037,2014-05-06,,128357.24,1,EMP00482
+EMP00085,Nancy,Williams,nancy.williams46@firstnationalbank.com,553-346-2698,Finance & Accounting,Financial Analyst,BRN0031,2005-12-23,,90486.98,1,EMP00470
+EMP00086,Pedro,Al-Farsi,pedro.al-farsi90@firstnationalbank.com,386-930-3209,Wealth Management,Branch Manager,BRN0035,2012-08-05,,41126.13,1,EMP00094
+EMP00087,Kenneth,Lawal,kenneth.lawal66@firstnationalbank.com,756-584-5150,IT & Technology,Teller,BRN0003,2022-09-29,,48550.56,1,EMP00342
+EMP00088,Sandra,White,sandra.white48@firstnationalbank.com,609-861-8204,HR,Credit Analyst,BRN0050,2006-01-27,,30000.0,1,EMP00136
+EMP00089,Sandra,Wilson,sandra.wilson94@firstnationalbank.com,640-716-3956,Finance & Accounting,Loan Officer,BRN0032,2020-07-10,,142648.23,1,EMP00110
+EMP00090,Marco,Hussain,marco.hussain22@firstnationalbank.com,559-557-1693,Finance & Accounting,Customer Service Rep,BRN0043,2011-08-19,,112614.81,1,EMP00456
+EMP00091,Charles,Sheikh,charles.sheikh47@firstnationalbank.com,967-795-3621,Risk & Compliance,Accountant,BRN0018,2019-05-06,,56530.19,1,EMP00269
+EMP00092,Laura,Huang,laura.huang47@firstnationalbank.com,780-133-3513,Finance & Accounting,Credit Analyst,BRN0029,2005-10-13,,45081.86,1,EMP00253
+EMP00093,Carol,Zhang,carol.zhang84@firstnationalbank.com,316-126-4048,HR,Operations Manager,BRN0005,2017-11-15,,65996.75,1,EMP00022
+EMP00094,Chen,Eze,chen.eze89@firstnationalbank.com,702-304-3009,Commercial Banking,IT Specialist,BRN0050,2010-11-03,,41917.49,1,EMP00156
+EMP00095,Miguel,Zhang,miguel.zhang86@firstnationalbank.com,266-663-9882,Operations,Accountant,BRN0046,2014-12-26,,152660.67,1,EMP00147
+EMP00096,Fatima,Green,fatima.green16@firstnationalbank.com,,Credit,Credit Analyst,BRN0046,2020-09-15,,72723.22,1,EMP00159
+EMP00097,Thomas,Lawal,thomas.lawal51@firstnationalbank.com,936-590-9612,HR,Accountant,BRN0036,2007-11-30,,47247.93,1,EMP00102
+EMP00098,Kathleen,Marino,kathleen.marino45@firstnationalbank.com,998-664-3981,Risk & Compliance,Risk Analyst,BRN0009,2012-02-11,,66159.53,1,EMP00025
+EMP00099,Donna,King,donna.king21@firstnationalbank.com,926-330-6669,Customer Service,Teller,BRN0004,2023-08-25,,47856.12,1,
+EMP00100,Margaret,Harris,margaret.harris81@firstnationalbank.com,746-195-9234,Credit,Customer Service Rep,BRN0017,2009-05-28,,122592.58,1,EMP00013
+EMP00101,George,Lopez,george.lopez6@firstnationalbank.com,229-183-1744,Credit,Teller,BRN0043,2019-01-03,,124945.87,1,EMP00047
+EMP00102,Michael,Romano,michael.romano81@firstnationalbank.com,857-409-8912,HR,Teller,BRN0050,2017-10-31,,112346.55,1,EMP00170
+EMP00103,Chidi,Al-Farsi,chidi.al-farsi27@firstnationalbank.com,347-420-6231,Finance & Accounting,Risk Analyst,BRN0045,2006-05-06,,66126.43,1,
+EMP00104,Dorothy,Al-Farsi,dorothy.al-farsi16@firstnationalbank.com,453-244-2586,HR,Accountant,BRN0024,2016-07-20,,71734.78,1,
+EMP00105,Sofia,Zhang,sofia.zhang25@firstnationalbank.com,710-627-8648,Operations,IT Specialist,BRN0016,2008-08-01,,136109.58,1,EMP00208
+EMP00106,Paul,Perez,paul.perez46@firstnationalbank.com,488-606-8710,Retail Banking,Accountant,BRN0026,2016-05-03,,45168.03,1,EMP00052
+EMP00107,Edward,Garcia,edward.garcia52@firstnationalbank.com,775-299-6939,Commercial Banking,Risk Analyst,BRN0009,2010-12-07,,73047.85,1,EMP00478
+EMP00108,Zainab,Ortiz,zainab.ortiz16@firstnationalbank.com,299-503-7114,Finance & Accounting,Operations Manager,BRN0049,2017-05-02,,151847.75,1,EMP00081
+EMP00109,Amanda,Colombo,amanda.colombo6@firstnationalbank.com,340-830-6456,Customer Service,IT Specialist,BRN0049,2008-03-27,,133162.22,1,EMP00326
+EMP00110,Kenneth,Allen,kenneth.allen51@firstnationalbank.com,957-962-5902,Customer Service,Accountant,BRN0033,2008-02-20,,122566.91,1,EMP00070
+EMP00111,Luis,Williams,luis.williams48@firstnationalbank.com,312-526-6040,Retail Banking,Customer Service Rep,BRN0032,2020-11-23,,61541.18,1,EMP00473
+EMP00112,Ling,Adams,ling.adams93@firstnationalbank.com,691-274-9589,Credit,Data Analyst,BRN0042,2022-07-24,,107058.85,1,EMP00441
+EMP00113,Ling,Jackson,ling.jackson25@firstnationalbank.com.com,628-255-7765,HR,Operations Manager,BRN0010,2023-06-07,,38396.02,1,
+EMP00114,Jessica,Marino,jessica.marino27@firstnationalbank.com,878-589-9609,Risk & Compliance,IT Specialist,BRN0031,2021-07-03,,114873.74,1,EMP00052
+EMP00115,Zainab,Musa,zainab.musa79@firstnationalbank.com,452-385-5890,Operations,Data Analyst,BRN0022,2017-04-03,,100579.23,1,EMP00072
+EMP00116,Chidi,Chen,chidi.chen72@firstnationalbank.com,938-380-5715,Customer Service,Risk Analyst,BRN0014,2020-06-25,,53278.73,1,EMP00178
+EMP00117,Emily,Garcia,emily.garcia37@firstnationalbank.com,280-454-8247,Wealth Management,Relationship Manager,BRN0026,2023-05-11,,39252.45,1,EMP00333
+EMP00118,Sandra,Martin,sandra.martin14@firstnationalbank.com,800-345-4972,Customer Service,Relationship Manager,BRN0035,2011-01-31,,106801.23,1,EMP00461
+EMP00119,Emeka,Taylor,emeka.taylor88@firstnationalbank.com,205-663-3587,Wealth Management,IT Specialist,BRN0004,2007-04-01,,109629.74,1,EMP00134
+EMP00120,Joseph,Anderson,joseph.anderson84@firstnationalbank.com,747-856-1611,Risk & Compliance,Risk Analyst,BRN0049,2011-06-12,,93455.38,1,
+EMP00121,Carlos,Romano,carlos.romano24@firstnationalbank.com,,Credit,Loan Officer,BRN0012,2005-10-25,,97991.08,1,EMP00062
+EMP00122,Bisi,Greco,bisi.greco64@firstnationalbank.com,337-971-9261,IT & Technology,Data Analyst,BRN0022,2011-05-21,,101975.59,1,EMP00157
+EMP00123,Marco,Scott,marco.scott2@firstnationalbank.com,502-681-4164,HR,Accountant,BRN0011,2021-05-26,,75188.89,1,EMP00145
+EMP00124,Anthony,Martin,anthony.martin62@firstnationalbank.com,454-106-5272,Wealth Management,Data Analyst,BRN0021,2006-12-12,,38815.92,1,
+EMP00125,John,Musa,john.musa84@firstnationalbank.com,441-163-2936,Risk & Compliance,Risk Analyst,BRN0022,2011-10-10,,153063.65,1,EMP00306
+EMP00126,Ahmed,Okonkwo,ahmed.okonkwo48@firstnationalbank.com,424-236-8834,Credit,Credit Analyst,BRN0046,2022-04-08,,38861.22,1,EMP00065
+EMP00127,Carmen,Flores,carmen.flores98@firstnationalbank.com,972-710-2341,Customer Service,Wealth Advisor,BRN0036,2015-07-25,,93205.56,1,EMP00245
+EMP00128,Donald,Gonzalez,donald.gonzalez69@firstnationalbank.com,535-974-9525,IT & Technology,Wealth Advisor,BRN0037,2007-07-09,2013-08-30,99484.9,0,EMP00140
+EMP00129,Cynthia,Harris,cynthia.harris66@firstnationalbank.com,777-159-8575,Operations,Wealth Advisor,BRN0006,2016-06-12,,38926.94,1,
+EMP00130,Charles,Garcia,charles.garcia55@firstnationalbank.com,265-654-1987,Commercial Banking,IT Specialist,BRN0017,2023-04-25,2025-10-04,98461.93,0,
+EMP00131,Elena,Chaudhry,elena.chaudhry48@firstnationalbank.com,591-559-7184,Customer Service,Financial Analyst,BRN0027,2009-01-14,,83595.34,1,
+EMP00132,Carol,Greco,carol.greco17@firstnationalbank.com,428-954-1056,Operations,IT Specialist,BRN0023,2007-08-30,,100616.49,1,EMP00409
+EMP00133,Lisa,Nasser,lisa.nasser45@firstnationalbank.com,393-996-2848,HR,Customer Service Rep,BRN0035,2014-07-07,,31294.92,1,EMP00175
+EMP00134,Xiao,Jones,xiao.jones58@firstnationalbank.com,920-993-1797,Retail Banking,Risk Analyst,BRN0002,2010-05-26,,54902.53,1,EMP00345
+EMP00135,Jessica,Colombo,jessica.colombo38@firstnationalbank.com,949-689-6224,Finance & Accounting,Relationship Manager,BRN0035,2009-11-15,,45041.95,1,EMP00421
+EMP00136,Donna,Abubakar,donna.abubakar8@firstnationalbank.com,805-852-3869,HR,Operations Manager,BRN0010,2019-10-23,,58985.69,1,EMP00032
+EMP00137,Kenneth,Chaudhry,kenneth.chaudhry53@firstnationalbank.com,585-288-9813,IT & Technology,Teller,BRN0023,2019-06-07,,124232.3,1,EMP00451
+EMP00138,Mei,Malik,mei.malik54@firstnationalbank.com,337-497-4978,Finance & Accounting,Compliance Officer,BRN0010,2023-01-27,,36002.86,1,EMP00144
+EMP00139,Sandra,Wu,sandra.wu87@firstnationalbank.com,240-994-2192,Credit,Wealth Advisor,BRN0029,2013-04-28,2015-06-18,47658.51,0,EMP00175
+EMP00140,Donna,Johnson,donna.johnson28@firstnationalbank.com,959-220-8846,Credit,Wealth Advisor,BRN0014,2015-10-03,,92689.46,1,EMP00401
+EMP00141,Jeffrey,Al-Farsi,jeffrey.al-farsi69@firstnationalbank.com,515-367-6892,Wealth Management,IT Specialist,BRN0016,2017-05-20,,101330.11,1,EMP00464
+EMP00142,Steven,Zhao,steven.zhao41@firstnationalbank.com,776-984-4625,Retail Banking,Teller,BRN0047,2015-07-14,,84680.64,1,EMP00306
+EMP00143,Karen,Nguyen,karen.nguyen43@firstnationalbank.com,783-953-5026,Finance & Accounting,Teller,BRN0038,2017-12-28,,85290.77,1,
+EMP00144,Cynthia,King,cynthia.king94@firstnationalbank.com,373-243-9954,Customer Service,Compliance Officer,BRN0032,2021-03-25,,57251.12,1,
+EMP00145,Luis,Miller,luis.miller98@firstnationalbank,845-336-2113,Retail Banking,Relationship Manager,BRN0034,2005-10-05,,42844.75,1,EMP00226
+EMP00146,Chen,Ferrari,chen.ferrari85@firstnationalbank.com,,Operations,Operations Manager,BRN0024,2006-05-11,,82397.97,1,
+EMP00147,Rebecca,Wright,rebecca.wright14@firstnationalbank.com,736-252-4948,Customer Service,Teller,BRN0002,2016-04-07,,117681.31,1,
+EMP00148,Amanda,Nasser,amanda.nasser73@firstnationalbank.com,913-331-5914,Commercial Banking,Compliance Officer,BRN0018,2022-10-31,,43988.37,1,EMP00470
+EMP00149,Jeffrey,Diaz,jeffrey.diaz61@firstnationalbank.com,209-819-3807,HR,Compliance Officer,BRN0042,2022-01-14,2026-08-02,85045.09,0,EMP00169
+EMP00150,Joshua,Flores,joshua.flores89@firstnationalbank.com,686-377-1762,Operations,Operations Manager,BRN0037,2007-02-21,,37480.96,1,EMP00093
+EMP00151,Robert,Hill,robert.hill76@firstnationalbank.com,929-940-7525,Operations,Financial Analyst,BRN0003,2009-01-09,,89327.13,1,
+EMP00152,Bisi,Li,bisi.li50@firstnationalbank.com,343-909-2284,Finance & Accounting,Branch Manager,BRN0037,2023-09-21,,94142.54,1,EMP00464
+EMP00153,Xiao,Khan,xiao.khan42@firstnationalbank.com,479-902-8381,Finance & Accounting,Operations Manager,BRN0015,2023-10-24,2030-08-07,98927.01,0,EMP00233
+EMP00154,Jeffrey,Wilson,jeffrey.wilson99@firstnationalbank.com,452-830-2204,Risk & Compliance,Risk Analyst,BRN0028,2009-03-02,,110705.27,1,EMP00157
+EMP00155,Edward,Thomas,edward.thomas12@firstnationalbank.com.com,655-468-5419,Commercial Banking,Financial Analyst,BRN0041,2008-06-17,,78209.7,1,
+EMP00156,Michael,Anderson,michael.anderson46@firstnationalbank.com,811-712-6315,Retail Banking,Teller,BRN0036,2017-06-11,,43232.24,1,EMP00283
+EMP00157,Lisa,Gonzalez,lisa.gonzalez67@firstnationalbank.com,589-273-3274,Operations,IT Specialist,BRN0050,2006-11-25,,104498.97,1,EMP00239
+EMP00158,Chidi,Hernandez,chidi.hernandez47@firstnationalbank.com,452-838-9123,IT & Technology,IT Specialist,BRN0011,2014-10-01,,52272.13,1,
+EMP00159,Rosa,Morales,rosa.morales49@firstnationalbank.com,537-550-6484,Credit,Financial Analyst,BRN0020,2005-02-25,,71264.46,1,EMP00245
+EMP00160,Matthew,Khan,matthew.khan41@firstnationalbank.com,911-748-9044,IT & Technology,Credit Analyst,BRN0039,2020-08-05,,121183.21,1,
+EMP00161,Fang,Conti,fang.conti24@firstnationalbank.com,763-127-8563,IT & Technology,IT Specialist,BRN0026,2013-03-10,2019-07-07,43976.66,0,EMP00470
+EMP00162,Aisha,Romano,aisha.romano18@firstnationalbank.com,447-358-3525,HR,Loan Officer,BRN0045,2006-07-21,,63654.74,1,EMP00147
+EMP00163,Yusuf,Chaudhry,yusuf.chaudhry70@firstnationalbank.com,568-818-9796,Commercial Banking,Loan Officer,BRN0039,2015-10-01,,143742.83,1,EMP00201
+EMP00164,Chen,Garcia,chen.garcia73@firstnationalbank.com,893-762-7547,Finance & Accounting,Data Analyst,BRN0043,2019-11-29,,139598.88,1,EMP00416
+EMP00165,Giulia,Marino,giulia.marino72@firstnationalbank.com,789-326-8303,Wealth Management,Data Analyst,BRN0001,2007-03-19,,140462.48,1,EMP00420
+EMP00166,Chidi,Thomas,chidi.thomas38@firstnationalbank.com,287-218-3321,Finance & Accounting,IT Specialist,BRN0045,2016-03-23,,49311.28,1,EMP00398
+EMP00167,Sharon,Anwar,sharon.anwar41@firstnationalbank.com,245-929,Commercial Banking,Compliance Officer,BRN0034,2015-11-01,,37995.05,1,EMP00031
+EMP00168,Christopher,Li,christopher.li72@firstnationalbank.com,673-337-7636,Risk & Compliance,Compliance Officer,BRN0048,2010-06-22,,121259.38,1,EMP00105
+EMP00169,Laura,Sanchez,laura.sanchez55@firstnationalbank.com,921-319-4371,Commercial Banking,Customer Service Rep,BRN0026,2005-08-28,,39794.86,1,EMP00453
+EMP00170,Cynthia,Jackson,cynthia.jackson34@firstnationalbank.com,701-640-6134,Credit,Risk Analyst,BRN0035,2009-03-12,,38088.07,1,EMP00003
+EMP00171,Matthew,Bello,matthew.bello79@firstnationalbank.com,888-237-6131,Operations,Loan Officer,BRN0023,2012-11-23,,105221.04,1,EMP00357
+EMP00172,Xiao,Martin,xiao.martin74@firstnationalbank.com,390-598-9804,Risk & Compliance,Operations Manager,BRN0045,2008-03-04,,66348.43,1,EMP00328
+EMP00173,Hao,Miller,hao.miller46@firstnationalbank.com,696-239-4196,Customer Service,Operations Manager,BRN0019,2008-02-24,,60336.67,1,EMP00091
+EMP00174,Rosa,Siddiqui,rosa.siddiqui63@firstnationalbank.com,778-131-4613,Operations,Relationship Manager,BRN0027,2020-05-11,,120867.2,1,EMP00408
+EMP00175,Alessandro,Romano,alessandro.romano71@firstnationalbank.com,786-216-5389,Finance & Accounting,Operations Manager,BRN0011,2022-07-06,,94734.82,1,
+EMP00176,Paul,Hussain,paul.hussain14@firstnationalbank.com,869-869-5055,Retail Banking,IT Specialist,BRN0003,2022-01-17,,110961.7,1,EMP00435
+EMP00177,Laura,Okafor,laura.okafor27@firstnationalbank.com,802-805-6744,Credit,Compliance Officer,BRN0006,2014-11-06,,47077.78,1,EMP00339
+EMP00178,Ana,Davis,ana.davis73@firstnationalbank.com,487-711-9827,Operations,Teller,BRN0040,2008-02-15,,31707.84,1,EMP00453
+EMP00179,Francesco,Malik,francesco.malik8@firstnationalbank.com,871-229-3174,Finance & Accounting,Accountant,BRN0033,2020-03-27,,39785.31,1,
+EMP00180,Mohammed,Ibrahim,mohammed.ibrahim81@firstnationalbank.com,662-177-2525,Operations,Wealth Advisor,BRN0044,2013-10-23,,98462.16,1,EMP00500
+EMP00181,Hui,Smith,hui.smith94@firstnationalbank.com,669-750-6869,Customer Service,Risk Analyst,BRN0024,2015-03-14,,58054.4,1,EMP00147
+EMP00182,Kevin,Eze,kevin.eze44@firstnationalbank.com,333-679-8951,Retail Banking,Branch Manager,BRN0028,2023-07-03,,37925.33,1,EMP00338
+EMP00183,Sharon,Nasser,sharon.nasser1@firstnationalbank.com,638-307-3161,Operations,Financial Analyst,BRN0030,2005-05-14,,49616.58,1,EMP00457
+EMP00184,Mary,Zhao,mary.zhao86@firstnationalbank.com,369-153-7493,IT & Technology,Risk Analyst,BRN0018,2007-02-04,,76298.85,1,EMP00048
+EMP00185,Susan,Sanchez,susan.sanchez29@firstnationalbank.com,655-109-1132,Commercial Banking,Accountant,BRN0046,2007-02-19,2012-06-26,54342.26,0,EMP00104
+EMP00186,Elena,Thomas,elena.thomas14@firstnationalbank.com,506-240-7270,Risk & Compliance,Compliance Officer,BRN0009,2015-09-19,2020-01-06,41704.98,0,EMP00215
+EMP00187,Chen,King,chen.king57@firstnationalbank.com,418-743-3480,Credit,Compliance Officer,BRN0010,2006-07-15,,48155.62,1,
+EMP00188,Francesco,White,francesco.white76@firstnationalbank.com,559-539-6152,IT & Technology,Teller,BRN0014,2006-12-12,,61603.21,1,
+EMP00189,Yun,Eze,yun.eze89@firstnationalbank.com,874-996-5942,Credit,Operations Manager,BRN0016,2017-05-31,,69237.51,1,EMP00014
+EMP00190,Ngozi,Zhou,ngozi.zhou15@firstnationalbank.com,853-708-2163,Retail Banking,Credit Analyst,BRN0026,2011-08-19,,36935.31,1,
+EMP00191,Deborah,Huang,deborah.huang70@firstnationalbank.com,N/A,Retail Banking,Teller,BRN0009,2013-09-04,,116538.55,1,EMP00356
+EMP00192,Mohammed,Colombo,mohammed.colombo99@firstnationalbank.com,918-511-2350,Customer Service,Customer Service Rep,BRN0004,2022-09-14,,87441.08,1,EMP00050
+EMP00193,Tunde,Wang,tunde.wang51@firstnationalbank.com,981-954-2083,HR,Wealth Advisor,BRN0006,2011-12-14,2014-03-26,46884.92,0,
+EMP00194,Barbara,Nasser,barbara.nasser79@firstnationalbank.com,516-782-3877,Risk & Compliance,Wealth Advisor,BRN0016,2006-04-20,,,1,EMP00402
+EMP00195,Betty,King,betty.king48@firstnationalbank.com,999-994-5403,Commercial Banking,Data Analyst,BRN0032,2012-10-11,,113637.33,1,
+EMP00196,Thomas,Musa,thomas.musa92@firstnationalbank.com,842-178-9128,Finance & Accounting,Branch Manager,BRN0022,2023-02-07,,93003.11,1,EMP00352
+EMP00197,Alessandro,Thomas,alessandro.thomas74@firstnationalbank.com,N/A,IT & Technology,Branch Manager,BRN0037,2008-09-29,,62158.74,1,EMP00147
+EMP00198,Wei,Chaudhry,wei.chaudhry29@firstnationalbank.com,626-837-6241,Commercial Banking,Customer Service Rep,BRN0025,2008-05-14,,41178.74,1,EMP00211
+EMP00199,Andrew,Marino,andrew.marino6@firstnationalbank.com,270-998-8620,Operations,Credit Analyst,BRN0033,2020-02-07,,53300.32,1,EMP00324
+EMP00200,Jian,Bello,jian.bello95@firstnationalbank.com,675-477-9083,IT & Technology,Wealth Advisor,BRN0030,2005-03-07,,68335.6,1,EMP00410
+EMP00201,Melissa,Brown,melissa.brown30@firstnationalbank.com,851-959-1157,Retail Banking,Data Analyst,BRN0049,2022-11-08,,51055.91,1,EMP00440
+EMP00202,Obinna,Okafor,obinna.okafor54@firstnationalbank.com,261-245-5584,IT & Technology,Accountant,BRN0048,2021-04-24,,55845.1,1,
+EMP00203,Mary,Perez,mary.perez13@firstnationalbank.com,852-939-7461,Credit,Branch Manager,BRN0045,2013-05-10,,74425.6,1,EMP00385
+EMP00204,Jorge,Khan,jorge.khan90@firstnationalbank.com,534-425-8417,Commercial Banking,Relationship Manager,BRN0009,2010-04-24,,84815.48,1,EMP00125
+EMP00205,Laura,Al-Farsi,laura.al-farsi41@firstnationalbank.com,748-466-4401,Wealth Management,Teller,BRN0050,2018-02-11,2019-04-20,47239.75,0,EMP00108
+EMP00206,Carmen,Cruz,carmen.cruz6@firstnationalbank.com,535-251-2494,Finance & Accounting,Risk Analyst,BRN0006,2008-07-15,,76640.92,1,
+EMP00207,Michael,Sheikh,michael.sheikh58@firstnationalbank.com,763-355-2551,Risk & Compliance,Loan Officer,BRN0044,2011-09-15,,,1,EMP00151
+EMP00208,Jason,Wilson,jason.wilson75@firstnationalbank.com,276-122-2056,Wealth Management,Data Analyst,BRN0050,2009-12-26,,103230.37,1,EMP00285
+EMP00209,Daniel,Gonzalez,daniel.gonzalez56@firstnationalbank.com,604-608-1483,HR,Financial Analyst,BRN0022,2007-10-01,2012-12-02,57745.49,0,EMP00248
+EMP00210,William,Ortiz,william.ortiz80@firstnationalbank.com,862-402-9173,Customer Service,IT Specialist,BRN0012,2011-03-03,,43993.7,1,
+EMP00211,Ali,Greco,ali.greco32@firstnationalbank.com,756-913-1319,Finance & Accounting,IT Specialist,BRN0018,2013-08-04,,31460.28,1,EMP00470
+EMP00212,Kevin,Zhou,kevin.zhou35@firstnationalbank.com,526-711,Retail Banking,Data Analyst,BRN0032,2012-09-19,,76902.87,1,EMP00387
+EMP00213,Christopher,Taylor,christopher.taylor32@firstnationalbank.com,472-646-1916,IT & Technology,Customer Service Rep,BRN0034,2013-01-07,,51585.36,1,EMP00103
+EMP00214,Matthew,Okafor,matthew.okafor76@firstnationalbank.com,955-814-6878,Retail Banking,Wealth Advisor,BRN0025,2012-12-16,,34639.37,1,EMP00085
+EMP00215,Rosa,Romano,rosa.romano70@firstnationalbank.com,702-138-2478,Credit,Relationship Manager,BRN0037,2017-08-23,,,1,EMP00148
+EMP00216,Donald,Harris,donald.harris44@firstnationalbank.com,531-160-1359,Risk & Compliance,Data Analyst,BRN0031,2005-01-06,,108914.1,1,EMP00261
+EMP00217,Luca,Khan,luca.khan76@firstnationalbank.com,509-430-3235,HR,Data Analyst,BRN0034,2013-03-09,,85443.1,1,
+EMP00218,Mei,Ortiz,mei.ortiz46@firstnationalbank.com,803-934-3872,Operations,Financial Analyst,BRN0032,2019-07-25,,87869.48,1,EMP00391
+EMP00219,Miguel,Lopez,miguel.lopez5@firstnationalbank.com,525-928-4619,Commercial Banking,IT Specialist,BRN0001,2020-09-29,,75888.28,1,EMP00048
+EMP00220,Daniel,Anderson,daniel.anderson91@firstnationalbank.com,000-000-0000,IT & Technology,Wealth Advisor,BRN0048,2006-09-30,,77971.27,1,EMP00078
+EMP00221,Ryan,Siddiqui,ryan.siddiqui94@firstnationalbank.com,370-523-9078,Finance & Accounting,Operations Manager,BRN0017,2022-08-27,2022-09-02,40410.7,0,
+EMP00222,Chiara,Green,chiara.green21@firstnationalbank.com,234-401-1328,Commercial Banking,Loan Officer,BRN0031,2022-09-10,,112128.6,1,
+EMP00223,Patricia,Liu,patricia.liu77@firstnationalbank.com,694-821-1507,Risk & Compliance,Customer Service Rep,BRN0025,2008-08-11,,56980.6,1,EMP00119
+EMP00224,Melissa,Diaz,melissa.diaz93@firstnationalbank.com,753-371-5612,Commercial Banking,Branch Manager,BRN0011,2006-03-15,2008-07-04,53732.05,0,EMP00404
+EMP00225,Edward,Smith,edward.smith55@firstnationalbank.com,877-740-8869,Retail Banking,Relationship Manager,BRN0036,2023-11-03,,42258.5,1,EMP00340
+EMP00226,Michelle,Khan,michelle.khan61@firstnationalbank.com,876-371-2493,HR,Financial Analyst,BRN0019,2006-11-03,,38777.47,1,EMP00055
+EMP00227,Betty,Siddiqui,betty.siddiqui60@firstnationalbank.com,475-677-2009,Commercial Banking,Loan Officer,BRN0025,2013-04-15,,52485.43,1,EMP00031
+EMP00228,Joshua,Diaz,joshua.diaz8@firstnationalbank.com,735-528-9773,Wealth Management,Customer Service Rep,BRN0035,2014-04-15,,119787.49,1,EMP00133
+EMP00229,Ling,Marino,ling.marino74@firstnationalbank.com,835-250-2970,Wealth Management,Financial Analyst,BRN0031,2011-09-15,2012-02-05,105193.49,0,EMP00201
+EMP00230,David,Hussain,david.hussain11@firstnationalbank.com,645-306-3422,Operations,Credit Analyst,BRN0011,2009-10-02,,42001.43,1,
+EMP00231,Wei,Wang,wei.wang36@firstnationalbank.com,212-905-9561,Commercial Banking,Risk Analyst,BRN0005,2006-12-14,,92389.95,1,
+EMP00232,Linda,Lopez,linda.lopez13@firstnationalbank.com,748-452-7732,Wealth Management,Customer Service Rep,BRN0037,2018-03-10,,49927.48,1,
+EMP00233,Hao,Cruz,hao.cruz88@firstnationalbank.com,239-505-6431,Retail Banking,Wealth Advisor,BRN0003,2008-11-11,,47609.06,1,EMP00428
+EMP00234,Margaret,Esposito,margaret.esposito90@firstnationalbank.com,433-237-5923,Wealth Management,Data Analyst,BRN0018,2013-05-10,2016-10-03,67159.15,0,EMP00004
+EMP00235,Patricia,Torres,patricia.torres57@firstnationalbank.com,616-858-8937,Finance & Accounting,Accountant,BRN0018,2021-05-07,,78867.42,1,EMP00353
+EMP00236,Amanda,Martin,amanda.martin68@firstnationalbank.com,229-277-4158,IT & Technology,Accountant,BRN0011,2006-06-22,,145095.88,1,EMP00226
+EMP00237,Donald,Abubakar,donald.abubakar48@firstnationalbank.com,717-506-3029,IT & Technology,Credit Analyst,BRN0003,2015-03-29,2019-04-14,114220.35,0,EMP00077
+EMP00238,Fang,Diaz,fang.diaz45@firstnationalbank.com,464-866-2480,HR,Branch Manager,BRN0029,2008-12-25,,66826.21,1,
+EMP00239,Ali,Green,ali.green87@firstnationalbank.com,N/A,Wealth Management,Financial Analyst,BRN0037,2022-06-29,,44698.92,1,EMP00331
+EMP00240,Ana,Lawal,ana.lawal92@firstnationalbank.com,858-381-7943,Finance & Accounting,IT Specialist,BRN0039,2022-12-18,2025-10-17,108861.09,0,EMP00097
+EMP00241,Carol,Perez,carol.perez14@firstnationalbank.com.com,774-762-5631,Commercial Banking,IT Specialist,BRN0030,2011-10-12,,83036.29,1,EMP00192
+EMP00242,Betty,Bello,betty.bello25@firstnationalbank.com,983-346-1930,Credit,Risk Analyst,BRN0018,2019-05-15,,77562.98,1,
+EMP00243,Ngozi,Okonkwo,ngozi.okonkwo34@firstnationalbank.com,614-497-1578,Credit,Accountant,BRN0044,2008-02-21,,99204.81,1,EMP00179
+EMP00244,Ahmed,Rossi,ahmed.rossi86@firstnationalbank.com,507-965-3785,Customer Service,Financial Analyst,BRN0047,2020-12-31,,90432.54,1,EMP00250
+EMP00245,Ana,Reyes,ana.reyes98@firstnationalbank.com,896-443-2463,IT & Technology,Wealth Advisor,BRN0031,2007-11-15,,130583.11,1,EMP00067
+EMP00246,Betty,Perez,betty.perez38@firstnationalbank.com,320-581-1879,Credit,Customer Service Rep,BRN0027,2022-09-05,,78840.45,1,EMP00075
+EMP00247,Elizabeth,Wu,elizabeth.wu68@firstnationalbank.com,255-991-3470,IT & Technology,Credit Analyst,BRN0005,2015-08-05,,73182.52,1,EMP00476
+EMP00248,Anthony,Wilson,anthony.wilson63@firstnationalbank.com,381-420,IT & Technology,Data Analyst,BRN0037,2015-04-07,,110521.82,1,EMP00204
+EMP00249,Susan,Ortiz,susan.ortiz56@firstnationalbank.com,613-539-8821,Retail Banking,Operations Manager,BRN0037,2022-02-23,,49141.27,1,
+EMP00250,Mark,Williams,mark.williams87@firstnationalbank,431-810-6641,Commercial Banking,Risk Analyst,BRN0024,2005-04-26,,81866.78,1,EMP00148
+EMP00251,Emily,Nasser,emily.nasser94@firstnationalbank.com,736-445-8105,Risk & Compliance,Credit Analyst,BRN0020,2008-09-30,2009-04-06,54724.73,0,EMP00433
+EMP00252,Ana,Sheikh,ana.sheikh3@firstnationalbank.com,944-234-4460,Credit,Operations Manager,BRN0032,2013-01-21,,53429.13,1,
+EMP00253,Jeffrey,Adeyemi,jeffrey.adeyemi99@firstnationalbank.com,249-708-1785,Retail Banking,Branch Manager,BRN0024,2020-12-13,,48946.54,1,EMP00252
+EMP00254,Nancy,Rossi,nancy.rossi90@firstnationalbank.com,911-802-1152,Commercial Banking,Compliance Officer,BRN0027,2014-12-19,,112440.2,1,
+EMP00255,Pedro,Thomas,pedro.thomas66@firstnationalbank.com,320-389-2867,Wealth Management,Relationship Manager,BRN0040,2018-08-02,,73559.1,1,EMP00283
+EMP00256,Ronald,Malik,ronald.malik38@firstnationalbank.com,761-608-4402,Wealth Management,Credit Analyst,BRN0050,2010-11-25,,39374.59,1,EMP00088
+EMP00257,Omar,Romano,omar.romano20@firstnationalbank.com,998-623-2229,Commercial Banking,Teller,BRN0001,2020-01-25,2021-04-22,124155.04,0,EMP00373
+EMP00258,Jennifer,Wright,jennifer.wright6@firstnationalbank.com,568-920-6123,Commercial Banking,Loan Officer,BRN0030,2011-08-23,,40500.27,1,EMP00254
+EMP00259,Ali,King,ali.king43@firstnationalbank.com,648-736-5395,Commercial Banking,Credit Analyst,BRN0003,2005-03-21,,95457.26,1,EMP00087
+EMP00260,Sandra,Zhou,sandra.zhou89@firstnationalbank.com,631-764-3732,Retail Banking,Accountant,BRN0012,2007-07-22,,73883.5,1,EMP00104
+EMP00261,Aisha,Siddiqui,aisha.siddiqui24@firstnationalbank.com,997-467-1472,Risk & Compliance,IT Specialist,BRN0027,2018-04-02,,117603.96,1,EMP00147
+EMP00262,Betty,Zhang,betty.zhang2@firstnationalbank.com,894-637-4669,Finance & Accounting,Operations Manager,BRN0008,2014-03-24,,49884.69,1,EMP00271
+EMP00263,Lisa,Ferrari,lisa.ferrari45@firstnationalbank.com,856-494-3435,Customer Service,Customer Service Rep,BRN0045,2018-11-13,2026-04-16,108596.69,0,EMP00284
+EMP00264,Isabel,Romano,isabel.romano22@firstnationalbank.com,703-428-4946,Operations,Branch Manager,BRN0042,2008-07-09,,81444.27,1,EMP00202
+EMP00265,Mary,Nasser,mary.nasser57@firstnationalbank.com,658-190-9166,Commercial Banking,IT Specialist,BRN0036,2019-06-07,,47172.63,1,
+EMP00266,Mei,Diaz,mei.diaz1@firstnationalbank.com,818-733-5990,Customer Service,Relationship Manager,BRN0002,2007-04-21,,53425.22,1,EMP00265
+EMP00267,Luis,Green,luis.green59@firstnationalbank.com,985-734-8751,Finance & Accounting,Wealth Advisor,BRN0030,2012-08-24,,45226.55,1,EMP00482
+EMP00268,George,Yang,george.yang82@firstnationalbank.com,498-660-9552,Commercial Banking,Branch Manager,BRN0007,2022-01-12,,40871.64,1,EMP00086
+EMP00269,Sofia,Malik,sofia.malik14@firstnationalbank.com,400-292-2978,HR,Relationship Manager,BRN0032,2008-02-25,,114442.68,1,EMP00054
+EMP00270,David,Sanchez,david.sanchez16@firstnationalbank.com,661-568-9260,Wealth Management,Branch Manager,BRN0013,2021-01-28,,93836.34,1,EMP00162
+EMP00271,Chidi,Ricci,chidi.ricci23@firstnationalbank.com,377-848-3103,Credit,Customer Service Rep,BRN0004,2017-05-30,,138939.56,1,EMP00097
+EMP00272,Musa,Nwosu,musa.nwosu36@firstnationalbank.com,551-401-8419,Risk & Compliance,Risk Analyst,BRN0033,2013-08-18,,80288.79,1,EMP00470
+EMP00273,Wei,Zhang,wei.zhang92@firstnationalbank.com,766-747-4560,Credit,Wealth Advisor,BRN0048,2016-06-28,,111645.68,1,EMP00378
+EMP00274,Hassan,Wright,hassan.wright65@firstnationalbank.com,852-430-2890,Customer Service,IT Specialist,BRN0023,2020-01-31,,138186.95,1,EMP00332
+EMP00275,Rosa,Bruno,rosa.bruno37@firstnationalbank.com,632-927-1209,Retail Banking,Risk Analyst,BRN0043,2020-12-05,,101089.95,1,
+EMP00276,Ashley,Adeyemi,ashley.adeyemi19@firstnationalbank.com,907-903-5835,Customer Service,Branch Manager,BRN0043,2006-04-09,,56627.08,1,EMP00437
+EMP00277,Giovanni,Reyes,giovanni.reyes29@firstnationalbank.com,774-498-4892,Operations,Wealth Advisor,BRN0029,2007-04-20,,83110.99,1,EMP00241
+EMP00278,Kenneth,Diaz,kenneth.diaz7@firstnationalbank.com.com,407-735-8259,Finance & Accounting,Data Analyst,BRN0025,2013-09-10,,94644.05,1,
+EMP00279,Mark,Okonkwo,mark.okonkwo58@firstnationalbank.com,899-176-4063,Customer Service,Loan Officer,BRN0048,2018-07-14,,141010.01,1,EMP00287
+EMP00280,Christopher,Perez,CHRISTOPHER.PEREZ33@FIRSTNATIONALBANK.COM,926-258-1654,Finance & Accounting,Customer Service Rep,BRN0028,2011-04-06,,37013.17,1,EMP00187
+EMP00281,Amaka,Gonzalez,amaka.gonzalez71@firstnationalbank.com,924-425-9608,Risk & Compliance,Operations Manager,BRN0041,2018-10-23,,85122.29,1,EMP00389
+EMP00282,Amanda,Anderson,amanda.anderson45@firstnationalbank.com,418-779-6437,Operations,Relationship Manager,BRN0033,2008-07-29,,119849.03,1,
+EMP00283,Carmen,Johnson,carmen.johnson15@firstnationalbank.com,656-346-4994,Finance & Accounting,Risk Analyst,BRN0040,2016-11-24,,97245.2,1,EMP00213
+EMP00284,Ashley,Brown,ashley.brown67@firstnationalbank.com,583-626-9335,Retail Banking,Teller,BRN0008,2013-08-28,,98890.46,1,EMP00062
+EMP00285,Daniel,Bruno,daniel.bruno69firstnationalbank.com,415-786-4492,HR,Accountant,BRN0013,2012-03-09,,39900.9,1,EMP00089
+EMP00286,Laura,Akhtar,laura.akhtar83@firstnationalbank.com,273-864,Retail Banking,Loan Officer,BRN0035,2023-08-04,,119428.31,1,EMP00266
+EMP00287,Ling,Adams,ling.adams34@firstnationalbank.com,661-745-7626,Retail Banking,Risk Analyst,BRN0012,2022-10-25,,40582.22,1,EMP00376
+EMP00288,Thomas,Perez,thomas.perez6@firstnationalbank.com,274-466-9238,Operations,Customer Service Rep,BRN0035,2005-02-18,,145917.55,1,EMP00357
+EMP00289,Michael,Rossi,michael.rossi21@firstnationalbank.com,339-864-7406,Customer Service,Teller,BRN0049,2014-10-26,,115717.31,1,
+EMP00290,Ali,Zhao,ali.zhao2@firstnationalbank.com,768-244-3019,Credit,Customer Service Rep,BRN0010,2011-09-08,,150204.09,1,EMP00004
+EMP00291,Giovanni,Chen,giovanni.chen28@firstnationalbank.com,861-971-9397,Risk & Compliance,Relationship Manager,BRN0036,2006-11-29,,82413.62,1,EMP00027
+EMP00292,Isabel,Miller,isabel.miller97@firstnationalbank.com,762-572-2198,Commercial Banking,Teller,BRN0017,2009-05-11,2016-11-19,145891.16,0,EMP00261
+EMP00293,Ronald,Harris,ronald.harris86@firstnationalbank.com,302-391-2143,Finance & Accounting,IT Specialist,BRN0047,2018-01-09,,78356.82,1,EMP00417
+EMP00294,Karen,Lopez,karen.lopez73@firstnationalbank.com,000-000-0000,IT & Technology,Wealth Advisor,BRN0040,2019-10-16,,99382.62,1,
+EMP00295,Aisha,Li,aisha.li62@firstnationalbank.com,567-893-6004,Commercial Banking,Financial Analyst,BRN0028,2011-03-17,,41084.48,1,
+EMP00296,Tunde,Nguyen,tunde.nguyen34@firstnationalbank.com,841-178-2235,Customer Service,Compliance Officer,BRN0006,2023-11-18,,59773.66,1,EMP00076
+EMP00297,Paul,Jones,paul.jones71@firstnationalbank.com,752-583-3435,IT & Technology,Data Analyst,BRN0038,2017-12-26,,126409.64,1,EMP00029
+EMP00298,Patricia,Khan,patricia.khan47@firstnationalbank.com,878-344-3717,Risk & Compliance,IT Specialist,BRN0019,2008-01-02,,133385.91,1,EMP00160
+EMP00299,Giovanni,Ferrari,giovanni.ferrari46@firstnationalbank.com,979-599-4796,Finance & Accounting,Relationship Manager,BRN0037,2017-09-10,,56057.27,1,EMP00033
+EMP00300,Ryan,Rossi,ryan.rossi59@firstnationalbank.com,240-764-6309,Customer Service,Compliance Officer,BRN0014,2016-08-13,,93097.63,1,EMP00314
+EMP00301,Matthew,Wu,matthew.wu84@firstnationalbank.com,801-769-2275,HR,Relationship Manager,BRN0048,2010-11-28,,110574.9,1,
+EMP00302,Maria,Ferrari,maria.ferrari78@firstnationalbank,650-269-4768,Operations,Relationship Manager,BRN0023,2023-05-01,,77866.49,1,EMP00228
+EMP00303,Ibrahim,Adams,ibrahim.adams54@firstnationalbank.com,937-216-8889,Wealth Management,Relationship Manager,BRN0011,2013-02-15,,34121.15,1,EMP00135
+EMP00304,David,Harris,david.harris74@firstnationalbank.com,337-744-9399,Credit,Financial Analyst,BRN0042,2023-09-10,,62306.04,1,
+EMP00305,Xiao,Lopez,xiao.lopez82@firstnationalbank.com.com,287-321-8359,Wealth Management,Accountant,BRN0017,2009-01-14,,98661.8,1,
+EMP00306,Maria,Perez,maria.perez99@firstnationalbank.com,875-623-5333,Finance & Accounting,IT Specialist,BRN0015,2023-08-17,,47232.17,1,EMP00486
+EMP00307,Linda,Williams,linda.williams26@firstnationalbank.com,716-800-7877,Credit,Loan Officer,BRN0005,2010-02-26,,41428.53,1,EMP00220
+EMP00308,Francesco,White,francesco.white12@firstnationalbank.com,333-717-9835,HR,Operations Manager,BRN0040,2018-06-15,2024-05-31,95997.58,0,EMP00162
+EMP00309,Jorge,Ferrari,jorge.ferrari99@firstnationalbank.com,803-923-2600,Operations,IT Specialist,BRN0003,2020-08-25,,54560.37,1,EMP00372
+EMP00310,Melissa,Adeyemi,melissa.adeyemi25firstnationalbank.com,791-635-2930,HR,Compliance Officer,BRN0006,2011-05-10,,108684.99,1,EMP00169
+EMP00311,Stephanie,Perez,stephanie.perez33@firstnationalbank.com,748-533-6990,HR,Data Analyst,BRN0021,2014-03-04,,40558.4,1,EMP00249
+EMP00312,Jason,Reyes,jason.reyes72@firstnationalbank.com,514-691-6641,HR,Wealth Advisor,BRN0036,2022-07-31,,30000.0,1,EMP00175
+EMP00313,Carlos,Allen,carlos.allen13@firstnationalbank.com,610-904-6544,Credit,Wealth Advisor,BRN0043,2007-09-03,,85625.35,1,
+EMP00314,James,Anderson,james.anderson19@firstnationalbank.com,814-545-2444,IT & Technology,Credit Analyst,BRN0004,2008-08-09,,127449.15,1,EMP00203
+EMP00315,Chen,Marino,chen.marino37@firstnationalbank.com,811-158-3871,Wealth Management,Branch Manager,BRN0003,2021-04-02,,73512.36,1,EMP00475
+EMP00316,William,Ramirez,william.ramirez66@firstnationalbank.com,437-729-3776,Finance & Accounting,Relationship Manager,BRN0043,2023-01-12,,36439.32,1,EMP00113
+EMP00317,Ronald,Khan,ronald.khan52@firstnationalbank.com,730-115-2124,Customer Service,Teller,BRN0011,2006-12-13,,78650.09,1,EMP00220
+EMP00318,Andrew,Cruz,andrew.cruz25@firstnationalbank.com,613-688-1076,HR,Operations Manager,BRN0036,2018-01-28,,56226.91,1,EMP00322
+EMP00319,Jorge,Ricci,jorge.ricci33@firstnationalbank.com,788-356-8254,Credit,IT Specialist,BRN0005,2016-04-14,,44342.79,1,EMP00052
+EMP00320,Zainab,Nasser,zainab.nasser76@firstnationalbank.com,693-219-5224,IT & Technology,Compliance Officer,BRN0049,2012-08-14,,83546.51,1,EMP00464
+EMP00321,Tunde,Johnson,tunde.johnson90@firstnationalbank.com,454-394-2523,Finance & Accounting,Loan Officer,BRN0021,2014-04-02,,113930.42,1,EMP00106
+EMP00322,Ling,Ibrahim,ling.ibrahim24@firstnationalbank.com,899-294-9175,IT & Technology,Wealth Advisor,BRN0012,2015-09-09,,50672.03,1,EMP00246
+EMP00323,Rosa,Morales,rosa.morales46@firstnationalbank.com,309-222-2285,Wealth Management,Customer Service Rep,BRN0017,2009-08-21,,,1,EMP00294
+EMP00324,Hao,Zhang,hao.zhang64@firstnationalbank.com,788-989-5501,Customer Service,Teller,BRN0035,2005-12-13,,76921.57,1,EMP00268
+EMP00325,Jorge,Hussain,jorge.hussain62@firstnationalbank.com,233-614-6689,Risk & Compliance,IT Specialist,BRN0049,2017-12-08,,101076.33,1,EMP00368
+EMP00326,John,Johnson,john.johnson87@firstnationalbank.com,794-203-6331,Operations,Financial Analyst,BRN0045,2016-08-16,,61522.41,1,EMP00090
+EMP00327,George,Huang,george.huang24@firstnationalbank.com,415-529-7099,HR,Teller,BRN0016,2011-01-16,,125716.0,1,
+EMP00328,Joshua,Taylor,joshua.taylor93@firstnationalbank.com,441-668-8081,IT & Technology,Financial Analyst,BRN0037,2007-12-11,,109045.77,1,EMP00368
+EMP00329,Matthew,Chaudhry,matthew.chaudhry64@firstnationalbank.com,845-629-9748,Wealth Management,Teller,BRN0048,2008-05-10,,44971.18,1,EMP00165
+EMP00330,Christopher,Davis,christopher.davis28@firstnationalbank.com,687-959-2577,Finance & Accounting,Teller,BRN0037,2006-01-26,,110537.72,1,EMP00045
+EMP00331,Timothy,Williams,timothy.williams53@firstnationalbank.com,895-720-4259,Customer Service,Financial Analyst,BRN0036,2017-07-03,,44373.98,1,
+EMP00332,Amaka,Anwar,amaka.anwar11@firstnationalbank.com,493-574-3373,Finance & Accounting,Risk Analyst,BRN0019,2012-12-19,,104377.99,1,EMP00087
+EMP00333,Mary,Allen,mary.allen44@firstnationalbank.com,524-768-5773,Credit,Compliance Officer,BRN0037,2014-01-29,,59381.49,1,
+EMP00334,Giulia,Sanchez,giulia.sanchez67@firstnationalbank.com,623-271-4012,Risk & Compliance,Wealth Advisor,BRN0029,2022-07-08,,95990.33,1,EMP00170
+EMP00335,Steven,King,steven.king51@firstnationalbank.com,265-999-8752,Retail Banking,Data Analyst,BRN0017,2021-09-07,,45477.04,1,EMP00299
+EMP00336,Mary,Zhou,mary.zhou40@firstnationalbank.com,955-390-8260,Risk & Compliance,Operations Manager,BRN0049,2006-11-13,2013-10-19,48147.88,0,EMP00324
+EMP00337,Emeka,Al-Farsi,emeka.al-farsi70@firstnationalbank.com,761-555-3213,Customer Service,Financial Analyst,BRN0002,2005-10-15,,66971.47,1,EMP00044
+EMP00338,Rebecca,Greco,rebecca.greco82@firstnationalbank.com,517-455-8891,Commercial Banking,IT Specialist,BRN0030,2019-02-26,,96216.24,1,
+EMP00339,James,Marino,james.marino98@firstnationalbank.com,552-393-8687,Wealth Management,Data Analyst,BRN0027,2010-10-30,,58887.71,1,EMP00293
+EMP00340,Xiao,Adams,xiao.adams1@firstnationalbank.com,393-521-8161,Risk & Compliance,Wealth Advisor,BRN0001,2022-03-07,,70194.79,1,EMP00055
+EMP00341,Mary,Hussain,mary.hussain81@firstnationalbank.com,982-919-5454,Customer Service,Data Analyst,BRN0025,2023-08-01,,66394.5,1,EMP00411
+EMP00342,Barbara,Nasser,barbara.nasser80@firstnationalbank.com,917-737-9060,Retail Banking,Financial Analyst,BRN0013,2006-07-15,,100913.15,1,EMP00143
+EMP00343,Ashley,Ibrahim,ashley.ibrahim17@firstnationalbank.com,944-108-4814,Retail Banking,IT Specialist,BRN0035,2005-07-01,,45304.03,1,EMP00332
+EMP00344,Jason,Al-Farsi,jason.al-farsi90@firstnationalbank.com,538-182-3393,HR,Loan Officer,BRN0027,2011-12-28,,71139.35,1,EMP00288
+EMP00345,Luis,Wu,luis.wu2@firstnationalbank.com,986-831-5078,Wealth Management,Relationship Manager,BRN0012,2009-04-24,,84707.94,1,EMP00422
+EMP00346,Adaeze,Hill,adaeze.hill61@firstnationalbank.com,519-430-3598,Retail Banking,Wealth Advisor,BRN0003,2009-06-20,,57591.89,1,EMP00102
+EMP00347,Donna,Nguyen,donna.nguyen47@firstnationalbank.com,882-323-2850,HR,Credit Analyst,BRN0034,2007-09-28,,,1,EMP00480
+EMP00348,David,Perez,david.perez89@firstnationalbank.com,810-258-7084,IT & Technology,Financial Analyst,BRN0018,2018-02-11,2020-11-03,41328.93,0,EMP00047
+EMP00349,Joseph,Davis,joseph.davis46@firstnationalbank.com,918-649-2759,IT & Technology,Credit Analyst,BRN0044,2018-11-16,,123046.46,1,EMP00403
+EMP00350,Elena,Torres,elena.torres3@firstnationalbank.com,566-841-3207,Retail Banking,IT Specialist,BRN0042,2021-12-21,,97148.11,1,EMP00333
+EMP00351,Mark,Lopez,mark.lopez24@firstnationalbank.com,531-849-8674,Credit,Accountant,BRN0036,2011-08-12,,80937.05,1,EMP00432
+EMP00352,Luis,Musa,luis.musa70@firstnationalbank.com,200-894-9289,Risk & Compliance,Branch Manager,BRN0005,2016-11-30,,66745.42,1,EMP00355
+EMP00353,Sofia,Martinez,sofia.martinez85@firstnationalbank.com,596-294-9586,Customer Service,Financial Analyst,BRN0024,2022-05-29,,92590.94,1,EMP00194
+EMP00354,Jennifer,Marino,jennifer.marino85@firstnationalbank.com,332-282-1512,Wealth Management,Relationship Manager,BRN0021,2014-03-12,,42035.09,1,
+EMP00355,Amaka,Greco,amaka.greco80@firstnationalbank.com,462-150-7002,Commercial Banking,Branch Manager,BRN0037,2019-05-25,,102751.18,1,
+EMP00356,Kathleen,Davis,kathleen.davis47@firstnationalbank.com,625-941-7046,Retail Banking,Accountant,BRN0014,2019-09-16,,36042.64,1,EMP00105
+EMP00357,Charles,Flores,charles.flores67@firstnationalbank.com,942-336-9710,IT & Technology,Operations Manager,BRN0034,2005-11-30,,80197.56,1,EMP00343
+EMP00358,Giulia,Reyes,giulia.reyes54@firstnationalbank.com,984-753-6864,HR,Loan Officer,BRN0037,2019-01-10,,84340.16,1,EMP00385
+EMP00359,Ibrahim,Allen,ibrahim.allen69@firstnationalbank.com,653-460-6163,Finance & Accounting,Accountant,BRN0012,2017-05-03,,67593.65,1,EMP00305
+EMP00360,Kevin,Cruz,kevin.cruz31@firstnationalbank.com,419-484-5162,Wealth Management,IT Specialist,BRN0049,2019-03-16,,127004.43,1,EMP00226
+EMP00361,Robert,Marino,robert.marino18@firstnationalbank.com,509-106-5920,IT & Technology,Accountant,BRN0001,2021-04-16,2024-06-25,103567.3,0,EMP00098
+EMP00362,Wei,Ricci,wei.ricci72@firstnationalbank.com,785-258-2544,Finance & Accounting,Financial Analyst,BRN0050,2023-06-09,,80729.03,1,EMP00266
+EMP00363,Ana,Bello,ana.bello12@firstnationalbank.com,782-322-2264,Wealth Management,Financial Analyst,BRN0024,2018-01-22,,78581.84,1,EMP00497
+EMP00364,Xiao,Bello,xiao.bello5@firstnationalbank.com,790-490-2285,Finance & Accounting,Credit Analyst,BRN0045,2020-10-06,,43429.2,1,EMP00425
+EMP00365,Alessandro,Adams,alessandro.adams96@firstnationalbank.com,816-111-7266,Customer Service,Branch Manager,BRN0028,2014-05-06,,50821.04,1,EMP00280
+EMP00366,Andrew,Young,andrew.young7@firstnationalbank.com,602-556-9269,HR,Teller,BRN0037,2008-05-10,,70035.99,1,EMP00465
+EMP00367,Ling,Miller,ling.miller71@firstnationalbank.com,287-508-9221,Risk & Compliance,Data Analyst,BRN0010,2007-12-19,,80197.33,1,
+EMP00368,Ling,Nguyen,ling.nguyen72@firstnationalbank.com,953-636-5034,Operations,Data Analyst,BRN0036,2009-06-11,,107208.21,1,EMP00385
+EMP00369,Stephanie,Huang,stephanie.huang45@firstnationalbank.com,552-708-1396,Risk & Compliance,Credit Analyst,BRN0044,2017-12-02,2025-06-15,59401.41,0,
+EMP00370,Luis,Adams,luis.adams26@firstnationalbank.com,359-875-2405,Retail Banking,Relationship Manager,BRN0029,2018-12-24,,36572.68,1,EMP00460
+EMP00371,George,Jackson,george.jackson40@firstnationalbank.com,223-439-4424,IT & Technology,Relationship Manager,BRN0010,2023-09-03,,43474.54,1,EMP00074
+EMP00372,Elena,Thompson,elena.thompson89@firstnationalbank.com,218-485-9631,Risk & Compliance,Branch Manager,BRN0049,2010-10-20,,117299.22,1,EMP00108
+EMP00373,Hassan,Johnson,hassan.johnson9@firstnationalbank.com,477-778-6901,Retail Banking,Teller,BRN0045,2018-11-11,,74135.72,1,EMP00011
+EMP00374,Fatima,Taylor,fatima.taylor41@firstnationalbank.com,811-644-2442,Customer Service,IT Specialist,BRN0042,2013-09-02,,91582.89,1,EMP00107
+EMP00375,Brian,Esposito,brian.esposito51@firstnationalbank.com,218-455-6765,Operations,Relationship Manager,BRN0046,2005-06-26,2011-06-04,57854.93,0,
+EMP00376,Nancy,Zhou,nancy.zhou4@firstnationalbank.com,486-330-3485,HR,Compliance Officer,BRN0033,2011-03-10,,94914.48,1,EMP00368
+EMP00377,Chen,Adams,chen.adams54@firstnationalbank.com,356-536-6118,Finance & Accounting,IT Specialist,BRN0047,2013-07-29,,116427.14,1,EMP00136
+EMP00378,Zainab,Nguyen,zainab.nguyen18@firstnationalbank.com,922-636-3215,Risk & Compliance,Compliance Officer,BRN0014,2019-08-21,,119070.69,1,EMP00355
+EMP00379,Elizabeth,Scott,elizabeth.scott41@firstnationalbank.com,349-844-1483,HR,Risk Analyst,BRN0011,2012-02-14,2018-02-06,133789.41,0,
+EMP00380,Margaret,Young,margaret.young25@firstnationalbank.com,389-126-5372,Credit,Relationship Manager,BRN0048,2023-06-07,,124023.45,1,EMP00049
+EMP00381,Laura,Ferrari,laura.ferrari18@firstnationalbank.com,819-580-7126,HR,IT Specialist,BRN0015,2020-06-01,2021-04-23,106998.89,0,EMP00268
+EMP00382,Chiara,Johnson,chiara.johnson35@firstnationalbank.com,427-860-4323,Commercial Banking,Financial Analyst,BRN0011,2009-05-03,,72403.92,1,EMP00244
+EMP00383,Cynthia,Nwosu,cynthia.nwosu55@firstnationalbank.com,242-722-7232,HR,Customer Service Rep,BRN0029,2018-11-03,,53399.24,1,EMP00096
+EMP00384,Luca,Jones,luca.jones67@firstnationalbank.com,667-946-1694,IT & Technology,Operations Manager,BRN0037,2018-04-27,,66932.2,1,
+EMP00385,Chiara,Miller,chiara.miller25@firstnationalbank.com,607-411-5684,HR,Teller,BRN0048,2005-11-18,,142840.3,1,EMP00256
+EMP00386,Kathleen,Anwar,kathleen.anwar12@firstnationalbank.com,315-284-9952,HR,Credit Analyst,BRN0004,2020-06-23,,53078.54,1,
+EMP00387,Donald,Nasser,donald.nasser12@firstnationalbank.com,908-764-3686,Commercial Banking,Loan Officer,BRN0012,2015-03-06,,60011.89,1,EMP00491
+EMP00388,Luca,Zhou,luca.zhou94@firstnationalbank.com,723-726-3619,HR,Branch Manager,BRN0029,2019-03-23,,77092.03,1,EMP00137
+EMP00389,Christopher,Thompson,christopher.thompson23@firstnationalbank.com,252-529-6047,Wealth Management,Teller,BRN0022,2017-09-07,,53180.56,1,EMP00324
+EMP00390,Hao,Adeyemi,hao.adeyemi2@firstnationalbank.com,710-656-1094,Wealth Management,Relationship Manager,BRN0008,2007-12-14,,49511.27,1,EMP00223
+EMP00391,Mary,Ramirez,mary.ramirez77@firstnationalbank.com.com,834-743-4401,Risk & Compliance,Branch Manager,BRN0043,2015-09-03,,79217.87,1,EMP00006
+EMP00392,Ling,Cruz,ling.cruz39@firstnationalbank.com,289-150-2784,Risk & Compliance,Financial Analyst,BRN0003,2008-04-05,,104386.5,1,EMP00482
+EMP00393,Ling,Reyes,ling.reyes23@firstnationalbank.com,967-692-6901,Commercial Banking,Data Analyst,BRN0040,2019-10-29,,90228.18,1,EMP00239
+EMP00394,Rosa,Diaz,rosa.diaz9@firstnationalbank.com,337-224-5496,HR,Operations Manager,BRN0024,2013-07-02,,77698.41,1,EMP00420
+EMP00395,Mohammed,Greco,mohammed.greco12@firstnationalbank.com,905-719-5705,Finance & Accounting,Teller,BRN0014,2018-09-23,2025-02-19,90207.44,0,EMP00416
+EMP00396,Jian,Romano,jian.romano67@firstnationalbank.com,709-604-3947,IT & Technology,Wealth Advisor,BRN0040,2012-12-08,,105507.34,1,EMP00165
+EMP00397,Maria,White,maria.white95@firstnationalbank.com,830-524-7783,Finance & Accounting,Operations Manager,BRN0013,2005-01-13,2010-04-02,112107.51,0,EMP00228
+EMP00398,Ashley,Adeyemi,ashley.adeyemi9@firstnationalbank.com,718-663-6307,Commercial Banking,Compliance Officer,BRN0014,2005-04-03,,116395.64,1,EMP00335
+EMP00399,Pedro,Wright,pedro.wright25@firstnationalbank.com,546-788-8849,Retail Banking,Compliance Officer,BRN0026,2021-04-01,,32256.05,1,EMP00387
+EMP00400,Brian,Al-Farsi,brian.al-farsi53@firstnationalbank.com,257-955-9537,Finance & Accounting,Operations Manager,BRN0010,2019-01-26,,137282.81,1,
+EMP00401,Thomas,Young,thomas.young36@firstnationalbank.com,547-484-9753,Credit,Customer Service Rep,BRN0014,2017-12-14,,68558.92,1,
+EMP00402,Luca,Zhang,luca.zhang91@firstnationalbank.com,623-188-9143,Finance & Accounting,IT Specialist,BRN0039,2007-08-16,,75732.9,1,EMP00036
+EMP00403,Barbara,Zhao,barbara.zhao5@firstnationalbank.com,UNKNOWN,Customer Service,Financial Analyst,BRN0020,2009-11-06,,39384.07,1,EMP00244
+EMP00404,Laura,Wang,laura.wang19@firstnationalbank.com,300-941-9456,Risk & Compliance,Relationship Manager,BRN0031,2021-06-06,,56342.05,1,EMP00316
+EMP00405,Barbara,Smith,barbara.smith40@firstnationalbank.com,903-968-2426,Retail Banking,Loan Officer,BRN0030,2013-09-11,,104101.01,1,EMP00367
+EMP00406,Chiara,Lawal,chiara.lawal82@firstnationalbank.com,528-305-4154,Customer Service,Credit Analyst,BRN0043,2021-09-21,,115579.88,1,EMP00273
+EMP00407,Margaret,Jackson,margaret.jackson2@firstnationalbank.com,773-626-2677,Finance & Accounting,Operations Manager,BRN0043,2007-08-22,,38317.22,1,EMP00353
+EMP00408,Lisa,King,lisa.king10@firstnationalbank.com,546-653-8268,Retail Banking,IT Specialist,BRN0010,2020-10-19,,118275.98,1,
+EMP00409,Stephanie,Khan,stephanie.khan23@firstnationalbank.com,806-744-8304,Operations,Credit Analyst,BRN0004,2007-05-18,,43517.7,1,EMP00399
+EMP00410,Mary,Al-Farsi,mary.al-farsi73@firstnationalbank.com,915-579-2593,Wealth Management,IT Specialist,BRN0046,2022-01-04,,154210.46,1,EMP00093
+EMP00411,Betty,Huang,betty.huang51@firstnationalbank.com,881-438-6320,Retail Banking,Loan Officer,BRN0015,2008-03-23,,108234.36,1,EMP00109
+EMP00412,Ashley,Chen,ashley.chen78@firstnationalbank.com,720-205-7646,Commercial Banking,Credit Analyst,BRN0023,2015-09-27,,65637.67,1,EMP00253
+EMP00413,Amanda,Sanchez,amanda.sanchez53@firstnationalbank.com,449-661-3605,HR,Loan Officer,BRN0005,2022-10-10,,66696.18,1,EMP00123
+EMP00414,Jian,Liu,jian.liu70@firstnationalbank.com,377-778-2276,Credit,Accountant,BRN0045,2018-04-04,,69313.08,1,EMP00390
+EMP00415,Jennifer,Siddiqui,jennifer.siddiqui23@firstnationalbank.com,615-171-2781,Credit,Data Analyst,BRN0038,2018-05-16,,97014.45,1,EMP00342
+EMP00416,Patricia,Flores,patricia.flores18@firstnationalbank.com,973-751-1003,Risk & Compliance,IT Specialist,BRN0021,2016-02-02,,35208.48,1,
+EMP00417,Steven,Zhang,steven.zhang39@firstnationalbank.com,895-411-8122,Finance & Accounting,Loan Officer,BRN0025,2018-10-22,,46870.29,1,EMP00270
+EMP00418,Isabel,Okonkwo,isabel.okonkwo8@firstnationalbank.com,762-154-1013,Finance & Accounting,Loan Officer,BRN0040,2016-06-13,,51668.23,1,EMP00167
+EMP00419,Carol,Zhang,carol.zhang92@firstnationalbank.com,590-545-9931,Risk & Compliance,IT Specialist,BRN0002,2010-04-12,,143451.45,1,EMP00222
+EMP00420,Rosa,Chaudhry,rosa.chaudhry20@firstnationalbank.com,N/A,Risk & Compliance,Wealth Advisor,BRN0036,2013-08-17,,64424.82,1,
+EMP00421,Mary,Martin,mary.martin83@firstnationalbank.com,666-907-7974,Wealth Management,Operations Manager,BRN0043,2014-10-18,,49466.62,1,EMP00384
+EMP00422,Stephanie,Cruz,stephanie.cruz1@firstnationalbank.com,948-342-9220,Customer Service,Customer Service Rep,BRN0029,2013-08-18,,37634.61,1,EMP00204
+EMP00423,Barbara,Perez,barbara.perez62@firstnationalbank.com,281-245-9624,Operations,IT Specialist,BRN0003,2017-09-29,,61441.39,1,EMP00457
+EMP00424,Giovanni,Hernandez,giovanni.hernandez88@firstnationalbank.com,793-419-1864,Customer Service,Data Analyst,BRN0034,2018-09-07,2023-12-26,,0,
+EMP00425,Elena,Li,elena.li54@firstnationalbank.com,501-396-3744,Credit,Wealth Advisor,BRN0030,2016-07-01,,134261.95,1,EMP00117
+EMP00426,Daniel,Gonzalez,daniel.gonzalez7@firstnationalbank.com,498-928-1447,Commercial Banking,Financial Analyst,BRN0037,2010-11-04,2016-02-25,117866.36,0,EMP00427
+EMP00427,Margaret,Adeyemi,margaret.adeyemi2@firstnationalbank.com,818-278-3476,Finance & Accounting,Data Analyst,BRN0018,2010-08-27,,70363.25,1,EMP00278
+EMP00428,William,Liu,william.liu11@firstnationalbank.com,809-941-3525,HR,Data Analyst,BRN0045,2010-04-19,,129134.05,1,EMP00113
+EMP00429,Steven,Gonzalez,steven.gonzalez94@firstnationalbank.com,255-757-5331,Commercial Banking,Branch Manager,BRN0043,2014-11-15,,38712.08,1,EMP00282
+EMP00430,Francesco,Bruno,francesco.bruno30@firstnationalbank.com,922-499-8775,Customer Service,Accountant,BRN0026,2015-09-07,,66942.19,1,EMP00239
+EMP00431,Kenneth,Greco,kenneth.greco88@firstnationalbank.com,299-644-6797,HR,Customer Service Rep,BRN0019,2022-11-19,,109878.58,1,
+EMP00432,Nancy,Perez,nancy.perez51@firstnationalbank.com,891-867-4961,Credit,Data Analyst,BRN0018,2012-07-07,,51707.93,1,EMP00133
+EMP00433,Kenneth,Diaz,kenneth.diaz2@firstnationalbank.com,269-112-7737,Commercial Banking,Compliance Officer,BRN0022,2020-03-14,,52352.61,1,EMP00029
+EMP00434,William,Brown,william.brown80@firstnationalbank.com,808-772-4552,Commercial Banking,Wealth Advisor,BRN0015,2021-04-08,,47573.58,1,
+EMP00435,Chiara,Lopez,chiara.lopez24@firstnationalbank.com,912-288-5150,Commercial Banking,Compliance Officer,BRN0006,2018-07-25,,120730.2,1,EMP00147
+EMP00436,Alessandro,Wang,alessandro.wang33@firstnationalbank.com,275-383-2022,Finance & Accounting,Branch Manager,BRN0018,2022-04-04,,109817.62,1,EMP00092
+EMP00437,Donald,Ortiz,donald.ortiz51@firstnationalbank.com,703-211-3357,HR,Relationship Manager,BRN0017,2008-12-28,,82120.47,1,EMP00491
+EMP00438,William,Hernandez,william.hernandez10@firstnationalbank.com,UNKNOWN,Risk & Compliance,Compliance Officer,BRN0007,2014-11-27,,51542.13,1,
+EMP00439,Halima,Li,halima.li51@firstnationalbank.com,727-824-9039,HR,Accountant,BRN0003,2019-11-28,,45082.82,1,EMP00037
+EMP00440,Musa,Ferrari,musa.ferrari16@firstnationalbank.com,567-441-5961,Commercial Banking,Credit Analyst,BRN0005,2017-02-11,,65857.32,1,EMP00066
+EMP00441,Ali,Nguyen,ali.nguyen23@firstnationalbank.com,593-776-4129,HR,Loan Officer,BRN0022,2006-10-22,,82945.39,1,EMP00070
+EMP00442,Giovanni,Torres,giovanni.torres18@firstnationalbank.com,225-837-4907,Commercial Banking,Data Analyst,BRN0023,2015-11-30,2023-01-04,75967.12,0,EMP00280
+EMP00443,Robert,Jones,robert.jones44@firstnationalbank.com,938-143-7643,Customer Service,IT Specialist,BRN0020,2016-03-17,,72838.69,1,EMP00194
+EMP00444,Charles,Jones,charles.jones95@firstnationalbank.com,869-119-8720,Credit,Branch Manager,BRN0035,2008-05-05,,49799.43,1,EMP00437
+EMP00445,Michelle,Taylor,michelle.taylor59@firstnationalbank.com,805-165-2742,Credit,Data Analyst,BRN0042,2007-12-06,2015-01-10,43292.46,0,EMP00318
+EMP00446,Ana,Sheikh,ana.sheikh42@firstnationalbank.com,900-689-9943,IT & Technology,Data Analyst,BRN0005,2023-01-17,,65798.96,1,EMP00088
+EMP00447,Francesco,Chaudhry,francesco.chaudhry22@firstnationalbank.com,766-268-8187,Credit,Branch Manager,BRN0012,2012-07-11,2015-08-07,41894.59,0,
+EMP00448,Robert,Esposito,robert.esposito11@firstnationalbank,291-823-5648,Wealth Management,Wealth Advisor,BRN0041,2018-09-27,,45024.37,1,
+EMP00449,Melissa,Okafor,melissa.okafor23@firstnationalbank.com,238-710-3949,Credit,Loan Officer,BRN0010,2019-05-09,,52726.53,1,EMP00060
+EMP00450,Dorothy,Torres,dorothy.torres16@firstnationalbank.com,297-733-6929,Customer Service,Operations Manager,BRN0020,2012-10-20,,105504.69,1,EMP00253
+EMP00451,Richard,Torres,richard.torres15@firstnationalbank.com,901-964-8772,Risk & Compliance,Compliance Officer,BRN0050,2019-01-19,,47970.29,1,EMP00479
+EMP00452,Rebecca,Adeyemi,rebecca.adeyemi43@firstnationalbank.com,976-564-1709,Retail Banking,Operations Manager,BRN0004,2019-06-19,,51073.24,1,EMP00062
+EMP00453,Dorothy,Siddiqui,dorothy.siddiqui76@firstnationalbank.com,629-303-6336,Commercial Banking,Credit Analyst,BRN0002,2015-11-18,,40630.04,1,EMP00346
+EMP00454,Jeffrey,Green,jeffrey.green10@firstnationalbank.com,696-155-8141,Credit,IT Specialist,BRN0016,2021-07-19,,46466.88,1,EMP00059
+EMP00455,Mohammed,Yang,mohammed.yang35@firstnationalbank.com,330-132-1977,Commercial Banking,Accountant,BRN0024,2008-01-23,,45956.64,1,EMP00025
+EMP00456,Emily,Cruz,emily.cruz21@firstnationalbank.com,853-726-3784,Customer Service,Accountant,BRN0027,2008-11-03,,43731.76,1,EMP00096
+EMP00457,Fang,Rossi,fang.rossi60@firstnationalbank.com,947-538-5041,HR,Customer Service Rep,BRN0027,2016-09-14,,41453.74,1,EMP00498
+EMP00458,Deborah,Garcia,deborah.garcia6@firstnationalbank.com,951-887-9261,Customer Service,Risk Analyst,BRN0038,2008-05-05,,58693.67,1,EMP00206
+EMP00459,Mary,Reyes,MARY.REYES97@FIRSTNATIONALBANK.COM,423-235-6872,Commercial Banking,Branch Manager,BRN0045,2023-06-04,2028-12-23,56769.36,0,EMP00166
+EMP00460,Giulia,Perez,giulia.perez4@firstnationalbank.com,674-890-3271,HR,Financial Analyst,BRN0020,2008-08-18,,146520.19,1,EMP00434
+EMP00461,James,Hernandez,james.hernandez50@firstnationalbank.com,540-643-1535,Operations,Wealth Advisor,BRN0024,2019-01-22,,153146.16,1,EMP00417
+EMP00462,Mary,Morales,mary.morales43@firstnationalbank.com,256-627-6963,Commercial Banking,Risk Analyst,BRN0035,2017-11-26,,115985.85,1,
+EMP00463,Ali,Reyes,ali.reyes91@firstnationalbank.com,926-892-4354,Finance & Accounting,Relationship Manager,BRN0040,2005-12-01,,55413.93,1,EMP00207
+EMP00464,Halima,Hill,halima.hill97@firstnationalbank.com,430-428-6778,Customer Service,Compliance Officer,BRN0042,2015-09-25,,96445.69,1,EMP00080
+EMP00465,Amaka,Colombo,amaka.colombo68@firstnationalbank.com,681-826-9714,Customer Service,Teller,BRN0004,2006-06-04,,77048.03,1,EMP00114
+EMP00466,Ana,Martinez,ana.martinez25@firstnationalbank.com,668-189-2313,Risk & Compliance,Teller,BRN0024,2022-12-10,,90567.72,1,EMP00239
+EMP00467,Halima,Thompson,halima.thompson64@firstnationalbank.com,409-633-1371,Customer Service,Financial Analyst,BRN0005,2007-06-15,,54603.31,1,EMP00005
+EMP00468,Emily,Torres,emily.torres9@firstnationalbank.com,437-954-9513,HR,Customer Service Rep,BRN0027,2014-12-16,,49293.22,1,EMP00462
+EMP00469,Omar,Greco,omar.greco71@firstnationalbank.com,511-680-3161,Operations,Financial Analyst,BRN0042,2022-08-25,,81563.79,1,EMP00163
+EMP00470,Alessandro,Miller,alessandro.miller19@firstnationalbank.com,666-270-3634,Operations,Financial Analyst,BRN0015,2015-11-11,,70159.8,1,EMP00048
+EMP00471,Christopher,Okafor,christopher.okafor15@firstnationalbank.com,524-688-3072,Finance & Accounting,Financial Analyst,BRN0046,2020-07-16,,55625.55,1,EMP00408
+EMP00472,Sarah,Zhao,sarah.zhao58@firstnationalbank.com,366-646-5940,Retail Banking,Risk Analyst,BRN0046,2005-10-12,,65347.23,1,EMP00204
+EMP00473,Karen,Smith,karen.smith95@firstnationalbank.com,719-439-5842,Operations,Data Analyst,BRN0050,2008-04-05,,79028.88,1,EMP00138
+EMP00474,Elena,Siddiqui,elena.siddiqui44@firstnationalbank.com,949-590-1656,Customer Service,Loan Officer,BRN0037,2019-12-17,,131450.15,1,EMP00429
+EMP00475,Ronald,Anderson,ronald.anderson42@firstnationalbank.com,856-299-9625,Operations,Relationship Manager,BRN0026,2018-11-07,,62411.85,1,EMP00450
+EMP00476,Fatima,Khan,fatima.khan25@firstnationalbank.com,817-719-9381,Finance & Accounting,Risk Analyst,BRN0035,2014-12-29,,30000.0,1,EMP00457
+EMP00477,Ashley,Chen,ashley.chen45@firstnationalbank.com,656-995-2435,Wealth Management,Wealth Advisor,BRN0028,2013-04-17,,43229.97,1,EMP00235
+EMP00478,Stephanie,Chaudhry,stephanie.chaudhry18@firstnationalbank.com,812-188-3353,Wealth Management,Accountant,BRN0029,2011-06-23,,98338.45,1,
+EMP00479,Francesco,Wu,francesco.wu12@firstnationalbank.com.com,624-279-8571,Risk & Compliance,Relationship Manager,BRN0022,2006-06-26,,105026.18,1,
+EMP00480,Carmen,Bello,carmen.bello75@firstnationalbank.com,772-857-8593,Retail Banking,Financial Analyst,BRN0025,2011-06-30,,57858.76,1,EMP00389
+EMP00481,Hassan,Eze,hassan.eze54@firstnationalbank.com,904-760,Wealth Management,Loan Officer,BRN0041,2023-09-18,,50303.05,1,EMP00019
+EMP00482,Betty,Rossi,betty.rossi89@firstnationalbank.com,582-624-1287,Risk & Compliance,Customer Service Rep,BRN0024,2018-01-13,,80995.32,1,EMP00438
+EMP00483,Ronald,Allen,ronald.allen7@firstnationalbank.com,629-751-6832,Operations,Operations Manager,BRN0021,2015-05-05,,40771.07,1,EMP00460
+EMP00484,Anthony,Taylor,anthony.taylor77@firstnationalbank.com,756-430-6180,Operations,Teller,BRN0005,2016-07-11,,144044.3,1,EMP00040
+EMP00485,Carmen,Thompson,carmen.thompson2@firstnationalbank.com,488-481-8944,Risk & Compliance,Loan Officer,BRN0045,2013-02-17,2019-08-21,114025.25,0,EMP00178
+EMP00486,Chen,Greco,chen.greco69@firstnationalbank.com,919-874-2867,Commercial Banking,Loan Officer,BRN0033,2009-12-17,,117623.17,1,EMP00439
+EMP00487,Edward,Martin,edward.martin57@firstnationalbank.com,811-635-6604,Operations,Branch Manager,BRN0002,2015-10-04,,107230.88,1,EMP00036
+EMP00488,Sarah,Adams,sarah.adams40@firstnationalbank.com,333-180-7960,Commercial Banking,Loan Officer,BRN0008,2009-12-27,,,1,EMP00022
+EMP00489,Linda,Jones,linda.jones85@firstnationalbank.com,260-580-2948,Retail Banking,Loan Officer,BRN0031,2021-12-27,,40355.81,1,EMP00364
+EMP00490,Steven,Sanchez,steven.sanchez26@firstnationalbank.com,559-129-2487,Operations,Customer Service Rep,BRN0001,2021-12-04,2023-04-26,118892.05,0,EMP00327
+EMP00491,Dorothy,Colombo,dorothy.colombo73@firstnationalbank.com,792-881-1229,IT & Technology,Teller,BRN0011,2016-03-25,,107319.66,1,EMP00358
+EMP00492,Yusuf,Rossi,yusuf.rossi47@firstnationalbank.com,389-550-2758,Finance & Accounting,Risk Analyst,BRN0049,2017-01-18,2018-02-27,45117.51,0,
+EMP00493,Elizabeth,Al-Farsi,elizabeth.al-farsi15@firstnationalbank.com,707-880-6918,Customer Service,Wealth Advisor,BRN0033,2010-02-08,,81292.99,1,EMP00298
+EMP00494,Xiao,Lawal,xiao.lawal88@firstnationalbank.com,654-331-7672,HR,Relationship Manager,BRN0021,2016-01-28,2019-04-04,85835.72,0,
+EMP00495,Aisha,Esposito,aisha.esposito87@firstnationalbank.com,648-635-2392,HR,Risk Analyst,BRN0031,2020-03-26,,58815.71,1,EMP00388
+EMP00496,Thomas,Huang,thomas.huang26@firstnationalbank.com,809-964-7623,HR,Wealth Advisor,BRN0007,2021-08-18,,52460.73,1,EMP00500
+EMP00497,Sandra,Sheikh,sandra.sheikh46@firstnationalbank.com,817-514-8938,Risk & Compliance,Data Analyst,BRN0049,2021-01-01,,98962.84,1,EMP00422
+EMP00498,Mohammed,Martin,mohammed.martin4@firstnationalbank.com,254-950-2117,Retail Banking,Financial Analyst,BRN0008,2010-08-16,,65465.59,1,EMP00196
+EMP00499,Hao,Taylor,hao.taylor98@firstnationalbank.com,969-632-9064,IT & Technology,Teller,BRN0044,2012-05-02,,151230.07,1,EMP00159
+EMP00500,Ana,Conti,ana.conti70firstnationalbank.com,640-221-7285,HR,IT Specialist,BRN0032,2016-04-28,,90360.94,1,
+EMP00492,Yusuf,Rossi,yusuf.rossi47@firstnationalbank.com,389-550-2758,Finance & Accounting,Risk Analyst,BRN0049,2017-01-18,2018-02-27,45117.51,0,
+EMP00419,Carol,Zhang,carol.zhang92@firstnationalbank.com,590-545-9931,Risk & Compliance,IT Specialist,BRN0002,2010-04-12,,143451.45,1,EMP00222
